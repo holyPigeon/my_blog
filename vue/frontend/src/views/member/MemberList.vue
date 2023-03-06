@@ -15,7 +15,7 @@
                             <td>Member Id</td>
                             <td>Member Name</td>
                         </tr>
-                        <tr v-for="(member, index) in memberList" :key="index">
+                        <tr v-for="(member, index) in memberList.userData" :key="index">
                             <td>{{ member.id }}</td>
                             <td>{{ member.name }}</td>
                         </tr>
@@ -41,8 +41,8 @@ export default {
                 count: -1,
                 userData: [
                     {
-                    // id: '',
-                    // name: '',
+                        // id: '',
+                        // name: '',
                     }
                 ],
             }
@@ -64,12 +64,15 @@ export default {
     //     },
     // },
     beforeMount() {
-        axios.get('/member/list', data)
+        axios.get('/member/list')
             .then((res) => {
                 console.log(res);
-                this.memberList.count = res.count;
-                this.memberList.userData = [...res.data];
-            })
+                // JSON.stringify("res => " + res);
+                this.memberList.count = res.data.count;
+                this.memberList.userData = [...res.data.data];
+            }).catch((err) => {
+                JSON.stringify("err => " + err);
+            });
     },
 }
 
