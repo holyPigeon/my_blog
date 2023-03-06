@@ -38,6 +38,7 @@ export default {
     data() {
         return {
             memberList: {
+                count: -1,
                 userData: [
                     {
                     // id: '',
@@ -62,13 +63,14 @@ export default {
     //             });
     //     },
     // },
-    // beforeMount() {
-    //     axios.get('/member/list', data)
-    //         .then((res) => {
-    //             console.log(res);
-    //             this.$router.push('/');
-    //         })
-    // },
+    beforeMount() {
+        axios.get('/member/list', data)
+            .then((res) => {
+                console.log(res);
+                this.memberList.count = res.count;
+                this.memberList.userData = [...res.data];
+            })
+    },
 }
 
 </script>
