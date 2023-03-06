@@ -1,5 +1,6 @@
 <template>
     <div id="wrapper" class="container-fluid">
+        <img alt="Vue logo" src="../../assets/logo.png">
         <div class="container px-4s my-5">
             <div class="row gx-4 justify-content-center m-auto">
                 <div class="col-md-10 position-static d-block p-3 text-black"
@@ -8,7 +9,6 @@
                         <!-- style="--bs-text-opacity: 0.6;" -->
                         <h4 class="mb-3 text-center text-black fs-3 fw-bold">회원가입</h4>
                     </div>
-                    <div class="needs-validation" novalidate>
                         <div class="row g-3">
                             <div class="col-md-4 offset-md-4">
                                 <input type="text" v-model="formData.name" class="form-control form-control-lg p-2"
@@ -26,7 +26,6 @@
                                 style="opacity: 0.7;">완료</button>
                         </div>
                     </div>
-                </div>
             </div>
         </div>
     </div>
