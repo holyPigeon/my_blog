@@ -23,16 +23,19 @@ public class MemberService {
   }
 
 
-  public Member findOne(Long id) {
-    Member findMember = memberRepository.findById(id);
+  public Member findById(Long id) {
 
-    return findMember;
+    return memberRepository.findById(id);
+  }
+
+  public Member findByName(String name) {
+
+    return memberRepository.findByName(name);
   }
 
   public List<Member> findAll() {
-    List<Member> memberList = memberRepository.findAll();
 
-    return memberList;
+    return memberRepository.findAll();
   }
 
   @Transactional
