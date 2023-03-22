@@ -9,12 +9,25 @@
     </p>
     <h3><a href="#" @click="$router.push('/')" class="nav-link active">This is Home</a></h3>
     <div class="row g-3">
-      <div class="col-md-2 offset-md-4">
-        <!-- <button @click="login" class="btn btn-outline-primary btn-lg col-md-12 p-2">로그인</button> -->
-        <h4 @click="$router.push('/member/join')"><button class="btn btn-outline-primary py-3 m-3">회원 가입</button></h4>
+      <div class="col-md-6 offset-md-3">
+        <div class="row mt-3">
+          <div class="col-md-2 offset-md-4">
+            <h4 @click="$router.push('/member/join')"><button class="btn btn-outline-primary py-3">회원 가입</button></h4>
+          </div>
+          <div class="col-md-2">
+            <h4 @click="$router.push('/member/list')"><button class="btn btn-outline-primary py-3">회원 조회</button></h4>
+          </div>
+        </div>
       </div>
-      <div class="col-md-2">
-        <h4 @click="$router.push('/member/list')"><button class="btn btn-outline-primary py-3 m-3">회원 조회</button></h4>
+      <div class="col-md-6 offset-md-3">
+        <div class="row">
+          <div class="col-md-2 offset-md-4">
+            <h4 @click="$router.push('/item/register')"><button class="btn btn-outline-primary py-3">상품 등록</button></h4>
+          </div>
+          <div class="col-md-2">
+            <h4 @click="$router.push('/item/list')"><button class="btn btn-outline-primary py-3">상품 조회</button></h4>
+          </div>
+        </div>
       </div>
     </div>
     <div>
