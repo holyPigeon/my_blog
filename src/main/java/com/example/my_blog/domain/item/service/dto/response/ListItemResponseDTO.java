@@ -5,7 +5,7 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public class ItemDTO {
+public class ListItemResponseDTO {
 
   private Long id;
   private String name;
