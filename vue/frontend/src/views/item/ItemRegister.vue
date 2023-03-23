@@ -17,13 +17,13 @@
                         </div>
                         <div class="row g-3 mt-1">
                             <div class="col-md-4 offset-md-4">
-                                <input type="text" v-model="formData.name" class="form-control form-control-lg p-2"
+                                <input type="text" v-model="formData.price" class="form-control form-control-lg p-2"
                                     id="price" name="price" placeholder="가격" required>
                             </div>
                         </div>
                         <div class="row g-3 mt-1">
                             <div class="col-md-4 offset-md-4">
-                                <input type="text" v-model="formData.name" class="form-control form-control-lg p-2"
+                                <input type="text" v-model="formData.quantity" class="form-control form-control-lg p-2"
                                     id="quantity" name="quantity" placeholder="재고" required>
                             </div>
                         </div>
@@ -52,7 +52,7 @@ export default {
         return {
             formData: {
                 name: '',
-                int: '',
+                price: '',
                 quantity: '',
             },
         }
