@@ -20,12 +20,12 @@ public class ItemApiController {
   private final ItemService itemService;
 
   @PostMapping("/item/register")
-  public RegisterItemResponseDTO registerItem(RegisterItemRequestDTO registerItemDTO) {
+  public RegisterItemResponseDTO registerItem(RegisterItemRequestDTO registerItemRequestDTO) {
     Item item = new Item();
 
-    item.setName(registerItemDTO.getName());
-    item.setPrice(registerItemDTO.getPrice());
-    item.setQuantity(registerItemDTO.getQuantity());
+    item.setName(registerItemRequestDTO.getName());
+    item.setPrice(registerItemRequestDTO.getPrice());
+    item.setQuantity(registerItemRequestDTO.getQuantity());
 
     Long itemId = itemService.save(item);
 
