@@ -75,7 +75,7 @@ export default {
                 console.log(res);
                 // JSON.stringify("res => " + res);
                 this.itemList.count = res.data.count;
-                this.itemList.userData = [...res.data.data];
+                this.itemList.itemData = [...res.data.data];
             }).catch((err) => {
                 JSON.stringify("err => " + err);
             });
