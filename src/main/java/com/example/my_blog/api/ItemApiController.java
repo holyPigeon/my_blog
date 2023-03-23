@@ -27,9 +27,9 @@ public class ItemApiController {
     item.setPrice(registerItemDTO.getPrice());
     item.setQuantity(registerItemDTO.getQuantity());
 
-    itemService.save(item);
+    Long itemId = itemService.save(item);
 
-    return new RegisterItemResponseDTO(item.getId());
+    return new RegisterItemResponseDTO(itemId);
 
   }
 
