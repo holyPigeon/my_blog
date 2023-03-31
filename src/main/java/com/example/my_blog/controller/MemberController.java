@@ -1,4 +1,4 @@
-package com.example.my_blog.api;
+package com.example.my_blog.controller;
 
 import com.example.my_blog.domain.member.Member;
 import com.example.my_blog.domain.member.service.MemberService;
@@ -16,7 +16,7 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-public class MemberApiController {
+public class MemberController {
 
   private final MemberService memberService;
 

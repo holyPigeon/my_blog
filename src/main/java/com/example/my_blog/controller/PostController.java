@@ -1,4 +1,4 @@
-package com.example.my_blog.api;
+package com.example.my_blog.controller;
 
 import com.example.my_blog.domain.post.Post;
 import com.example.my_blog.domain.post.service.PostService;
@@ -16,7 +16,7 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-public class ItemApiController {
+public class PostController {
 
   private final PostService postService;
 
