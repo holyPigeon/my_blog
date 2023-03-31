@@ -1,14 +1,15 @@
 package com.example.my_blog.api;
 
-import com.example.my_blog.domain.item.Item;
-import com.example.my_blog.domain.item.service.ItemService;
-import com.example.my_blog.domain.item.service.dto.request.RegisterItemRequestDTO;
-import com.example.my_blog.domain.item.service.dto.response.ListItemResponseDTO;
-import com.example.my_blog.domain.item.service.dto.response.ListItemResponse;
-import com.example.my_blog.domain.item.service.dto.response.RegisterItemResponseDTO;
+import com.example.my_blog.domain.post.Post;
+import com.example.my_blog.domain.post.service.PostService;
+import com.example.my_blog.domain.post.service.dto.request.CreatePostRequestDTO;
+import com.example.my_blog.domain.post.service.dto.response.ListPostResponseDTO;
+import com.example.my_blog.domain.post.service.dto.response.ListPostResponse;
+import com.example.my_blog.domain.post.service.dto.response.CreatePostResponseDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -17,30 +18,25 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ItemApiController {
 
-  private final ItemService itemService;
+  private final PostService postService;
 
-  @PostMapping("/item/register")
-  public RegisterItemResponseDTO registerItem(RegisterItemRequestDTO registerItemRequestDTO) {
-    Item item = new Item();
+  @PostMapping("/post/create")
+  public CreatePostResponseDTO registerItem(@RequestBody CreatePostRequestDTO createPostRequestDTO) {
 
-    item.setName(registerItemRequestDTO.getName());
-    item.setPrice(registerItemRequestDTO.getPrice());
-    item.setQuantity(registerItemRequestDTO.getQuantity());
+    Post post = Post.createPost(createPostRequestDTO.getMember(), createPostRequestDTO.getTitle(), createPostRequestDTO.getContent());
 
-    Long itemId = itemService.save(item);
-
-    return new RegisterItemResponseDTO(itemId);
+    return new CreatePostResponseDTO(post.getId());
 
   }
 
-  @GetMapping("/item/list")
-  public ListItemResponse<List<ListItemResponseDTO>> listItem() {
-    List<Item> items = itemService.findAll();
+  @GetMapping("/post/list")
+  public ListPostResponse<List<ListPostResponseDTO>> listItem() {
+    List<Post> posts = postService.findAll();
 
-    List<ListItemResponseDTO> collect = items.stream().map(i ->
-        new ListItemResponseDTO(i.getId(), i.getName(), i.getPrice(), i.getQuantity())).toList();
+    List<ListPostResponseDTO> collect = posts.stream().map(p ->
+        new ListPostResponseDTO(p.getId(), p.getMember(), p.getTitle(), p.getContent())).toList();
 
-    return new ListItemResponse<>(collect.size(), collect);
+    return new ListPostResponse<>(collect.size(), collect);
 
   }
 
