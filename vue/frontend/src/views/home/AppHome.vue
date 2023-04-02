@@ -11,27 +11,34 @@
     <div class="row g-3">
       <div class="col-md-6 offset-md-3">
         <div class="row mt-3">
-          <div class="col-md-2 offset-md-4">
-            <h4 @click="$router.push('/member/join')"><button class="btn btn-outline-primary py-3">회원 가입</button></h4>
+
+          <div class="col-md-4 offset-md-4">
+            <div class="btn-group">
+            <button class="btn btn-outline-primary py-3">
+              <h6 @click="$router.push('/member/join')">회원 가입</h6>
+            </button>
+            <button class="btn btn-outline-primary py-3">
+              <h6 @click="$router.push('/member/list')">회원 조회</h6>
+            </button>
           </div>
-          <div class="col-md-2">
-            <h4 @click="$router.push('/member/list')"><button class="btn btn-outline-primary py-3">회원 조회</button></h4>
           </div>
         </div>
       </div>
       <div class="col-md-6 offset-md-3">
         <div class="row">
-          <div class="col-md-2 offset-md-4">
-            <h4 @click="$router.push('/item/register')"><button class="btn btn-outline-primary py-3">상품 등록</button></h4>
-          </div>
-          <div class="col-md-2">
-            <h4 @click="$router.push('/item/list')"><button class="btn btn-outline-primary py-3">상품 조회</button></h4>
+
+          <div class="col-md-4 offset-md-4">
+            <div class="btn-group">
+              <button class="btn btn-outline-primary py-3">
+                <h6 @click="$router.push('/post/create')">게시글 등록</h6>
+              </button>
+              <button class="btn btn-outline-primary py-3">
+                <h6 @click="$router.push('/post/list')">게시글 조회</h6>
+              </button>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-    <div>
-
     </div>
   </div>
 </template>
