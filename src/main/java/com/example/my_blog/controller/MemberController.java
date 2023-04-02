@@ -41,7 +41,7 @@ public class MemberController {
   @GetMapping("/member/list")
   public ListMemberResponse<List<ListMemberResponseDTO>> listMember() {
     List<Member> memberList = memberService.findAll();
-    List<ListMemberResponseDTO> listMemberData = memberList.stream().map(m -> new ListMemberResponseDTO(m.getId(), m.getName()))
+    List<ListMemberResponseDTO> listMemberData = memberList.stream().map(m -> new ListMemberResponseDTO(m.getId(), m.getName(), m.getAge()))
         .toList();
 
     return new ListMemberResponse<>(listMemberData.size(), listMemberData);
