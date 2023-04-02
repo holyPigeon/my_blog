@@ -14,10 +14,12 @@
                         <tr>
                             <td>Member Id</td>
                             <td>Member Name</td>
+                            <td>Member Age</td>
                         </tr>
-                        <tr v-for="(member, index) in memberList.userData" :key="index">
+                        <tr v-for="(member, index) in memberList.memberData" :key="index">
                             <td>{{ member.id }}</td>
                             <td>{{ member.name }}</td>
+                            <td>{{ member.age }}</td>
                         </tr>
                     </table>
 
@@ -39,10 +41,11 @@ export default {
         return {
             memberList: {
                 count: -1,
-                userData: [
+                memberData: [
                     {
                         // id: '',
                         // name: '',
+                        // age: '',
                     }
                 ],
             }
@@ -69,7 +72,7 @@ export default {
                 console.log(res);
                 // JSON.stringify("res => " + res);
                 this.memberList.count = res.data.count;
-                this.memberList.userData = [...res.data.data];
+                this.memberList.memberData = [...res.data.data];
             }).catch((err) => {
                 JSON.stringify("err => " + err);
             });
