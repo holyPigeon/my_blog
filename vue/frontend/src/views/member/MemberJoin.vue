@@ -15,6 +15,12 @@
                                     id="name" name="name" placeholder="이름" required>
                             </div>
                         </div>
+                        <div class="row g-3 mt-2">
+                            <div class="col-md-4 offset-md-4">
+                                <input type="text" v-model="formData.age" class="form-control form-control-lg p-2"
+                                    id="age" name="age" placeholder="나이" required>
+                            </div>
+                        </div>
 
                         <!-- <div class="row">
                             <hr class="my-4 col-md-12 offset-md-0 border border-1 border-dark" style="opacity: 0.1;">
@@ -40,6 +46,7 @@ export default {
         return {
             formData: {
                 name: '',
+                age: '',
             },
         }
     },
