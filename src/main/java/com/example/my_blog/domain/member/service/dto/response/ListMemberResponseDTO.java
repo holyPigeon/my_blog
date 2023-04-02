@@ -8,4 +8,5 @@ import lombok.Getter;
 public class ListMemberResponseDTO {
   private Long id;
   private String name;
+  private int age;
 }
