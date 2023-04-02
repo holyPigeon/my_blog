@@ -2,8 +2,8 @@ import { createWebHistory, createRouter } from "vue-router"
 import AppHome from './views/home/AppHome'
 import MemberJoin from './views/member/MemberJoin'
 import MemberList from './views/member/MemberList'
-import ItemRegister from './views/item/ItemRegister'
-import ItemList from './views/item/ItemList'
+import PostCreate from './views/post/PostCreate'
+import PostList from './views/post/PostList'
 
 
 const routes = [
@@ -20,12 +20,12 @@ const routes = [
     component: MemberList,
   },
   {
-    path: "/item/register",
-    component: ItemRegister,
+    path: "/post/create",
+    component: PostCreate,
   },
   {
-    path: "/item/list",
-    component: ItemList,
+    path: "/post/list",
+    component: PostList,
   }
 ];
 
