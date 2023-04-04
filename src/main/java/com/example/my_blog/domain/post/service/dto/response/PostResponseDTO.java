@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 
 @Getter
 @AllArgsConstructor
-public class ListPostResponseDTO {
+public class PostResponseDTO {
 
   private Long id;
   private String author;
