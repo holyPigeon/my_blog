@@ -5,14 +5,11 @@ import com.example.my_blog.domain.member.service.MemberService;
 import com.example.my_blog.domain.post.Post;
 import com.example.my_blog.domain.post.service.PostService;
 import com.example.my_blog.domain.post.service.dto.request.CreatePostRequestDTO;
-import com.example.my_blog.domain.post.service.dto.response.ListPostResponseDTO;
+import com.example.my_blog.domain.post.service.dto.response.PostResponseDTO;
 import com.example.my_blog.domain.post.service.dto.response.ListPostResponse;
 import com.example.my_blog.domain.post.service.dto.response.CreatePostResponseDTO;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -35,16 +32,28 @@ public class PostController {
   }
 
   @GetMapping("/post/list")
-  public ListPostResponse<List<ListPostResponseDTO>> listItem() {
+  public ListPostResponse<List<PostResponseDTO>> listItem() {
     List<Post> posts = postService.findAll();
 
-    List<ListPostResponseDTO> collect = posts.stream().map(p ->
-        new ListPostResponseDTO(p.getId(), p.getMember().getName(), p.getTitle(), p.getContent(),
+    List<PostResponseDTO> collect = posts.stream().map(p ->
+        new PostResponseDTO(p.getId(), p.getMember().getName(), p.getTitle(), p.getContent(),
             p.getCreatedAt(), p.getUpdatedAt())).toList();
 
     return new ListPostResponse<>(collect.size(), collect);
 
   }
+
+  @GetMapping("/post/list/{postId}")
+  public PostResponseDTO listItemByPostId(@PathVariable Long postId) {
+
+    Post findPost = postService.findById(postId);
+
+    return new PostResponseDTO(findPost.getId(), findPost.getMember().getName(), findPost.getTitle(),
+        findPost.getContent(), findPost.getCreatedAt(), findPost.getUpdatedAt());
+
+}
+
+
 
   /*@GetMapping("/member/{memberId}/itemList")
   public List<ItemDTO> listItemByMemberId(@PathVariable Long memberId) {
