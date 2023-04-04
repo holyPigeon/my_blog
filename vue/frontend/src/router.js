@@ -4,7 +4,7 @@ import MemberJoin from './views/member/MemberJoin'
 import MemberList from './views/member/MemberList'
 import PostCreate from './views/post/PostCreate'
 import PostList from './views/post/PostList'
-import PostListDetail from './views/post/PostListDetail'
+import PostDetail from './views/post/PostDetail'
 
 
 const routes = [
@@ -30,7 +30,7 @@ const routes = [
   },
   {
     path: "/post/list/:postId",
-    component: PostListDetail,
+    component: PostDetail,
   }
 ];
 

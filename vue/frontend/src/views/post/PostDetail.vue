@@ -88,7 +88,7 @@
 import axios from 'axios';
 
 export default {
-    name: 'postListDetail',
+    name: 'postDetail',
     data() {
         return {
             postId: -1,
