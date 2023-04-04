@@ -1,6 +1,5 @@
 <template>
     <div id="wrapper" class="container-fluid">
-        <img alt="Vue logo" src="../../assets/logo.png">
         <div class="container px-4s my-5">
             <div class="row gx-4 justify-content-center m-auto">
                 <div class="col-md-10 position-static d-block p-3 text-black"

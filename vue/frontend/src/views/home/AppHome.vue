@@ -1,6 +1,5 @@
 <template>
   <div>
-    <img alt="Vue logo" src="../../assets/logo.png">
     <h1></h1>
     <p>
       For a guide and recipes on how to configure / customize this project,<br>
@@ -14,13 +13,13 @@
 
           <div class="col-md-4 offset-md-4">
             <div class="btn-group">
-            <button class="btn btn-outline-primary py-3">
-              <h6 @click="$router.push('/member/join')">회원 가입</h6>
-            </button>
-            <button class="btn btn-outline-primary py-3">
-              <h6 @click="$router.push('/member/list')">회원 조회</h6>
-            </button>
-          </div>
+              <button class="btn btn-outline-primary py-3">
+                <h6 @click="$router.push('/member/join')">회원 가입</h6>
+              </button>
+              <button class="btn btn-outline-primary py-3">
+                <h6 @click="$router.push('/member/list')">회원 조회</h6>
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -44,12 +43,19 @@
 </template>
 
 <script>
+
 export default {
   name: 'appHome',
   data() {
     return {
 
     }
+  },
+  methods: {
+    // test() {
+    //   const postId = window.location.pathname;
+    //   console.log("postId => " + postId);
+    // }
   }
 }
 </script>
