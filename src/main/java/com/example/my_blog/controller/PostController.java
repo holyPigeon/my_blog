@@ -20,6 +20,9 @@ public class PostController {
   private final PostService postService;
   private final MemberService memberService;
 
+  /**
+   * 게시글 작성
+   */
   @PostMapping("/post/create")
   public CreatePostResponseDTO registerItem(@RequestBody CreatePostRequestDTO createPostRequestDTO) {
 
@@ -31,6 +34,9 @@ public class PostController {
 
   }
 
+  /**
+   * 게시글 조회
+   */
   @GetMapping("/post/list")
   public ListPostResponse<List<PostResponseDTO>> listItem() {
     List<Post> posts = postService.findAll();
@@ -43,6 +49,9 @@ public class PostController {
 
   }
 
+  /**
+   * 게시글 상세 조회
+   */
   @GetMapping("/post/list/{postId}")
   public PostResponseDTO listItemByPostId(@PathVariable Long postId) {
 
@@ -50,7 +59,6 @@ public class PostController {
 
     return new PostResponseDTO(findPost.getId(), findPost.getMember().getName(), findPost.getTitle(),
         findPost.getContent(), findPost.getCreatedAt(), findPost.getUpdatedAt());
-
 }
 
 
