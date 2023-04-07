@@ -2,6 +2,7 @@ package com.example.my_blog.domain.member.service;
 
 import com.example.my_blog.domain.member.Member;
 import com.example.my_blog.domain.member.repository.MemberRepositoryImpl;
+import com.example.my_blog.domain.member.service.dto.request.UpdateMemberRequestDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -39,10 +40,14 @@ public class MemberService {
   }
 
   @Transactional
-  public void updateName(Long id, String name) {
+  public void updateMember(Long id, UpdateMemberRequestDTO updateMemberRequestDTO) {
     Member findMember = memberRepository.findById(id);
 
-    findMember.setName("name");
+    if (findMember!= null) {
+      findMember.setName(updateMemberRequestDTO.getName());
+      findMember.setAge(updateMemberRequestDTO.getAge());
+    }
+
   }
 
 }
