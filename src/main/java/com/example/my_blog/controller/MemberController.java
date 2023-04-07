@@ -3,14 +3,13 @@ package com.example.my_blog.controller;
 import com.example.my_blog.domain.member.Member;
 import com.example.my_blog.domain.member.service.MemberService;
 import com.example.my_blog.domain.member.service.dto.request.JoinMemberRequestDTO;
+import com.example.my_blog.domain.member.service.dto.request.UpdateMemberRequestDTO;
 import com.example.my_blog.domain.member.service.dto.response.JoinMemberResponseDTO;
 import com.example.my_blog.domain.member.service.dto.response.ListMemberResponse;
-import com.example.my_blog.domain.member.service.dto.response.ListMemberResponseDTO;
+import com.example.my_blog.domain.member.service.dto.response.DetailMemberResponseDTO;
+import com.example.my_blog.domain.member.service.dto.response.UpdateMemberResponseDTO;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -39,12 +38,36 @@ public class MemberController {
    * 회원 조회
    */
   @GetMapping("/member/list")
-  public ListMemberResponse<List<ListMemberResponseDTO>> listMember() {
+  public ListMemberResponse<List<DetailMemberResponseDTO>> listMember() {
     List<Member> memberList = memberService.findAll();
-    List<ListMemberResponseDTO> listMemberData = memberList.stream().map(m -> new ListMemberResponseDTO(m.getId(), m.getName(), m.getAge()))
+    List<DetailMemberResponseDTO> listMemberData = memberList.stream().map(m -> new DetailMemberResponseDTO(m.getId(), m.getName(), m.getAge()))
         .toList();
 
     return new ListMemberResponse<>(listMemberData.size(), listMemberData);
+  }
+
+  /**
+   * 회원 상세 조회
+   */
+  @GetMapping("/member/list/{memberId}")
+  public DetailMemberResponseDTO listDetailMember(@PathVariable Long memberId) {
+
+    Member findMember = memberService.findById(memberId);
+
+    return new DetailMemberResponseDTO(findMember.getId(), findMember.getName(), findMember.getAge());
+  }
+
+  /**
+   * 회원 수정
+   */
+  @PostMapping("/member/update/{memberId}")
+  public UpdateMemberResponseDTO updateMember(@PathVariable Long memberId, @RequestBody UpdateMemberRequestDTO updateMemberRequestDTO) {
+
+    memberService.updateMember(memberId, updateMemberRequestDTO);
+
+    Member findMember = memberService.findById(memberId);
+
+    return new UpdateMemberResponseDTO(findMember.getId(), findMember.getName(), findMember.getAge());
   }
 
 }
