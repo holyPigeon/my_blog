@@ -5,6 +5,12 @@ import MemberList from './views/member/MemberList'
 import PostCreate from './views/post/PostCreate'
 import PostList from './views/post/PostList'
 import PostDetail from './views/post/PostDetail'
+import AdminHome from './views/admin/AdminHome'
+import AdminMember from './views/admin/AdminMember'
+import AdminPost from './views/admin/AdminPost'
+import AdminMemberUpdate from './views/admin/AdminMemberUpdate'
+import AdminPostUpdate from './views/admin/AdminPostUpdate'
+
 
 
 const routes = [
@@ -31,7 +37,28 @@ const routes = [
   {
     path: "/post/list/:postId",
     component: PostDetail,
-  }
+  },
+  {
+    path: "/admin/",
+    component: AdminHome,
+  },
+  {
+    path: "/admin/member",
+    component: AdminMember,
+  },
+  {
+    path: "/admin/member/update/:memberId",
+    component: AdminMemberUpdate,
+  },
+  {
+    path: "/admin/post",
+    component: AdminPost,
+  },
+  {
+    path: "/admin/post/update/:postId",
+    component: AdminPostUpdate,
+  },
+
 ];
 
 const router = createRouter({
