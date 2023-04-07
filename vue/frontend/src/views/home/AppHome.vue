@@ -11,29 +11,29 @@
 
       <div class="col-md-4 offset-md-4">
         <div class="btn-group">
-          <button class="btn btn-outline-primary py-3">
-            <h6 @click="$router.push('/member/join')">회원 가입</h6>
+          <button @click="$router.push('/member/join')" class="btn btn-outline-primary py-3">
+            <h6>회원 가입</h6>
           </button>
-          <button class="btn btn-outline-primary py-3">
-            <h6 @click="$router.push('/member/list')">회원 조회</h6>
+          <button @click="$router.push('/member/list')" class="btn btn-outline-primary py-3">
+            <h6>회원 조회</h6>
           </button>
         </div>
       </div>
 
       <div class="col-md-4 offset-md-4">
         <div class="btn-group">
-          <button class="btn btn-outline-primary py-3">
-            <h6 @click="$router.push('/post/create')">게시글 등록</h6>
+          <button @click="$router.push('/post/create')" class="btn btn-outline-primary py-3">
+            <h6>게시글 등록</h6>
           </button>
-          <button class="btn btn-outline-primary py-3">
-            <h6 @click="$router.push('/post/list')">게시글 조회</h6>
+          <button @click="$router.push('/post/list')" class="btn btn-outline-primary py-3">
+            <h6>게시글 조회</h6>
           </button>
         </div>
       </div>
 
       <div class="col-md-4 offset-md-4">
-        <button class="btn btn-outline-primary py-3">
-          <h6 @click="$router.push('/admin')">관리자 콘솔</h6>
+        <button @click="$router.push('/admin')" class="btn btn-outline-primary py-3">
+          <h6>관리자 콘솔</h6>
         </button>
       </div>
     </div>

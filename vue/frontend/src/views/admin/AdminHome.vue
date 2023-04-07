@@ -10,15 +10,15 @@
         <div class="row g-3 mt-3">
             <div class="col-md-4 offset-md-4">
                 <div class="btn-group">
-                    <button class="btn btn-outline-primary py-3">
-                        <h6 @click="$router.push('/admin/member')">회원 관리</h6>
+                    <button @click="$router.push('/admin/member')" class="btn btn-outline-primary py-3">
+                        <h6>회원 관리</h6>
                     </button>
                 </div>
             </div>
             <div class="col-md-4 offset-md-4">
                 <div class="btn-group">
-                    <button class="btn btn-outline-primary py-3">
-                        <h6 @click="$router.push('/admin/post')">게시글 관리</h6>
+                    <button @click="$router.push('/admin/post')" class="btn btn-outline-primary py-3">
+                        <h6>게시글 관리</h6>
                     </button>
                 </div>
             </div>
