@@ -25,27 +25,28 @@
                 </div> -->
                 <div class="col-md-10 position-static d-block p-3 text-black"
                     style="--bs-bg-opacity: .4; --bs-text-opacity: 0.6;">
-                        <div class="p-4">
+                    <div class="p-4">
                         <h4 class="mb-3 text-center text-black fs-3 fw-bold">게시글 목록</h4>
                     </div>
-                        <table class="text-center" style="width: 100%; border: 1px solid #444444;">
-                            <thead>
-                                <tr>
-                                    <th>번호</th>
-                                    <th>제목</th>
-                                    <th>글쓴이</th>
-                                    <th>등록일</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr v-for="(post, index) in postList.postData" :key="index">
-                                    <td>{{ post.id }}</td>
-                                    <td><a @click="$router.push(`/post/list/${post.id}`)" class="custom-nav">{{ post.title }}</a></td>
-                                    <td>{{ post.author }}</td>
-                                    <td>{{ post.createdAt }}</td>
-                                </tr>
-                            </tbody>
-                        </table>
+                    <table class="text-center" style="width: 100%; border: 1px solid #444444;">
+                        <thead>
+                            <tr>
+                                <th>번호</th>
+                                <th>제목</th>
+                                <th>글쓴이</th>
+                                <th>등록일</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr v-for="(post, index) in postList.postData" :key="index">
+                                <td style="width: 10%;">{{ post.id }}</td>
+                                <td style="width: 50%;"><a @click="$router.push(`/post/list/${post.id}`)"
+                                        class="custom-nav">{{ post.title }}</a></td>
+                                <td style="width: 15%;">{{ post.author }}</td>
+                                <td>{{ formattedDateTime(post.createdAt) }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
 
                     <!-- <div class="row">
                             <hr class="my-4 col-md-12 offset-md-0 border border-1 border-dark" style="opacity: 0.1;">
@@ -58,6 +59,7 @@
 
 <script>
 import axios from 'axios';
+import { DateTime } from 'luxon';
 
 export default {
     name: 'postList',
@@ -67,13 +69,20 @@ export default {
                 count: -1,
                 postData: [
                     {
-                        // id: '',
-                        // name: '',
-                        // price: -1,
-                        // quantity: -1,
+                        // id: 1,
+                        // author: '',
+                        // title: '',
+                        // content: '',
+                        // createdAt: '',
+                        // updatedAt: '',
                     }
                 ],
             }
+        }
+    },
+    methods: {
+        formattedDateTime(dateTime) {
+            return DateTime.fromISO(dateTime).toFormat('yyyy.MM.dd HH:mm:ss');
         }
     },
     beforeMount() {
