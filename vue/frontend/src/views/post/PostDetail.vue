@@ -14,8 +14,9 @@
                                     <header class="mb-4">
                                         <!-- Post title-->
                                         <h1 class="fw-bolder mb-1">{{ postData.title }}</h1><!-- Post meta content-->
-                                        <div class="text-muted fst-italic mb-2">Posted on {{ postData.createdAt }} by {{ postData.author }}
-                                        </div>
+                                        <div class="text-muted fst-italic mb-2">Posted on {{ formattedDateTime(postData.createdAt) }}</div>
+                                        <div class="text-muted fst-italic mb-2">Updated on {{ formattedDateTime(postData.updatedAt) }}</div>
+                                        <div class="text-muted fst-italic mb-2">Posted by {{ postData.author }}</div>
                                     </header><!-- Preview image figure-->
                                     <!-- <figure class="mb-4"><img class="img-fluid rounded"
                                             src="https://dummyimage.com/900x400/ced4da/6c757d.jpg" alt="..."></figure> -->
@@ -86,6 +87,7 @@
 
 <script>
 import axios from 'axios';
+import { DateTime } from 'luxon';
 
 export default {
     name: 'postDetail',
@@ -107,6 +109,9 @@ export default {
             const postId = splitArr[splitArr.length - 1]; // "1"
             this.postId = postId;
             console.log("postId -> " + postId);
+        },
+        formattedDateTime(dateTime) {
+            return DateTime.fromISO(dateTime).toFormat('yyyy.MM.dd HH:mm:ss');
         }
     },
     beforeMount() {
