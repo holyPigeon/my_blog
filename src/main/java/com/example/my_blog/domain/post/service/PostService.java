@@ -2,11 +2,12 @@ package com.example.my_blog.domain.post.service;
 
 import com.example.my_blog.domain.post.Post;
 import com.example.my_blog.domain.post.repository.PostRepository;
-import com.example.my_blog.domain.post.service.dto.request.PostEditRequestDTO;
+import com.example.my_blog.domain.post.service.dto.request.UpdatePostRequestDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -36,13 +37,16 @@ public class PostService {
   }
 
   @Transactional
-  public void update(Long id, PostEditRequestDTO postEditRequestDTO) {
+  public void updatePost(Long id, UpdatePostRequestDTO updatePostRequestDTO) {
     Post findPost = findById(id);
 
     if (findPost!= null) {
-      findPost.setTitle(postEditRequestDTO.getTitle());
-      findPost.setContent(postEditRequestDTO.getContent());
+      findPost.setTitle(updatePostRequestDTO.getTitle());
+      findPost.setContent(updatePostRequestDTO.getContent());
+      findPost.setUpdatedAt(LocalDateTime.now());
     }
+
+
   }
 
   public void deleteById(Long id) {
