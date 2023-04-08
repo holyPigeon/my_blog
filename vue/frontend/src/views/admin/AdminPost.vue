@@ -46,7 +46,7 @@
                                     <td>{{ post.author }}</td>
                                     <td>{{ formattedDateTime(post.createdAt) }}</td>
                                     <td><h6 @click="$router.push(`/admin/post/update/${post.id}`)" class="btn btn-outline-primary">수정</h6></td>
-                                    <td><h6 @click="deletePost" class="btn btn-outline-danger">삭제</h6></td>
+                                    <td><h6 @click="deletePost(post.id)" class="btn btn-outline-danger">삭제</h6></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -86,7 +86,19 @@ export default {
     methods: {
         formattedDateTime(dateTime) {
             return DateTime.fromISO(dateTime).toFormat('yyyy.MM.dd HH:mm:ss');
-        }
+        },
+        deletePost(postId) {
+            axios.delete(`/post/delete/${postId}`)
+                .then((res) => {
+                    console.log(res);
+                    location.reload();
+                }).catch((err) => {
+                    let errMsg = JSON.stringify(err.response.data.message);
+                    errMsg = errMsg.substring(1, errMsg.length - 1);
+                    console.log("errMsg -> " + errMsg);
+                    alert(errMsg);
+                });
+        },
     },
     beforeMount() {
         axios.get('/post/list')
