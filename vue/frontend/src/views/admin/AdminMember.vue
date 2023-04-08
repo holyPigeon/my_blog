@@ -22,7 +22,7 @@
                             <td>{{ member.name }}</td>
                             <td>{{ member.age }}</td>
                             <td><h6 @click="$router.push(`/admin/member/update/${member.id}`)" class="btn btn-outline-primary">수정</h6></td>
-                            <td><h6 @click="deleteMember" class="btn btn-outline-danger">삭제</h6></td>
+                            <td><h6 @click="deleteMember(member.id)" class="btn btn-outline-danger">삭제</h6></td>
                         </tr>
                     </table>
 
@@ -55,11 +55,11 @@ export default {
         }
     },
     methods: {
-        updateMember() {
-            axios.post('/member/join', data)
+        deleteMember(memberId) {
+            axios.delete(`/member/delete/${memberId}`)
                 .then((res) => {
                     console.log(res);
-                    this.$router.push('/');
+                    location.reload();
                 }).catch((err) => {
                     let errMsg = JSON.stringify(err.response.data.message);
                     errMsg = errMsg.substring(1, errMsg.length - 1);
