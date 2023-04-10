@@ -47,7 +47,11 @@ public class MemberService {
       findMember.setName(updateMemberRequestDTO.getName());
       findMember.setAge(updateMemberRequestDTO.getAge());
     }
+  }
 
+  @Transactional
+  public void deleteById(Long id) {
+    memberRepository.deleteById(id);
   }
 
 }
