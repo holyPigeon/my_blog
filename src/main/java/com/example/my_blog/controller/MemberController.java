@@ -4,10 +4,7 @@ import com.example.my_blog.domain.member.Member;
 import com.example.my_blog.domain.member.service.MemberService;
 import com.example.my_blog.domain.member.service.dto.request.JoinMemberRequestDTO;
 import com.example.my_blog.domain.member.service.dto.request.UpdateMemberRequestDTO;
-import com.example.my_blog.domain.member.service.dto.response.JoinMemberResponseDTO;
-import com.example.my_blog.domain.member.service.dto.response.ListMemberResponse;
-import com.example.my_blog.domain.member.service.dto.response.DetailMemberResponseDTO;
-import com.example.my_blog.domain.member.service.dto.response.UpdateMemberResponseDTO;
+import com.example.my_blog.domain.member.service.dto.response.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,11 +21,10 @@ public class MemberController {
    */
   @PostMapping("/member/join")
   public JoinMemberResponseDTO joinMember(@RequestBody JoinMemberRequestDTO joinMemberRequestDTO) {
-    Member member = new Member();
 
+    Member member = new Member();
     member.setName(joinMemberRequestDTO.getName());
     member.setAge(joinMemberRequestDTO.getAge());
-
     Long joinId = memberService.join(member);
 
     return new JoinMemberResponseDTO(joinId);
@@ -39,6 +35,7 @@ public class MemberController {
    */
   @GetMapping("/member/list")
   public ListMemberResponse<List<DetailMemberResponseDTO>> listMember() {
+
     List<Member> memberList = memberService.findAll();
     List<DetailMemberResponseDTO> listMemberData = memberList.stream().map(m -> new DetailMemberResponseDTO(m.getId(), m.getName(), m.getAge()))
         .toList();
@@ -64,10 +61,19 @@ public class MemberController {
   public UpdateMemberResponseDTO updateMember(@PathVariable Long memberId, @RequestBody UpdateMemberRequestDTO updateMemberRequestDTO) {
 
     memberService.updateMember(memberId, updateMemberRequestDTO);
-
     Member findMember = memberService.findById(memberId);
 
     return new UpdateMemberResponseDTO(findMember.getId(), findMember.getName(), findMember.getAge());
   }
 
+  /**
+   * 회원 삭제
+   */
+  @DeleteMapping("/member/delete/{memberId}")
+  public DeleteMemberResponseDTO deleteMember(@PathVariable Long memberId) {
+
+    memberService.deleteById(memberId);
+
+    return new DeleteMemberResponseDTO(memberId);
+  }
 }
