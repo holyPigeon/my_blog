@@ -6,10 +6,7 @@ import com.example.my_blog.domain.post.Post;
 import com.example.my_blog.domain.post.service.PostService;
 import com.example.my_blog.domain.post.service.dto.request.CreatePostRequestDTO;
 import com.example.my_blog.domain.post.service.dto.request.UpdatePostRequestDTO;
-import com.example.my_blog.domain.post.service.dto.response.DetailPostResponseDTO;
-import com.example.my_blog.domain.post.service.dto.response.ListPostResponse;
-import com.example.my_blog.domain.post.service.dto.response.CreatePostResponseDTO;
-import com.example.my_blog.domain.post.service.dto.response.UpdatePostResponseDTO;
+import com.example.my_blog.domain.post.service.dto.response.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -41,8 +38,8 @@ public class PostController {
    */
   @GetMapping("/post/list")
   public ListPostResponse<List<DetailPostResponseDTO>> listPost() {
-    List<Post> posts = postService.findAll();
 
+    List<Post> posts = postService.findAll();
     List<DetailPostResponseDTO> collect = posts.stream().map(p ->
         new DetailPostResponseDTO(p.getId(), p.getMember().getName(), p.getTitle(), p.getContent(),
             p.getCreatedAt(), p.getUpdatedAt())).toList();
@@ -74,5 +71,16 @@ public class PostController {
 
     return new UpdatePostResponseDTO(findPost.getId(), findPost.getMember().getName(),
         findPost.getTitle(), findPost.getContent(), findPost.getCreatedAt(), findPost.getUpdatedAt());
+  }
+
+  /**
+   * 게시글 삭제
+   */
+  @DeleteMapping("/post/delete/{postId}")
+  public DeletePostResponseDTO deletePost(@PathVariable Long postId) {
+
+    postService.deleteById(postId);
+
+    return new DeletePostResponseDTO(postId);
   }
 }
