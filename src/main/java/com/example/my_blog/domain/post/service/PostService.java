@@ -45,10 +45,9 @@ public class PostService {
       findPost.setContent(updatePostRequestDTO.getContent());
       findPost.setUpdatedAt(LocalDateTime.now());
     }
-
-
   }
 
+  @Transactional
   public void deleteById(Long id) {
     postRepository.deleteById(id);
   }
