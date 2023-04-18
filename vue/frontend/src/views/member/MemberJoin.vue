@@ -10,6 +10,18 @@
                     </div>
                         <div class="row g-3">
                             <div class="col-md-4 offset-md-4">
+                                <input type="text" v-model="formData.loginId" class="form-control form-control-lg p-2"
+                                    id="loginId" name="loginId" placeholder="아이디" required>
+                            </div>
+                        </div>
+                        <div class="row g-3 mt-2">
+                            <div class="col-md-4 offset-md-4">
+                                <input type="text" v-model="formData.password" class="form-control form-control-lg p-2"
+                                    id="password" name="password" placeholder="패스워드" required>
+                            </div>
+                        </div>
+                        <div class="row g-3 mt-2">
+                            <div class="col-md-4 offset-md-4">
                                 <input type="text" v-model="formData.name" class="form-control form-control-lg p-2"
                                     id="name" name="name" placeholder="이름" required>
                             </div>
@@ -44,6 +56,8 @@ export default {
     data() {
         return {
             formData: {
+                loginId: '',
+                password: '',
                 name: '',
                 age: '',
             },
