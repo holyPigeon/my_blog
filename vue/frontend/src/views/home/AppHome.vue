@@ -94,7 +94,7 @@ export default {
     axios.get(`/session`)
       .then((res) => {
         console.log(res);
-        if (res.data.id != -1) {
+        if (res.data.id !== -1) {
           this.sessionData = { ...res.data };
         }
       }).catch((err) => {
