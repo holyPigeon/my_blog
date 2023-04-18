@@ -23,6 +23,8 @@ public class MemberController {
   public JoinMemberResponseDTO joinMember(@RequestBody JoinMemberRequestDTO joinMemberRequestDTO) {
 
     Member member = new Member();
+    member.setLoginId(joinMemberRequestDTO.getLoginId());
+    member.setPassword(joinMemberRequestDTO.getPassword());
     member.setName(joinMemberRequestDTO.getName());
     member.setAge(joinMemberRequestDTO.getAge());
     Long joinId = memberService.join(member);
