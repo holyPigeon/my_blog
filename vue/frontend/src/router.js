@@ -1,5 +1,6 @@
 import { createWebHistory, createRouter } from "vue-router"
 import AppHome from './views/home/AppHome'
+import MemberLogin from './views/member/MemberLogin'
 import MemberJoin from './views/member/MemberJoin'
 import MemberList from './views/member/MemberList'
 import PostCreate from './views/post/PostCreate'
@@ -12,11 +13,14 @@ import AdminMemberUpdate from './views/admin/AdminMemberUpdate'
 import AdminPostUpdate from './views/admin/AdminPostUpdate'
 
 
-
 const routes = [
   {
     path: "/",
     component: AppHome,
+  },
+  {
+    path: "/login",
+    component: MemberLogin,
   },
   {
     path: "/member/join",
