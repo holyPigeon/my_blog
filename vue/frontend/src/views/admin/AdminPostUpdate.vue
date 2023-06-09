@@ -50,7 +50,7 @@ export default {
                 // title: '',
                 // content: '',
             },
-            memberList: {
+            userList: {
                 count: -1,
                 userData: {
                     // id: '',
