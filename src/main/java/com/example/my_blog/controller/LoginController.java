@@ -33,13 +33,13 @@ public class LoginController {
 
     if (loginUser == null) {
       log.error("login failed");
-      return new LoginResponse(-1L, "null", "null", "null", -1);
+      return new LoginResponse(-1L, "null", "null", "null");
     }
 
     HttpSession session = request.getSession();
     session.setAttribute(SessionConst.SESSION_KEY, loginUser);
 
-    return new LoginResponse(loginUser.getId(), loginUser.getLoginId(), loginUser.getPassword(), loginUser.getName(), loginUser.getAge());
+    return new LoginResponse(loginUser.getId(), loginUser.getLoginId(), loginUser.getPassword(), loginUser.getName());
   }
 
   @PostMapping("/logout")
@@ -60,9 +60,9 @@ public class LoginController {
 
     if (!Objects.isNull(session) && !Objects.isNull(session.getAttribute(SessionConst.SESSION_KEY))) {
       User loginUser = (User) session.getAttribute(SessionConst.SESSION_KEY);
-      return new DetailSessionResponse(loginUser.getId(), loginUser.getLoginId(), loginUser.getName(), loginUser.getAge());
+      return new DetailSessionResponse(loginUser.getId(), loginUser.getLoginId(), loginUser.getName());
     } else {
-      return new DetailSessionResponse(-1L, "", "", -1);
+      return new DetailSessionResponse(-1L, "", "");
     }
   }
 }
