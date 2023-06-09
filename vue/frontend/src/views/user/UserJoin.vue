@@ -52,7 +52,7 @@
 import axios from 'axios';
 
 export default {
-    name: 'memberJoin',
+    name: 'userJoin',
     data() {
         return {
             formData: {
@@ -66,7 +66,7 @@ export default {
     methods: {
         submitForm() {
             const data = this.formData;
-            axios.post('/member/join', data)
+            axios.post('/user/join', data)
                 .then((res) => {
                     console.log(res);
                     this.$router.push('/');
@@ -76,21 +76,6 @@ export default {
                     console.log("errMsg -> " + errMsg);
                     alert(errMsg);
                 });
-
-            // const data = this.formData;
-            // const url = `/api/join/user`;
-            // const options = {
-            //     method: 'POST',
-            //     headers: { 'content-type': 'application/x-www-form-urlencoded' },
-            //     data: qs.stringify(data),
-            //     url,
-            // };
-            // axios(options)
-            //     .then((res) => {
-            //         console.log(res);
-            //     }).catch(() => {
-            //         console.log('fail');
-            //     });
         },
     },
 }
