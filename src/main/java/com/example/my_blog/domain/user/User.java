@@ -33,7 +33,7 @@ public class User {
   private List<Comment> comments = new ArrayList<>();
 
   //==생성 메소드==//
-  public static User createUser(String loginId, String password, String name, String nickname, String country) {
+  public static User createUser(String loginId, String password, String name, String nickname) {
 
     User user = new User();
     user.setLoginId(loginId);
