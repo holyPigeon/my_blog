@@ -26,7 +26,7 @@ public class UserRepositoryImpl implements UserRepository {
 
   @Override
   public User findByLoginId(String loginId) {
-    return em.createQuery("select m from User m where m.loginId = :loginId", User.class)
+    return em.createQuery("select u from User u where u.loginId = :loginId", User.class)
         .setParameter("loginId", loginId)
         .getSingleResult();
   }
@@ -34,15 +34,22 @@ public class UserRepositoryImpl implements UserRepository {
   @Override
   public User findByName(String name) {
 
-    return em.createQuery("select m from User m where m.name = :name", User.class)
+    return em.createQuery("select u from User u where u.name = :name", User.class)
         .setParameter("name", name)
+        .getSingleResult();
+  }
+
+  @Override
+  public User findByNickname(String nickname) {
+    return em.createQuery("select u from User u where u.nickname = :nickname", User.class)
+        .setParameter("nickname", nickname)
         .getSingleResult();
   }
 
   @Override
   public List<User> findAll() {
 
-    return em.createQuery("select m from User m", User.class)
+    return em.createQuery("select u from User u", User.class)
         .getResultList();
   }
 
