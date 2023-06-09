@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-public class CreateCommentRequestDTO {
+public class CreateCommentRequest {
 
   private Long userId;
 
