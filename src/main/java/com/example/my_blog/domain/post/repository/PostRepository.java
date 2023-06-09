@@ -10,7 +10,7 @@ public interface PostRepository {
 
   Post findById(Long id);
 
-  List<Post> findByMemberId(Long memberId);
+  List<Post> findByUserId(Long memberId);
 
   List<Post> findAll();
 
