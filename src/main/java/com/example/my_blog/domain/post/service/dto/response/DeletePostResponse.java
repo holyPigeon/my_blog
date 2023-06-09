@@ -4,17 +4,10 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
-
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class DetailPostResponseDTO {
+public class DeletePostResponse {
 
   private Long id;
-  private String author;
-  private String title;
-  private String content;
-  private LocalDateTime createdAt;
-  private LocalDateTime updatedAt;
 }

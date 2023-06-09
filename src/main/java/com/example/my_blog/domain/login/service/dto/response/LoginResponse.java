@@ -7,10 +7,11 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class DetailSessionResponseDTO {
+public class LoginResponse {
 
   private Long id;
   private String loginId;
+  private String password;
   private String name;
   private int age;
 }

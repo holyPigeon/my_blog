@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class LogoutResponseDTO {
+public class LogoutResponse {
 
   private boolean success;
   private String message;
