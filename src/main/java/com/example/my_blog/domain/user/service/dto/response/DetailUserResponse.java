@@ -8,5 +8,4 @@ import lombok.Getter;
 public class DetailUserResponse {
   private Long id;
   private String name;
-  private int age;
 }
