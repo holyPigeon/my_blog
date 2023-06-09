@@ -38,7 +38,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr v-for="(post, index) in postList.postData" :key="index">
+                            <tr v-for="(post, index) in postList.data" :key="index">
                                 <td style="width: 10%;">{{ post.id }}</td>
                                 <td style="width: 50%;"><a @click="$router.push(`/post/list/${post.id}`)"
                                         class="custom-nav">{{ post.title }}</a></td>
@@ -67,7 +67,7 @@ export default {
         return {
             postList: {
                 count: -1,
-                postData: [
+                data: [
                     {
                         // id: 1,
                         // author: '',
@@ -91,7 +91,7 @@ export default {
                 console.log(res);
                 // JSON.stringify("res => " + res);
                 this.postList.count = res.data.count;
-                this.postList.postData = [...res.data.data];
+                this.postList.data = [...res.data.data];
             }).catch((err) => {
                 JSON.stringify("err => " + err);
             });
