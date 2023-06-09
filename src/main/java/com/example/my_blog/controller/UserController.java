@@ -6,8 +6,10 @@ import com.example.my_blog.domain.user.service.dto.request.JoinUserRequest;
 import com.example.my_blog.domain.user.service.dto.request.UpdateUserRequest;
 import com.example.my_blog.domain.user.service.dto.response.*;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.net.URI;
 import java.util.List;
 
 @RestController
@@ -20,22 +22,21 @@ public class UserController {
    * 회원 가입
    */
   @PostMapping("/user/join")
-  public JoinUserResponse joinMember(@RequestBody JoinUserRequest joinUserRequest) {
+  public ResponseEntity<Object> joinUser(@RequestBody JoinUserRequest request) {
 
-    User user = new User();
-    user.setLoginId(joinUserRequest.getLoginId());
-    user.setPassword(joinUserRequest.getPassword());
-    user.setName(joinUserRequest.getName());
-    Long joinId = userService.join(user);
+    User user = User.createUser(request.getLoginId(), request.getPassword(), request.getName(), request.getNickname());
+    Long userId = userService.join(user);
 
-    return new JoinUserResponse(joinId);
+    return ResponseEntity
+        .created(URI.create("/users/" + userId))
+        .build();
   }
 
   /**
    * 회원 조회
    */
   @GetMapping("/user/list")
-  public ListUserResponse<List<DetailUserResponse>> listMember() {
+  public ListUserResponse<List<DetailUserResponse>> listUser() {
 
     List<User> userList = userService.findAll();
     List<DetailUserResponse> listUserData = userList.stream().map(u -> new DetailUserResponse(u.getId(), u.getName()))
@@ -48,7 +49,7 @@ public class UserController {
    * 회원 상세 조회
    */
   @GetMapping("/user/list/{userId}")
-  public DetailUserResponse listDetailMember(@PathVariable Long userId) {
+  public DetailUserResponse listDetailUser(@PathVariable Long userId) {
 
     User findUser = userService.findById(userId);
 
@@ -59,22 +60,22 @@ public class UserController {
    * 회원 수정
    */
   @PostMapping("/user/update/{userId}")
-  public UpdateUserResponse updateMember(@PathVariable Long userId, @RequestBody UpdateUserRequest updateUserRequest) {
+  public ResponseEntity<Object> updateUser(@PathVariable Long userId, @RequestBody UpdateUserRequest request) {
 
-    userService.updateMember(userId, updateUserRequest);
+    userService.updateUser(userId, request);
     User findUser = userService.findById(userId);
 
-    return new UpdateUserResponse(findUser.getId(), findUser.getName());
+    return ResponseEntity.noContent().build();
   }
 
   /**
    * 회원 삭제
    */
   @DeleteMapping("/user/delete/{userId}")
-  public DeleteUserResponse deleteMember(@PathVariable Long userId) {
+  public ResponseEntity<Object> deleteUser(@PathVariable Long userId) {
 
     userService.deleteById(userId);
 
-    return new DeleteUserResponse(userId);
+    return ResponseEntity.noContent().build();
   }
 }
