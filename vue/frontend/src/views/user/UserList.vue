@@ -15,10 +15,10 @@
                             <td>Member Name</td>
                             <td>Member Age</td>
                         </tr>
-                        <tr v-for="(member, index) in memberList.memberData" :key="index">
-                            <td>{{ member.id }}</td>
-                            <td>{{ member.name }}</td>
-                            <td>{{ member.age }}</td>
+                        <tr v-for="(user, index) in userList.data" :key="index">
+                            <td>{{ user.id }}</td>
+                            <td>{{ user.name }}</td>
+                            <td>{{ user.age }}</td>
                         </tr>
                     </table>
 
@@ -35,12 +35,12 @@
 import axios from 'axios';
 
 export default {
-    name: 'memberList',
+    name: 'userList',
     data() {
         return {
-            memberList: {
+            userList: {
                 count: -1,
-                memberData: [
+                data: [
                     {
                         // id: '',
                         // name: '',
@@ -50,28 +50,13 @@ export default {
             }
         }
     },
-    // methods: {
-    //     submitForm() {
-    //         const data = this.formData;
-    //         axios.post('/member/join', data)
-    //             .then((res) => {
-    //                 console.log(res);
-    //                 this.$router.push('/');
-    //             }).catch((err) => {
-    //                 let errMsg = JSON.stringify(err.response.data.message);
-    //                 errMsg = errMsg.substring(1, errMsg.length - 1);
-    //                 console.log("errMsg -> " + errMsg);
-    //                 alert(errMsg);
-    //             });
-    //     },
-    // },
     beforeMount() {
-        axios.get('/member/list')
+        axios.get('/user/list')
             .then((res) => {
                 console.log(res);
                 // JSON.stringify("res => " + res);
-                this.memberList.count = res.data.count;
-                this.memberList.memberData = [...res.data.data];
+                this.userList.count = res.data.count;
+                this.userList.data = [...res.data.data];
             }).catch((err) => {
                 JSON.stringify("err => " + err);
             });
