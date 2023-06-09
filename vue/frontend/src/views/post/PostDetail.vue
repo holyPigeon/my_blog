@@ -13,16 +13,18 @@
                                     <!-- Post header-->
                                     <header class="mb-4">
                                         <!-- Post title-->
-                                        <h1 class="fw-bolder mb-1">{{ postData.title }}</h1><!-- Post meta content-->
-                                        <div class="text-muted fst-italic mb-2">Posted on {{ formattedDateTime(postData.createdAt) }}</div>
-                                        <div class="text-muted fst-italic mb-2">Updated on {{ formattedDateTime(postData.updatedAt) }}</div>
-                                        <div class="text-muted fst-italic mb-2">Posted by {{ postData.author }}</div>
+                                        <h1 class="fw-bolder mb-1">{{ post.title }}</h1><!-- Post meta content-->
+                                        <div class="text-muted fst-italic mb-2">Posted on
+                                            {{ formattedDateTime(post.createdAt) }}</div>
+                                        <div class="text-muted fst-italic mb-2">Updated on
+                                            {{ formattedDateTime(post.updatedAt) }}</div>
+                                        <div class="text-muted fst-italic mb-2">Posted by {{ post.author }}</div>
                                     </header><!-- Preview image figure-->
                                     <!-- <figure class="mb-4"><img class="img-fluid rounded"
                                             src="https://dummyimage.com/900x400/ced4da/6c757d.jpg" alt="..."></figure> -->
                                     <!-- Post content-->
                                     <section class="mb-5">
-                                        <p class="fs-5 mb-4">{{ postData.content }}</p>
+                                        <p class="fs-5 mb-4">{{ post.content }}</p>
                                     </section>
                                 </article>
                                 <!-- <section class="mb-5">
@@ -94,7 +96,7 @@ export default {
     data() {
         return {
             postId: -1,
-            postData: {
+            post: {
                 // id: '',
                 // name: '',
                 // price: -1,
@@ -124,8 +126,8 @@ export default {
         axios.get(`/post/list/${this.postId}`)
             .then((res) => {
                 console.log("res.data => " + JSON.stringify(res.data));
-                this.postData = {...res.data};
-                console.log("postData -> " + JSON.stringify(this.postData));
+                this.post = {...res.data};
+                console.log("postData -> " + JSON.stringify(this.post));
             }).catch((err) => {
                 JSON.stringify("err => " + err);
             });
