@@ -4,8 +4,8 @@ import com.example.my_blog.domain.user.User;
 import com.example.my_blog.domain.user.service.UserService;
 import com.example.my_blog.domain.post.Post;
 import com.example.my_blog.domain.post.service.PostService;
-import com.example.my_blog.domain.post.service.dto.request.CreatePostRequestDTO;
-import com.example.my_blog.domain.post.service.dto.request.UpdatePostRequestDTO;
+import com.example.my_blog.domain.post.service.dto.request.CreatePostRequest;
+import com.example.my_blog.domain.post.service.dto.request.UpdatePostRequest;
 import com.example.my_blog.domain.post.service.dto.response.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -23,13 +23,13 @@ public class PostController {
    * 게시글 작성
    */
   @PostMapping("/post/create")
-  public CreatePostResponseDTO registerPost(@RequestBody CreatePostRequestDTO createPostRequestDTO) {
+  public CreatePostResponse registerPost(@RequestBody CreatePostRequest createPostRequest) {
 
-    User findUser = userService.findByName(createPostRequestDTO.getAuthor());
-    Post post = Post.createPost(findUser, createPostRequestDTO.getTitle(), createPostRequestDTO.getContent());
+    User findUser = userService.findByName(createPostRequest.getAuthor());
+    Post post = Post.createPost(findUser, createPostRequest.getTitle(), createPostRequest.getContent());
     Long postId = postService.save(post);
 
-    return new CreatePostResponseDTO(postId);
+    return new CreatePostResponse(postId);
 
   }
 
@@ -37,11 +37,11 @@ public class PostController {
    * 게시글 조회
    */
   @GetMapping("/post/list")
-  public ListPostResponse<List<DetailPostResponseDTO>> listPost() {
+  public ListPostResponse<List<DetailPostResponse>> listPost() {
 
     List<Post> posts = postService.findAll();
-    List<DetailPostResponseDTO> collect = posts.stream().map(p ->
-        new DetailPostResponseDTO(p.getId(), p.getUser().getName(), p.getTitle(), p.getContent(),
+    List<DetailPostResponse> collect = posts.stream().map(p ->
+        new DetailPostResponse(p.getId(), p.getUser().getName(), p.getTitle(), p.getContent(),
             p.getCreatedAt(), p.getUpdatedAt())).toList();
 
     return new ListPostResponse<>(collect.size(), collect);
@@ -52,11 +52,11 @@ public class PostController {
    * 게시글 상세 조회
    */
   @GetMapping("/post/list/{postId}")
-  public DetailPostResponseDTO listPostDetail(@PathVariable Long postId) {
+  public DetailPostResponse listPostDetail(@PathVariable Long postId) {
 
     Post findPost = postService.findById(postId);
 
-    return new DetailPostResponseDTO(findPost.getId(), findPost.getUser().getName(), findPost.getTitle(),
+    return new DetailPostResponse(findPost.getId(), findPost.getUser().getName(), findPost.getTitle(),
         findPost.getContent(), findPost.getCreatedAt(), findPost.getUpdatedAt());
   }
 
@@ -64,12 +64,12 @@ public class PostController {
    * 게시글 수정
    */
   @PostMapping("/post/update/{postId}")
-  public UpdatePostResponseDTO updatePost(@PathVariable Long postId, @RequestBody UpdatePostRequestDTO updatePostRequestDTO) {
+  public UpdatePostResponse updatePost(@PathVariable Long postId, @RequestBody UpdatePostRequest updatePostRequest) {
 
-    postService.updatePost(postId, updatePostRequestDTO);
+    postService.updatePost(postId, updatePostRequest);
     Post findPost = postService.findById(postId);
 
-    return new UpdatePostResponseDTO(findPost.getId(), findPost.getUser().getName(),
+    return new UpdatePostResponse(findPost.getId(), findPost.getUser().getName(),
         findPost.getTitle(), findPost.getContent(), findPost.getCreatedAt(), findPost.getUpdatedAt());
   }
 
@@ -77,10 +77,10 @@ public class PostController {
    * 게시글 삭제
    */
   @DeleteMapping("/post/delete/{postId}")
-  public DeletePostResponseDTO deletePost(@PathVariable Long postId) {
+  public DeletePostResponse deletePost(@PathVariable Long postId) {
 
     postService.deleteById(postId);
 
-    return new DeletePostResponseDTO(postId);
+    return new DeletePostResponse(postId);
   }
 }

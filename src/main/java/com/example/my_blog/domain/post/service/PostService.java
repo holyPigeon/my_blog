@@ -2,7 +2,7 @@ package com.example.my_blog.domain.post.service;
 
 import com.example.my_blog.domain.post.Post;
 import com.example.my_blog.domain.post.repository.PostRepository;
-import com.example.my_blog.domain.post.service.dto.request.UpdatePostRequestDTO;
+import com.example.my_blog.domain.post.service.dto.request.UpdatePostRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -41,13 +41,13 @@ public class PostService {
   }
 
   @Transactional
-  public void updatePost(Long id, UpdatePostRequestDTO updatePostRequestDTO) {
+  public void updatePost(Long id, UpdatePostRequest updatePostRequest) {
 
     Post findPost = findById(id);
 
     if (findPost!= null) {
-      findPost.setTitle(updatePostRequestDTO.getTitle());
-      findPost.setContent(updatePostRequestDTO.getContent());
+      findPost.setTitle(updatePostRequest.getTitle());
+      findPost.setContent(updatePostRequest.getContent());
       findPost.setUpdatedAt(LocalDateTime.now());
     }
   }
