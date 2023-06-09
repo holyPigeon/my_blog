@@ -15,6 +15,7 @@ public class PostRepositoryImpl implements PostRepository {
 
   @Override
   public void save(Post post) {
+
     em.persist(post);
   }
 
@@ -25,11 +26,11 @@ public class PostRepositoryImpl implements PostRepository {
   }
 
   @Override
-  public List<Post> findByMemberId(Long memberId) {
+  public List<Post> findByUserId(Long userId) {
 
     return em.createQuery("select distinct p from Post p" +
-            " join fetch p.member m where m.id = :memberId", Post.class)
-        .setParameter("memberId", memberId)
+            " join fetch p.user u where u.id = :userId", Post.class)
+        .setParameter("userId", userId)
         .getResultList();
   }
 
@@ -43,6 +44,7 @@ public class PostRepositoryImpl implements PostRepository {
 
   @Override
   public void deleteById(Long id) {
+
     Post findPost = em.find(Post.class, id);
 
     em.remove(findPost);
