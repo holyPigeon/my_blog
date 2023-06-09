@@ -39,7 +39,7 @@ public class UserController {
   public ListUserResponse<List<DetailUserResponse>> listUser() {
 
     List<User> userList = userService.findAll();
-    List<DetailUserResponse> listUserData = userList.stream().map(u -> new DetailUserResponse(u.getId(), u.getName()))
+    List<DetailUserResponse> listUserData = userList.stream().map(u -> new DetailUserResponse(u.getId(), u.getName(), u.getNickname()))
         .toList();
 
     return new ListUserResponse<>(listUserData.size(), listUserData);
@@ -53,7 +53,7 @@ public class UserController {
 
     User findUser = userService.findById(userId);
 
-    return new DetailUserResponse(findUser.getId(), findUser.getName());
+    return new DetailUserResponse(findUser.getId(), findUser.getName(), findUser.getNickname());
   }
 
   /**
