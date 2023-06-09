@@ -24,6 +24,8 @@ public class User {
 
   private String name;
 
+  private String nickname;
+
   private int age;
 
   @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
