@@ -1,31 +1,29 @@
  package com.example.my_blog.domain.login.service;
 
-import com.example.my_blog.domain.member.Member;
-import com.example.my_blog.domain.member.repository.MemberRepository;
+import com.example.my_blog.domain.user.User;
+import com.example.my_blog.domain.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
-
-@Service
+ @Service
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
 public class LoginService {
 
-  private final MemberRepository memberRepository;
+  private final UserRepository userRepository;
 
-  public Member login(String username, String password) {
+  public User login(String username, String password) {
 
-    Member findMember = memberRepository.findByLoginId(username);
-    if (!isCorrectPassword(password, findMember)) {
+    User findUser = userRepository.findByLoginId(username);
+    if (!isCorrectPassword(password, findUser)) {
       return null;
     }
 
-    return findMember;
+    return findUser;
   }
 
-  private boolean isCorrectPassword(String password, Member findMember) {
-    return findMember.getPassword().equals(password);
+  private boolean isCorrectPassword(String password, User findUser) {
+    return findUser.getPassword().equals(password);
   }
 }
