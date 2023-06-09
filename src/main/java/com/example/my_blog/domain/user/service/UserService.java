@@ -14,11 +14,11 @@ import java.util.List;
 @RequiredArgsConstructor
 public class UserService {
 
-  private final UserRepositoryImpl memberRepository;
+  private final UserRepositoryImpl userRepository;
 
   @Transactional
   public Long join(User user) {
-    memberRepository.save(user);
+    userRepository.save(user);
 
     return user.getId();
   }
@@ -26,22 +26,22 @@ public class UserService {
 
   public User findById(Long id) {
 
-    return memberRepository.findById(id);
+    return userRepository.findById(id);
   }
 
   public User findByName(String name) {
 
-    return memberRepository.findByName(name);
+    return userRepository.findByName(name);
   }
 
   public List<User> findAll() {
 
-    return memberRepository.findAll();
+    return userRepository.findAll();
   }
 
   @Transactional
-  public void updateMember(Long id, UpdateUserRequest updateUserRequest) {
-    User findUser = memberRepository.findById(id);
+  public void updateUser(Long id, UpdateUserRequest updateUserRequest) {
+    User findUser = userRepository.findById(id);
 
     if (findUser != null) {
       findUser.setNickname(updateUserRequest.getNickname());
@@ -50,7 +50,7 @@ public class UserService {
 
   @Transactional
   public void deleteById(Long id) {
-    memberRepository.deleteById(id);
+    userRepository.deleteById(id);
   }
 
 }
