@@ -17,12 +17,12 @@
                             <td>수정</td>
                             <td>삭제</td>
                         </tr>
-                        <tr v-for="(member, index) in memberList.memberData" :key="index">
-                            <td>{{ member.id }}</td>
-                            <td>{{ member.name }}</td>
-                            <td>{{ member.age }}</td>
-                            <td><h6 @click="$router.push(`/admin/member/update/${member.id}`)" class="btn btn-outline-primary">수정</h6></td>
-                            <td><h6 @click="deleteMember(member.id)" class="btn btn-outline-danger">삭제</h6></td>
+                        <tr v-for="(user, index) in userList.data" :key="index">
+                            <td>{{ user.id }}</td>
+                            <td>{{ user.name }}</td>
+                            <td>{{ user.age }}</td>
+                            <td><h6 @click="$router.push(`/admin/user/update/${user.id}`)" class="btn btn-outline-primary">수정</h6></td>
+                            <td><h6 @click="deleteMember(user.id)" class="btn btn-outline-danger">삭제</h6></td>
                         </tr>
                     </table>
 
@@ -42,9 +42,9 @@ export default {
     name: 'adminMember',
     data() {
         return {
-            memberList: {
+            userList: {
                 count: -1,
-                memberData: [
+                data: [
                     {
                         // id: '',
                         // name: '',
@@ -55,8 +55,8 @@ export default {
         }
     },
     methods: {
-        deleteMember(memberId) {
-            axios.delete(`/member/delete/${memberId}`)
+        deleteMember(userId) {
+            axios.delete(`/user/delete/${userId}`)
                 .then((res) => {
                     console.log(res);
                     location.reload();
@@ -69,12 +69,12 @@ export default {
         },
     },
     beforeMount() {
-        axios.get('/member/list')
+        axios.get('/user/list')
             .then((res) => {
                 console.log(res);
                 // JSON.stringify("res => " + res);
-                this.memberList.count = res.data.count;
-                this.memberList.memberData = [...res.data.data];
+                this.userList.count = res.data.count;
+                this.userList.data = [...res.data.data];
             }).catch((err) => {
                 JSON.stringify("err => " + err);
             });
