@@ -12,5 +12,4 @@ public class DetailSessionResponse {
   private Long id;
   private String loginId;
   private String name;
-  private int age;
 }
