@@ -26,7 +26,6 @@ public class UserController {
     user.setLoginId(joinUserRequest.getLoginId());
     user.setPassword(joinUserRequest.getPassword());
     user.setName(joinUserRequest.getName());
-    user.setAge(joinUserRequest.getAge());
     Long joinId = userService.join(user);
 
     return new JoinUserResponse(joinId);
@@ -39,7 +38,7 @@ public class UserController {
   public ListUserResponse<List<DetailUserResponse>> listMember() {
 
     List<User> userList = userService.findAll();
-    List<DetailUserResponse> listUserData = userList.stream().map(u -> new DetailUserResponse(u.getId(), u.getName(), u.getAge()))
+    List<DetailUserResponse> listUserData = userList.stream().map(u -> new DetailUserResponse(u.getId(), u.getName()))
         .toList();
 
     return new ListUserResponse<>(listUserData.size(), listUserData);
@@ -53,7 +52,7 @@ public class UserController {
 
     User findUser = userService.findById(userId);
 
-    return new DetailUserResponse(findUser.getId(), findUser.getName(), findUser.getAge());
+    return new DetailUserResponse(findUser.getId(), findUser.getName());
   }
 
   /**
@@ -65,7 +64,7 @@ public class UserController {
     userService.updateMember(userId, updateUserRequest);
     User findUser = userService.findById(userId);
 
-    return new UpdateUserResponse(findUser.getId(), findUser.getName(), findUser.getAge());
+    return new UpdateUserResponse(findUser.getId(), findUser.getName());
   }
 
   /**
