@@ -1,15 +1,15 @@
 import { createWebHistory, createRouter } from "vue-router"
 import AppHome from './views/home/AppHome'
-import MemberLogin from './views/member/MemberLogin'
-import MemberJoin from './views/member/MemberJoin'
-import MemberList from './views/member/MemberList'
+import MemberLogin from '@/views/user/UserLogin.vue'
+import MemberJoin from '@/views/user/UserJoin.vue'
+import MemberList from '@/views/user/UserList.vue'
 import PostCreate from './views/post/PostCreate'
 import PostList from './views/post/PostList'
 import PostDetail from './views/post/PostDetail'
 import AdminHome from './views/admin/AdminHome'
-import AdminMember from './views/admin/AdminMember'
-import AdminPost from './views/admin/AdminPost'
-import AdminMemberUpdate from './views/admin/AdminMemberUpdate'
+import AdminMember from './views/admin/AdminUserList.vue'
+import AdminPost from './views/admin/AdminPostList.vue'
+import AdminMemberUpdate from './views/admin/AdminUserUpdate.vue'
 import AdminPostUpdate from './views/admin/AdminPostUpdate'
 
 
