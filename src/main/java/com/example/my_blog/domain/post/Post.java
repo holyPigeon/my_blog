@@ -11,6 +11,7 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -41,7 +42,7 @@ public class Post {
   private String content;
 
   @OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
-  private List<Comment> comments;
+  private List<Comment> comments = new ArrayList<>();
 
 
   //==연관관계 편의 메소드==//
