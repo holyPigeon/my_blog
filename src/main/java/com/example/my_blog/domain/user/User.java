@@ -1,5 +1,6 @@
 package com.example.my_blog.domain.user;
 
+import com.example.my_blog.domain.comment.Comment;
 import com.example.my_blog.domain.post.Post;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -28,6 +29,6 @@ public class User {
   @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
   private List<Post> posts = new ArrayList<>();
 
-//  @OneToMany(mappedBy = "member")
-//  private List<Item> items = new ArrayList<>();
+  @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+  private List<Comment> comments = new ArrayList<>();
 }
