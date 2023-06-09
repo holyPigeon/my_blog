@@ -1,17 +1,16 @@
 import { createWebHistory, createRouter } from "vue-router"
 import AppHome from './views/home/AppHome'
-import MemberLogin from '@/views/user/UserLogin.vue'
-import MemberJoin from '@/views/user/UserJoin.vue'
-import MemberList from '@/views/user/UserList.vue'
+import UserLogin from '@/views/user/UserLogin.vue'
+import UserJoin from '@/views/user/UserJoin.vue'
+import UserList from '@/views/user/UserList.vue'
 import PostCreate from './views/post/PostCreate'
 import PostList from './views/post/PostList'
 import PostDetail from './views/post/PostDetail'
 import AdminHome from './views/admin/AdminHome'
-import AdminMember from './views/admin/AdminUserList.vue'
+import AdminUser from './views/admin/AdminUserList.vue'
 import AdminPost from './views/admin/AdminPostList.vue'
-import AdminMemberUpdate from './views/admin/AdminUserUpdate.vue'
+import AdminUserUpdate from './views/admin/AdminUserUpdate.vue'
 import AdminPostUpdate from './views/admin/AdminPostUpdate'
-
 
 const routes = [
   {
@@ -20,15 +19,15 @@ const routes = [
   },
   {
     path: "/login",
-    component: MemberLogin,
+    component: UserLogin,
   },
   {
-    path: "/member/join",
-    component: MemberJoin,
+    path: "/user/join",
+    component: UserJoin,
   },
   {
-    path: "/member/list",
-    component: MemberList,
+    path: "/user/list",
+    component: UserList,
   },
   {
     path: "/post/create",
@@ -47,12 +46,12 @@ const routes = [
     component: AdminHome,
   },
   {
-    path: "/admin/member",
-    component: AdminMember,
+    path: "/admin/user",
+    component: AdminUser,
   },
   {
-    path: "/admin/member/update/:memberId",
-    component: AdminMemberUpdate,
+    path: "/admin/user/update/:userId",
+    component: AdminUserUpdate,
   },
   {
     path: "/admin/post",
