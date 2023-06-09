@@ -1,4 +1,4 @@
-package com.example.my_blog.domain.member;
+package com.example.my_blog.domain.user;
 
 import com.example.my_blog.domain.post.Post;
 import jakarta.persistence.*;
@@ -8,12 +8,12 @@ import lombok.Setter;
 import java.util.List;
 
 @Entity
-@Table(name = "members")
+@Table(name = "users")
 @Getter @Setter
-public class Member {
+public class User {
 
   @Id @GeneratedValue
-  @Column(name = "member_id")
+  @Column(name = "user_id")
   private Long id;
 
   private String loginId;
