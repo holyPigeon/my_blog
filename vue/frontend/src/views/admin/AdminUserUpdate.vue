@@ -10,14 +10,14 @@
                     </div>
                         <div class="row g-3">
                             <div class="col-md-4 offset-md-4">
-                                <input type="text" v-model="memberData.name" class="form-control form-control-lg p-2"
-                                    id="name" name="name" placeholder="이름" required>
+                                <input type="text" v-model="data.name" class="form-control form-control-lg p-2"
+                                       id="name" name="name" placeholder="이름" required>
                             </div>
                         </div>
                         <div class="row g-3 mt-2">
                             <div class="col-md-4 offset-md-4">
-                                <input type="text" v-model="memberData.age" class="form-control form-control-lg p-2"
-                                    id="age" name="age" placeholder="나이" required>
+                                <input type="text" v-model="data.age" class="form-control form-control-lg p-2"
+                                       id="age" name="age" placeholder="나이" required>
                             </div>
                         </div>
 
@@ -31,8 +31,8 @@
                                 style="opacity: 0.7;">완료</button>
                         </div>
 
-                        <h2>{{ memberData.name }}</h2>
-                        <h2>{{ memberData.age }}</h2>
+                        <h2>{{ data.name }}</h2>
+                        <h2>{{ data.age }}</h2>
                     </div>
             </div>
         </div>
@@ -46,8 +46,8 @@ export default {
     name: 'adminMemberUpdate',
     data() {
         return {
-            memberId: -1,
-            memberData: {
+            userId: -1,
+            data: {
                 // name: '',
                 // age: '',
             },
@@ -55,11 +55,11 @@ export default {
     },
     methods: {
         updateMember() {
-            const data = this.memberData;
-            axios.post(`/member/update/${this.memberId}`, data)
+            const data = this.data;
+            axios.post(`/user/update/${this.userId}`, data)
                 .then((res) => {
                     console.log(res);
-                    this.$router.push('/admin/member');
+                    this.$router.push('/admin/user');
                 }).catch((err) => {
                     let errMsg = JSON.stringify(err.response.data.message);
                     errMsg = errMsg.substring(1, errMsg.length - 1);
@@ -81,12 +81,12 @@ export default {
     beforeMount() {
         const url = window.location.pathname;
         const splitArr = url.split("/");
-        this.memberId = splitArr[splitArr.length - 1];
+        this.userId = splitArr[splitArr.length - 1];
         
-        axios.get(`/member/list/${this.memberId}`)
+        axios.get(`/user/list/${this.userId}`)
                 .then((res) => {
                     console.log(res);
-                    this.memberData = {...res.data};
+                    this.data = {...res.data};
                 }).catch((err) => {
                     let errMsg = JSON.stringify(err.response.data.message);
                     errMsg = errMsg.substring(1, errMsg.length - 1);
