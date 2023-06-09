@@ -10,9 +10,9 @@
                     </div>
                     <div class="row g-3 mt-1">
                         <div class="col-md-4 offset-md-4">
-                            <select v-model="postData.author" class="form-control form-control-lg p-2" style="" name="author" id="author" @change="test">
+                            <select v-model="post.author" class="form-control form-control-lg p-2" style="" name="author" id="author" @change="test">
                                 <option value="">회원 선택</option>
-                                <option v-for="(member, index) in memberList.userData" :key="index" :value="member.name">{{ member.name
+                                <option v-for="(user, index) in userList.data" :key="index" :value="user.name">{{ user.name
                                 }}</option>
                             </select>
                         </div>
@@ -20,14 +20,14 @@
 
                     <div class="row g-3 mt-1">
                         <div class="col-md-4 offset-md-4">
-                            <input type="text" v-model="postData.title" class="form-control form-control-lg p-2" id="title"
-                                name="title" placeholder="제목" required>
+                            <input type="text" v-model="post.title" class="form-control form-control-lg p-2" id="title"
+                                   name="title" placeholder="제목" required>
                         </div>
                     </div>
                     <div class="row g-3 mt-1">
                         <div class="col-md-4 offset-md-4">
-                            <input type="text" v-model="postData.content" class="form-control form-control-lg p-2" style="height: 100px;"
-                                id="content" name="content" placeholder="내용" required>
+                            <input type="text" v-model="post.content" class="form-control form-control-lg p-2" style="height: 100px;"
+                                   id="content" name="content" placeholder="내용" required>
                         </div>
                     </div>
 
@@ -53,14 +53,14 @@ export default {
     name: 'postCreate',
     data() {
         return {
-            postData: {
+            post: {
                 author: '',
                 title: '',
                 content: '',
             },
-            memberList: {
+            userList: {
                 count: -1,
-                userData: {
+                data: {
                     // id: '',
                     // name: '',
                     // age: '',
@@ -70,7 +70,7 @@ export default {
     },
     methods: {
         submitForm() {
-            const data = this.postData;
+            const data = this.post;
             console.log("data: " + JSON.stringify(data));
             axios.post('/post/create', data)
                 .then((res) => {
@@ -99,16 +99,16 @@ export default {
             //     });
         },
         test() {
-            console.log("author: " + this.postData.author);
+            console.log("author: " + this.post.author);
         }
     },
     beforeMount() {
-        axios.get('/member/list')
+        axios.get('/user/list')
             .then((res) => {
                 console.log(res);
                 // JSON.stringify("res => " + res);
-                this.memberList.count = res.data.count;
-                this.memberList.userData = [...res.data.data];
+                this.userList.count = res.data.count;
+                this.userList.data = [...res.data.data];
             }).catch((err) => {
                 JSON.stringify("err => " + err);
             });
