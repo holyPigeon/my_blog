@@ -8,5 +8,5 @@ import lombok.Getter;
 public class ListPostResponse<T> {
 
   private int count;
-  private T data;
+  private T customerList;
 }
