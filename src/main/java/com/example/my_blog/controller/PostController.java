@@ -8,8 +8,10 @@ import com.example.my_blog.domain.post.service.dto.request.CreatePostRequest;
 import com.example.my_blog.domain.post.service.dto.request.UpdatePostRequest;
 import com.example.my_blog.domain.post.service.dto.response.*;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.net.URI;
 import java.util.List;
 
 @RestController
@@ -23,13 +25,15 @@ public class PostController {
    * 게시글 작성
    */
   @PostMapping("/post/create")
-  public CreatePostResponse registerPost(@RequestBody CreatePostRequest createPostRequest) {
+  public ResponseEntity<Object> registerPost(@RequestBody CreatePostRequest createPostRequest) {
 
     User findUser = userService.findByName(createPostRequest.getAuthor());
     Post post = Post.createPost(findUser, createPostRequest.getTitle(), createPostRequest.getContent());
     Long postId = postService.save(post);
 
-    return new CreatePostResponse(postId);
+    return ResponseEntity
+        .created(URI.create("/posts/" + postId))
+        .build();
 
   }
 
@@ -64,23 +68,22 @@ public class PostController {
    * 게시글 수정
    */
   @PostMapping("/post/update/{postId}")
-  public UpdatePostResponse updatePost(@PathVariable Long postId, @RequestBody UpdatePostRequest updatePostRequest) {
+  public ResponseEntity<Object> updatePost(@PathVariable Long postId, @RequestBody UpdatePostRequest updatePostRequest) {
 
     postService.updatePost(postId, updatePostRequest);
     Post findPost = postService.findById(postId);
 
-    return new UpdatePostResponse(findPost.getId(), findPost.getUser().getName(),
-        findPost.getTitle(), findPost.getContent(), findPost.getCreatedAt(), findPost.getUpdatedAt());
+    return ResponseEntity.noContent().build();
   }
 
   /**
    * 게시글 삭제
    */
   @DeleteMapping("/post/delete/{postId}")
-  public DeletePostResponse deletePost(@PathVariable Long postId) {
+  public ResponseEntity<Object> deletePost(@PathVariable Long postId) {
 
     postService.deleteById(postId);
 
-    return new DeletePostResponse(postId);
+    return ResponseEntity.noContent().build();
   }
 }
