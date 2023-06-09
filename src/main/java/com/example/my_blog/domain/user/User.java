@@ -26,8 +26,6 @@ public class User {
 
   private String nickname;
 
-  private int age;
-
   @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
   private List<Post> posts = new ArrayList<>();
 
