@@ -1,7 +1,7 @@
 package com.example.my_blog.domain.post;
 
 import com.example.my_blog.domain.comment.Comment;
-import com.example.my_blog.domain.member.Member;
+import com.example.my_blog.domain.user.User;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -23,8 +23,8 @@ public class Post {
   private Long id;
 
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "member_id")
-  private Member member;
+  @JoinColumn(name = "user_id")
+  private User user;
 
   @CreatedDate
   private LocalDateTime createdAt;
@@ -43,20 +43,16 @@ public class Post {
 
 
   //==연관관계 편의 메소드==//
-  public void setMember(Member member) {
-    this.member = member;
-    member.getPosts().add(this);
+  public void setUser(User user) {
+    this.user = user;
+    user.getPosts().add(this);
   }
 
-  public void setComments(Comment comment) {
-    comments.add(comment);
-    comment.setPost(this);
-  }
-
-  public static Post createPost(Member member, String title ,String content) {
+  //==생성 메소드==//
+  public static Post createPost(User user, String title, String content) {
     Post post = new Post();
 
-    post.setMember(member);
+    post.setUser(user);
     post.setTitle(title);
     post.setContent(content);
     post.setCreatedAt(LocalDateTime.now());
