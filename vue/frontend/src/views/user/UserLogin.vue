@@ -40,7 +40,7 @@
 import axios from 'axios';
 
 export default {
-    name: 'memberLogin',
+    name: 'userLogin',
     data() {
         return {
             formData: {
