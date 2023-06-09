@@ -44,8 +44,7 @@ public class UserService {
     User findUser = memberRepository.findById(id);
 
     if (findUser != null) {
-      findUser.setName(updateUserRequest.getName());
-      findUser.setAge(updateUserRequest.getAge());
+      findUser.setNickname(updateUserRequest.getNickname());
     }
   }
 
