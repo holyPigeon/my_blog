@@ -1,3 +1,3 @@
 # my_blog
 blog with Vue.js &amp; Spring Boot
-<br>CRUD 가능한 미니 블로그
+<br>간단한 CRUD 기능을 갖춘 커뮤니티
