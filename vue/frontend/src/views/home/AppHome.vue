@@ -12,21 +12,21 @@
       <div class="col-md-4 offset-md-4">
         <h4 class="py-3">로그인한 사용자:
           <span>
-            <h6 v-if="Object.keys(sessionData).length !== 0">{{ sessionData.name }} | {{ sessionData.age }}</h6>
-            <h6 v-if="Object.keys(sessionData).length === 0">없음</h6>
+            <h6 v-if="Object.keys(session).length !== 0">{{ session.name }} | {{ session.age }}</h6>
+            <h6 v-if="Object.keys(session).length === 0">없음</h6>
           </span>
         </h4>
       </div>
 
       <div class="col-md-8 offset-md-2">
         <div class="btn-group">
-          <button v-if="Object.keys(sessionData).length === 0" @click="login" class="btn btn-outline-success py-3">
+          <button v-if="Object.keys(session).length === 0" @click="login" class="btn btn-outline-success py-3">
             <h6>로그인</h6>
           </button>
-          <button v-if="Object.keys(sessionData).length === 0" @click="$router.push('/member/join')" class="btn btn-outline-success py-3">
+          <button v-if="Object.keys(session).length === 0" @click="$router.push('/user/join')" class="btn btn-outline-success py-3">
             <h6>회원 가입</h6>
           </button>
-          <button v-if="Object.keys(sessionData).length !== 0" @click="logout" class="btn btn-outline-success py-3">
+          <button v-if="Object.keys(session).length !== 0" @click="logout" class="btn btn-outline-success py-3">
             <h6>로그아웃</h6>
           </button>
           
@@ -35,7 +35,7 @@
 
       <div class="col-md-4 offset-md-4">
         <div class="btn-group">
-          <button @click="$router.push('/member/list')" class="btn btn-outline-primary py-3">
+          <button @click="$router.push('/user/list')" class="btn btn-outline-primary py-3">
             <h6>회원 조회</h6>
           </button>
           <button @click="$router.push('/post/create')" class="btn btn-outline-primary py-3">
@@ -65,7 +65,7 @@ export default {
   data() {
     return {
       isLogined: true,
-      sessionData: {
+      session: {
         // id: 1,
         // loginId: admin,
         // name: kevin,
@@ -95,7 +95,7 @@ export default {
       .then((res) => {
         console.log(res);
         if (res.data.id !== -1) {
-          this.sessionData = { ...res.data };
+          this.session = { ...res.data };
         }
       }).catch((err) => {
         let errMsg = JSON.stringify(err.response.data.message);
