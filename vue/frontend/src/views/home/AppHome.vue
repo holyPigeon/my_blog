@@ -10,10 +10,9 @@
     <div class="row g-3 mt-3">
 
       <div class="col-md-4 offset-md-4">
-        <h4 class="py-3">로그인한 사용자:
+        <h4 class="py-3" v-if="Object.keys(session).length !== 0">로그인 사용자
           <span>
-            <h6 v-if="Object.keys(session).length !== 0">{{ session.name }} | {{ session.age }}</h6>
-            <h6 v-if="Object.keys(session).length === 0">없음</h6>
+            <h6 >{{ session.name }} | {{ session.nickname }}</h6>
           </span>
         </h4>
       </div>
@@ -101,7 +100,7 @@ export default {
         let errMsg = JSON.stringify(err.response.data.message);
         errMsg = errMsg.substring(1, errMsg.length - 1);
         console.log("errMsg -> " + errMsg);
-        alert(errMsg);
+        // alert(errMsg);
       });
   }
 }
