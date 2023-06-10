@@ -28,7 +28,7 @@
                         <div class="p-4">
                         <h4 class="mb-3 text-center text-black fs-3 fw-bold">게시글 목록</h4>
                     </div>
-                        <table class="text-center" style="width: 100%; border: 1px solid #444444;">
+                        <table class="text-center" style="width: 100%; border: 1px solid #CCCDCE;">
                             <thead>
                                 <tr>
                                     <th>번호</th>
