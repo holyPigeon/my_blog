@@ -24,7 +24,7 @@ public class PostController {
   /**
    * 게시글 작성
    */
-  @PostMapping("/post/create")
+  @PostMapping("/posts")
   public ResponseEntity<Object> registerPost(@RequestBody CreatePostRequest request) {
 
     User findUser = userService.findByName(request.getAuthor());
@@ -40,7 +40,7 @@ public class PostController {
   /**
    * 게시글 조회
    */
-  @GetMapping("/post/list")
+  @GetMapping("/posts")
   public ListPostResponse<List<DetailPostResponse>> listPost() {
 
     List<Post> posts = postService.findAll();
@@ -55,7 +55,7 @@ public class PostController {
   /**
    * 게시글 상세 조회
    */
-  @GetMapping("/post/list/{postId}")
+  @GetMapping("/posts/{postId}")
   public DetailPostResponse listPostDetail(@PathVariable Long postId) {
 
     Post findPost = postService.findById(postId);
@@ -67,7 +67,7 @@ public class PostController {
   /**
    * 게시글 수정
    */
-  @PostMapping("/post/update/{postId}")
+  @PostMapping("/posts/{postId}")
   public ResponseEntity<Object> updatePost(@PathVariable Long postId, @RequestBody UpdatePostRequest request) {
 
     postService.updatePost(postId, request);
@@ -79,7 +79,7 @@ public class PostController {
   /**
    * 게시글 삭제
    */
-  @DeleteMapping("/post/delete/{postId}")
+  @DeleteMapping("/posts/{postId}")
   public ResponseEntity<Object> deletePost(@PathVariable Long postId) {
 
     postService.deleteById(postId);
