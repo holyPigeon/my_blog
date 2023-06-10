@@ -67,7 +67,7 @@ public class PostController {
   /**
    * 게시글 수정
    */
-  @PostMapping("/posts/{postId}")
+  @PatchMapping("/posts/{postId}")
   public ResponseEntity<Object> updatePost(@PathVariable Long postId, @RequestBody UpdatePostRequest request) {
 
     postService.updatePost(postId, request);
