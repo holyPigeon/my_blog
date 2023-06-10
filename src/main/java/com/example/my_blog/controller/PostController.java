@@ -25,10 +25,10 @@ public class PostController {
    * 게시글 작성
    */
   @PostMapping("/post/create")
-  public ResponseEntity<Object> registerPost(@RequestBody CreatePostRequest createPostRequest) {
+  public ResponseEntity<Object> registerPost(@RequestBody CreatePostRequest request) {
 
-    User findUser = userService.findByName(createPostRequest.getAuthor());
-    Post post = Post.createPost(findUser, createPostRequest.getTitle(), createPostRequest.getContent());
+    User findUser = userService.findByName(request.getAuthor());
+    Post post = Post.createPost(findUser, request.getTitle(), request.getContent());
     Long postId = postService.save(post);
 
     return ResponseEntity
@@ -45,7 +45,7 @@ public class PostController {
 
     List<Post> posts = postService.findAll();
     List<DetailPostResponse> collect = posts.stream().map(p ->
-        new DetailPostResponse(p.getId(), p.getUser().getName(), p.getTitle(), p.getContent(),
+        new DetailPostResponse(p.getId(), p.getUser().getNickname(), p.getTitle(), p.getContent(),
             p.getCreatedAt(), p.getUpdatedAt())).toList();
 
     return new ListPostResponse<>(collect.size(), collect);
@@ -60,7 +60,7 @@ public class PostController {
 
     Post findPost = postService.findById(postId);
 
-    return new DetailPostResponse(findPost.getId(), findPost.getUser().getName(), findPost.getTitle(),
+    return new DetailPostResponse(findPost.getId(), findPost.getUser().getNickname(), findPost.getTitle(),
         findPost.getContent(), findPost.getCreatedAt(), findPost.getUpdatedAt());
   }
 
@@ -68,9 +68,9 @@ public class PostController {
    * 게시글 수정
    */
   @PostMapping("/post/update/{postId}")
-  public ResponseEntity<Object> updatePost(@PathVariable Long postId, @RequestBody UpdatePostRequest updatePostRequest) {
+  public ResponseEntity<Object> updatePost(@PathVariable Long postId, @RequestBody UpdatePostRequest request) {
 
-    postService.updatePost(postId, updatePostRequest);
+    postService.updatePost(postId, request);
     Post findPost = postService.findById(postId);
 
     return ResponseEntity.noContent().build();
