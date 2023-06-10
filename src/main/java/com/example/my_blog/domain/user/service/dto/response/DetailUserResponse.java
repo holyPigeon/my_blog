@@ -10,4 +10,5 @@ import lombok.NoArgsConstructor;
 public class DetailUserResponse {
   private Long id;
   private String name;
+  private String nickname;
 }
