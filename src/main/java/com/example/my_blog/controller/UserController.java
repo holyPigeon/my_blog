@@ -59,7 +59,7 @@ public class UserController {
   /**
    * 회원 수정
    */
-  @PostMapping("/users/{userId}")
+  @PatchMapping("/users/{userId}")
   public ResponseEntity<Object> updateUser(@PathVariable Long userId, @RequestBody UpdateUserRequest request) {
 
     userService.updateUser(userId, request);
