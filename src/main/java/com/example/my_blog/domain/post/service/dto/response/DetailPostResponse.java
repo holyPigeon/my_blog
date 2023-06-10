@@ -1,5 +1,6 @@
 package com.example.my_blog.domain.post.service.dto.response;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,6 +16,10 @@ public class DetailPostResponse {
   private String author;
   private String title;
   private String content;
+
+  @JsonFormat(pattern = "yyyy.MM.dd HH:mm:ss")
   private LocalDateTime createdAt;
+
+  @JsonFormat(pattern = "yyyy.MM.dd HH:mm:ss")
   private LocalDateTime updatedAt;
 }
