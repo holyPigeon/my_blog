@@ -43,7 +43,7 @@
                                 <td style="width: 50%;"><a @click="$router.push(`/post/list/${post.id}`)"
                                         class="custom-nav">{{ post.title }}</a></td>
                                 <td style="width: 15%;">{{ post.author }}</td>
-                                <td>{{ formattedDateTime(post.createdAt) }}</td>
+                                <td>{{ post.createdAt }}</td>
                             </tr>
                         </tbody>
                     </table>
@@ -59,7 +59,6 @@
 
 <script>
 import axios from 'axios';
-import { DateTime } from 'luxon';
 
 export default {
     name: 'postList',
@@ -81,9 +80,6 @@ export default {
         }
     },
     methods: {
-        formattedDateTime(dateTime) {
-            return DateTime.fromISO(dateTime).toFormat('yyyy.MM.dd HH:mm:ss');
-        }
     },
     beforeMount() {
         axios.get('/post/list')
@@ -91,7 +87,7 @@ export default {
                 console.log(res);
                 // JSON.stringify("res => " + res);
                 this.postList.count = res.data.count;
-                this.postList.data = [...res.data.data];
+                this.postList.data = [...res.data.postList];
             }).catch((err) => {
                 JSON.stringify("err => " + err);
             });

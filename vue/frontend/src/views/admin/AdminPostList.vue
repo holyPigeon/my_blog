@@ -45,7 +45,7 @@
                                     <td>{{ post.id }}</td>
                                     <td><a @click="$router.push(`/post/list/${post.id}`)" class="custom-nav">{{ post.title }}</a></td>
                                     <td>{{ post.author }}</td>
-                                    <td>{{ formattedDateTime(post.createdAt) }}</td>
+                                    <td>{{ post.createdAt }}</td>
                                     <td><h6 @click="$router.push(`/admin/post/update/${post.id}`)" class="btn btn-outline-primary">수정</h6></td>
                                     <td><h6 @click="deletePost(post.id)" class="btn btn-outline-danger">삭제</h6></td>
                                 </tr>
@@ -63,7 +63,6 @@
 
 <script>
 import axios from 'axios';
-import { DateTime } from 'luxon';
 
 export default {
     name: 'adminPost',
@@ -85,9 +84,6 @@ export default {
         }
     },
     methods: {
-        formattedDateTime(dateTime) {
-            return DateTime.fromISO(dateTime).toFormat('yyyy.MM.dd HH:mm:ss');
-        },
         deletePost(postId) {
             axios.delete(`/post/delete/${postId}`)
                 .then((res) => {
