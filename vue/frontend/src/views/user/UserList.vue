@@ -11,14 +11,14 @@
 
                     <table class="text-center fs-4" style="width: 100%; border: 1px solid #444444;">
                         <tr>
-                            <td>Member Id</td>
-                            <td>Member Name</td>
-                            <td>Member Age</td>
+                            <td>User Id</td>
+                            <td>User Name</td>
+                            <td>User Nickname</td>
                         </tr>
                         <tr v-for="(user, index) in userList.data" :key="index">
                             <td>{{ user.id }}</td>
                             <td>{{ user.name }}</td>
-                            <td>{{ user.age }}</td>
+                            <td>{{ user.nickname }}</td>
                         </tr>
                     </table>
 
