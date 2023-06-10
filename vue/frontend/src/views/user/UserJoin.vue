@@ -28,8 +28,8 @@
                         </div>
                         <div class="row g-3 mt-2">
                             <div class="col-md-4 offset-md-4">
-                                <input type="text" v-model="formData.age" class="form-control form-control-lg p-2"
-                                    id="age" name="age" placeholder="나이" required>
+                                <input type="text" v-model="formData.nickname" class="form-control form-control-lg p-2"
+                                    id="nickname" name="nickname" placeholder="닉네임" required>
                             </div>
                         </div>
 
@@ -38,7 +38,7 @@
                         </div> -->
 
                         <div class="row g-3 mt-3">
-                            <button type="button" @click="submitForm($router)"
+                            <button type="button" @click="submitForm()"
                                 class="btn btn-outline-dark btn-lg col-md-4 offset-md-4 p-2" id="signup"
                                 style="opacity: 0.7;">완료</button>
                         </div>
