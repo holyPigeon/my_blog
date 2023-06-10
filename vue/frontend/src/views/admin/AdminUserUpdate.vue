@@ -16,8 +16,8 @@
                         </div>
                         <div class="row g-3 mt-2">
                             <div class="col-md-4 offset-md-4">
-                                <input type="text" v-model="data.age" class="form-control form-control-lg p-2"
-                                       id="age" name="age" placeholder="나이" required>
+                                <input type="text" v-model="data.nickname" class="form-control form-control-lg p-2"
+                                       id="nickname" name="nickname" placeholder="닉네임" required>
                             </div>
                         </div>
 
@@ -30,9 +30,6 @@
                                 class="btn btn-outline-dark btn-lg col-md-4 offset-md-4 p-2" id="signup"
                                 style="opacity: 0.7;">완료</button>
                         </div>
-
-                        <h2>{{ data.name }}</h2>
-                        <h2>{{ data.age }}</h2>
                     </div>
             </div>
         </div>
@@ -49,7 +46,7 @@ export default {
             userId: -1,
             data: {
                 // name: '',
-                // age: '',
+                // nickname: '',
             },
         }
     },
@@ -67,16 +64,16 @@ export default {
                     alert(errMsg);
                 });
         },
-        setMemberName(event, index)  {
-            console.log("event -> " + JSON.stringify(event));
-            console.log("index -> " + index);
-            // this.memberData.name = event.target.value;
-        },
-        setMemberAge(event, index)  {
-            console.log("event -> " + JSON.stringify(event));
-            console.log("index -> " + index);
-            // this.memberData.age = event.target.value;
-        }
+        // setMemberName(event, index)  {
+        //     console.log("event -> " + JSON.stringify(event));
+        //     console.log("index -> " + index);
+        //     // this.data.name = event.target.value;
+        // },
+        // setMemberNickname(event, index)  {
+        //     console.log("event -> " + JSON.stringify(event));
+        //     console.log("index -> " + index);
+        //     // this.data.nickname = event.target.value;
+        // }
     },
     beforeMount() {
         const url = window.location.pathname;
