@@ -11,16 +11,16 @@
 
                     <table class="text-center fs-4" style="width: 100%; border: 1px solid #444444;">
                         <tr>
-                            <td>Member Id</td>
-                            <td>Member Name</td>
-                            <td>Member Age</td>
+                            <td>User Id</td>
+                            <td>User Name</td>
+                            <td>User Nickname</td>
                             <td>수정</td>
                             <td>삭제</td>
                         </tr>
                         <tr v-for="(user, index) in userList.data" :key="index">
                             <td>{{ user.id }}</td>
                             <td>{{ user.name }}</td>
-                            <td>{{ user.age }}</td>
+                            <td>{{ user.nickname }}</td>
                             <td><h6 @click="$router.push(`/admin/user/update/${user.id}`)" class="btn btn-outline-primary">수정</h6></td>
                             <td><h6 @click="deleteMember(user.id)" class="btn btn-outline-danger">삭제</h6></td>
                         </tr>
@@ -48,7 +48,7 @@ export default {
                     {
                         // id: '',
                         // name: '',
-                        // age: '',
+                        // nickname: '',
                     }
                 ],
             }
