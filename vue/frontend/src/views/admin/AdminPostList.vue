@@ -85,7 +85,7 @@ export default {
     },
     methods: {
         deletePost(postId) {
-            axios.delete(`/post/delete/${postId}`)
+            axios.delete(`/posts/${postId}`)
                 .then((res) => {
                     console.log(res);
                     location.reload();
@@ -98,7 +98,7 @@ export default {
         },
     },
     beforeMount() {
-        axios.get('/post/list')
+        axios.get('/posts')
             .then((res) => {
                 console.log(res);
                 // JSON.stringify("res => " + res);

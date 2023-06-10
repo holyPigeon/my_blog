@@ -82,7 +82,7 @@ export default {
     methods: {
     },
     beforeMount() {
-        axios.get('/post/list')
+        axios.get('/posts')
             .then((res) => {
                 console.log(res);
                 // JSON.stringify("res => " + res);

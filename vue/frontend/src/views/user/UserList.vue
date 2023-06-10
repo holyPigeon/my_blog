@@ -9,7 +9,7 @@
                         <h4 class="mb-3 text-center text-black fs-3 fw-bold">회원 목록</h4>
                     </div>
 
-                    <table class="text-center fs-4" style="width: 100%; border: 1px solid #444444;">
+                    <table class="text-center fs-4" style="width: 100%; border: 1px solid #CCCDCE;">
                         <tr>
                             <td>User Id</td>
                             <td>User Name</td>
@@ -51,7 +51,7 @@ export default {
         }
     },
     beforeMount() {
-        axios.get('/user/list')
+        axios.get('/users')
             .then((res) => {
                 console.log(res);
                 // JSON.stringify("res => " + res);

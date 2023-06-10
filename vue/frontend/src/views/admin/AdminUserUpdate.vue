@@ -53,7 +53,7 @@ export default {
     methods: {
         updateMember() {
             const data = this.data;
-            axios.post(`/user/update/${this.userId}`, data)
+            axios.update(`/users/${this.userId}`, data)
                 .then((res) => {
                     console.log(res);
                     this.$router.push('/admin/user');
@@ -80,7 +80,7 @@ export default {
         const splitArr = url.split("/");
         this.userId = splitArr[splitArr.length - 1];
         
-        axios.get(`/user/list/${this.userId}`)
+        axios.get(`/users/${this.userId}`)
                 .then((res) => {
                     console.log(res);
                     this.data = {...res.data};

@@ -27,57 +27,31 @@
                                         <p class="fs-5 mb-4">{{ post.content }}</p>
                                     </section>
                                 </article>
-                                <!-- <section class="mb-5">
+                                <!-- <div class="row">
+                                    <hr class="my-4 col-md-12 offset-md-0 border border-1 border-dark" style="opacity: 0.1;">
+                                </div> -->
+                                <section class="mb-5">
                                     <div class="card bg-light">
                                         <div class="card-body">
                                             <form class="mb-4"><textarea class="form-control" rows="3"
                                                     placeholder="Join the discussion and leave a comment!"></textarea>
                                             </form>
-                                            <div class="d-flex mb-4">
-                                            
-                                                <div class="flex-shrink-0"><img class="rounded-circle"
-                                                        src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="...">
-                                                </div>
-                                                <div class="ms-3">
-                                                    <div class="fw-bold">Commenter Name</div>If you're going to lead a space
-                                                    frontier, it has to be government; it'll never be private enterprise.
-                                                    Because the space frontier is dangerous, and it's expensive, and it has
-                                                    unquantified risks.
-                                                  
-                                                    <div class="d-flex mt-4">
-                                                        <div class="flex-shrink-0"><img class="rounded-circle"
-                                                                src="https://dummyimage.com/50x50/ced4da/6c757d.jpg"
-                                                                alt="..."></div>
-                                                        <div class="ms-3">
-                                                            <div class="fw-bold">Commenter Name</div>And under those
-                                                            conditions, you cannot establish a capital-market evaluation of
-                                                            that enterprise. You can't get investors.
-                                                        </div>
-                                                    </div>
-                                                    <div class="d-flex mt-4">
-                                                        <div class="flex-shrink-0"><img class="rounded-circle"
-                                                                src="https://dummyimage.com/50x50/ced4da/6c757d.jpg"
-                                                                alt="..."></div>
-                                                        <div class="ms-3">
-                                                            <div class="fw-bold">Commenter Name</div>When you put money
-                                                            directly to a problem, it makes a good headline.
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="d-flex">
-                                                <div class="flex-shrink-0"><img class="rounded-circle"
-                                                        src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="...">
-                                                </div>
-                                                <div class="ms-3">
-                                                    <div class="fw-bold">Commenter Name</div>When I look at the universe and
-                                                    all the ways the universe wants to kill us, I find it hard to reconcile
-                                                    that with statements of beneficence.
-                                                </div>
-                                            </div>
+                                            <table class="text-center" style="width: 100%; border: 1px solid #CCCDCE;">
+                                                <tbody>
+                                                    <tr>
+                                                        <!-- v-for="(post, index) in postList.data" :key="index" -->
+                                                        <td style="width: 10%;"></td>
+                                                        <td style="width: 50%;"><a
+                                                                @click="$router.push(`/post/list/`)"
+                                                                class="custom-nav"></a></td>
+                                                        <td style="width: 15%;"></td>
+                                                        <td></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
                                         </div>
                                     </div>
-                                </section> -->
+                                </section>
                             </div>
                         </div>
                     </div>
@@ -119,7 +93,7 @@ export default {
         this.postId = postId;
         console.log("postId -> " + postId);
 
-        axios.get(`/post/list/${this.postId}`)
+        axios.get(`/posts/${this.postId}`)
             .then((res) => {
                 console.log("res.data => " + JSON.stringify(res.data));
                 this.post = {...res.data};
