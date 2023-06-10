@@ -21,7 +21,7 @@ public class UserController {
   /**
    * 회원 가입
    */
-  @PostMapping("/user/join")
+  @PostMapping("/users")
   public ResponseEntity<Object> joinUser(@RequestBody JoinUserRequest request) {
 
     User user = User.createUser(request.getLoginId(), request.getPassword(), request.getName(), request.getNickname());
@@ -35,7 +35,7 @@ public class UserController {
   /**
    * 회원 조회
    */
-  @GetMapping("/user/list")
+  @GetMapping("/users")
   public ListUserResponse<List<DetailUserResponse>> listUser() {
 
     List<User> userList = userService.findAll();
@@ -48,7 +48,7 @@ public class UserController {
   /**
    * 회원 상세 조회
    */
-  @GetMapping("/user/list/{userId}")
+  @GetMapping("/users/{userId}")
   public DetailUserResponse listDetailUser(@PathVariable Long userId) {
 
     User findUser = userService.findById(userId);
@@ -59,7 +59,7 @@ public class UserController {
   /**
    * 회원 수정
    */
-  @PostMapping("/user/update/{userId}")
+  @PostMapping("/users/{userId}")
   public ResponseEntity<Object> updateUser(@PathVariable Long userId, @RequestBody UpdateUserRequest request) {
 
     userService.updateUser(userId, request);
@@ -71,7 +71,7 @@ public class UserController {
   /**
    * 회원 삭제
    */
-  @DeleteMapping("/user/delete/{userId}")
+  @DeleteMapping("/users/{userId}")
   public ResponseEntity<Object> deleteUser(@PathVariable Long userId) {
 
     userService.deleteById(userId);
