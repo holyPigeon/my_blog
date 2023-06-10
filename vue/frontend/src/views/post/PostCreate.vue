@@ -63,7 +63,7 @@ export default {
                 data: {
                     // id: '',
                     // name: '',
-                    // age: '',
+                    // nickname: '',
                 }
             }
         }
