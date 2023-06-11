@@ -57,7 +57,7 @@ public class CommentController {
   }
 
   @GetMapping("/posts/{postId}/comments/{commentId}")
-  @ApiOperation(value = "댓글 상세 조회 API", notes = "댓글 상세 정보 조회")
+  @ApiOperation(value = "단일 댓글 조회 API", notes = "댓글 상세 정보 조회")
   public ListCommentDetailResponse listDetailComment(@PathVariable("postId") Long postId, @PathVariable("commentId") Long commentId) {
 
     Comment comment = commentService.findById(commentId);
