@@ -33,13 +33,13 @@ public class LoginController {
 
     if (loginUser == null) {
       log.error("login failed");
-      return new LoginResponse(-1L, "null", "null", "null");
+      return new LoginResponse(-1L, "dummy", "dummy", "dummy", "dummy");
     }
 
     HttpSession session = request.getSession();
     session.setAttribute(SessionConst.SESSION_KEY, loginUser);
 
-    return new LoginResponse(loginUser.getId(), loginUser.getLoginId(), loginUser.getPassword(), loginUser.getName());
+    return new LoginResponse(loginUser.getId(), loginUser.getLoginId(), loginUser.getPassword(), loginUser.getName(), loginUser.getNickname());
   }
 
   @PostMapping("/logout")
