@@ -27,31 +27,70 @@
                                         <p class="fs-5 mb-4">{{ post.content }}</p>
                                     </section>
                                 </article>
-                                <!-- <div class="row">
-                                    <hr class="my-4 col-md-12 offset-md-0 border border-1 border-dark" style="opacity: 0.1;">
-                                </div> -->
-                                <section class="mb-5">
-                                    <div class="card bg-light">
-                                        <div class="card-body">
-                                            <form class="mb-4"><textarea class="form-control" rows="3"
-                                                    placeholder="Join the discussion and leave a comment!"></textarea>
-                                            </form>
-                                            <table class="text-center" style="width: 100%; border: 1px solid #CCCDCE;">
-                                                <tbody>
-                                                    <tr>
-                                                        <!-- v-for="(post, index) in postList.data" :key="index" -->
-                                                        <td style="width: 10%;"></td>
-                                                        <td style="width: 50%;"><a
-                                                                @click="$router.push(`/post/list/`)"
-                                                                class="custom-nav"></a></td>
-                                                        <td style="width: 15%;"></td>
-                                                        <td></td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
+                                <div class="row">
+                                    <hr class="my-3 col-md-12 offset-md-0 border border-1 border-dark"
+                                        style="opacity: 0.1;">
+                                </div>
+
+                                <!-- 댓글 작성란 -->
+                                <div id="write_comment" class="mb-5">
+                                    <h5 class="row text-left p-3">{{ comments.count }}개의 댓글</h5>
+                                    <div class="card border rounded-3">
+                                        <div class="card-body row" style="padding-right: 4%; padding-top: 2%;">
+                                            <div class="col-md-1">
+                                                <img class="rounded-circle shadow-1-strong me-3"
+                                                    src="../../assets/profile.png" alt="avatar" width="50" height="50" />
+                                            </div>
+                                            <div class="col-md-11 p-1">
+                                                <form class="mb-2"><textarea v-model="comment.content" class="form-control" rows="3"
+                                                        style="text-indent: 0.5%; padding-top: 1%; resize: none;"
+                                                        placeholder="Leave a comment here"></textarea>
+                                                </form>
+                                            </div>
+                                            <div class="offset-md-10 col-md-2 p-1 text-end d-grid gap-2">
+                                                <button @click="createComment" class="btn btn text-white"
+                                                    style="background-color: #0090F8;">댓글 쓰기</button>
+                                            </div>
                                         </div>
                                     </div>
-                                </section>
+                                </div>
+
+                                <!-- 댓글 리스트 -->
+                                <div id="comments">
+                                    <div id="comment" v-for="(comment, index) in comments.commentList" :key="index">
+                                        <div class="row" style="padding-right: 4%; padding-left: 2%;">
+                                            <div class="col-md-1 p-2 d-flex justify-content-center">
+                                                <img class="rounded-circle shadow-1-strong me-3 mx-3"
+                                                    src="../../assets/profile.png" alt="avatar" width="50" height="50" />
+                                            </div>
+                                            <div class="col-md-11 p-2">
+                                                <div class="row">
+                                                    <div class="col-md-2 text-start">
+                                                        <h6>{{ comment.author }}</h6>
+                                                    </div>
+                                                    <div class="col-md-8"></div>
+                                                    <div class="col-md-2 text-end"><button class="btn btn-outline-danger">삭제</button></div>
+                                                    <div class="col-md-3 text-start">
+                                                        <h6>{{ comment.createdAt }}</h6>
+                                                    </div>
+                                                    <div class="col-md-9"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row" style="padding-right: 4%; padding-left: 2%;">
+                                            <div class="col-md-11 text-start">
+                                                <p class="mt-3">
+                                                    {{ comment.content }}
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <hr class="my-4 col-md-12 offset-md-0 border border-1 border-dark"
+                                            style="opacity: 0.1;">
+                                        </div>
+                                    </div>
+                                </div>
+
                             </div>
                         </div>
                     </div>
@@ -74,17 +113,40 @@ export default {
                 // name: '',
                 // price: -1,
                 // quantity: -1,
+            },
+            comments: {
+                count: -1,
+                commentList: [
+                    {
+                        // id: 1,
+                        // postId: 1,
+                        // author: '',
+                        // content: '',
+                        // createdAt: '',
+                        // updatedAt: '',
+                    }
+                ],
+            },
+            comment: {
+                content: "",
             }
         }
     },
     methods: {
-        test() {
-            const url = window.location.pathname;
-            const splitArr = url.split("/");
-            const postId = splitArr[splitArr.length - 1]; // "1"
-            this.postId = postId;
-            console.log("postId -> " + postId);
-        },
+        createComment() {
+            const postId = this.postId;
+
+            axios.post(`/posts/${postId}/comments`)
+                .then((res) => {
+                    console.log(res);
+                    this.$router.push('/');
+                }).catch((err) => {
+                    let errMsg = JSON.stringify(err.response.data.message);
+                    errMsg = errMsg.substring(1, errMsg.length - 1);
+                    console.log("errMsg -> " + errMsg);
+                    alert(errMsg);
+                });
+        }
     },
     beforeMount() {
         const url = window.location.pathname;
@@ -95,9 +157,17 @@ export default {
 
         axios.get(`/posts/${this.postId}`)
             .then((res) => {
-                console.log("res.data => " + JSON.stringify(res.data));
-                this.post = {...res.data};
-                console.log("postData -> " + JSON.stringify(this.post));
+                console.log("posts res.data => " + JSON.stringify(res.data));
+                this.post = { ...res.data };
+            }).catch((err) => {
+                JSON.stringify("err => " + err);
+            });
+
+        axios.get(`/posts/${this.postId}/comments`)
+            .then((res) => {
+                console.log("comments res.data => " + JSON.stringify(res.data));
+                this.comments = { ...res.data };
+                console.log("this.comments ->" + JSON.stringify(this.comments));
             }).catch((err) => {
                 JSON.stringify("err => " + err);
             });
@@ -107,8 +177,8 @@ export default {
 </script>
  
 <style>
-input::placeholder {
-    font-size: 14px;
+::placeholder {
+    font-size: 18px;
 }
 
 td {
