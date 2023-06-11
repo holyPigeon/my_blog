@@ -10,5 +10,5 @@ import lombok.NoArgsConstructor;
 public class ListCommentResponse<T> {
 
   private int count;
-  private T data;
+  private T commentList;
 }
