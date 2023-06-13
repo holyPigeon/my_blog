@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.NoSuchElementException;
 import java.util.Objects;
 
 @RestController
@@ -60,9 +61,9 @@ public class LoginController {
 
     if (!Objects.isNull(session) && !Objects.isNull(session.getAttribute(SessionConst.SESSION_KEY))) {
       User loginUser = (User) session.getAttribute(SessionConst.SESSION_KEY);
-      return new DetailSessionResponse(loginUser.getId(), loginUser.getLoginId(), loginUser.getName());
+      return new DetailSessionResponse(loginUser.getId(), loginUser.getLoginId(), loginUser.getName(), loginUser.getNickname());
     } else {
-      return new DetailSessionResponse(-1L, "", "");
+      throw new NoSuchElementException("세션이 존재하지 않습니다.");
     }
   }
 }
