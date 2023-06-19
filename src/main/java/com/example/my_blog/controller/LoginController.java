@@ -59,11 +59,11 @@ public class LoginController {
 
     HttpSession session = request.getSession(false);
 
-    if (!Objects.isNull(session) && !Objects.isNull(session.getAttribute(SessionConst.SESSION_KEY))) {
+    if (Objects.isNull(session) || Objects.isNull(session.getAttribute(SessionConst.SESSION_KEY))) {
+      throw new NoSuchElementException("세션이 존재하지 않습니다.");
+    } else {
       User loginUser = (User) session.getAttribute(SessionConst.SESSION_KEY);
       return new DetailSessionResponse(loginUser.getId(), loginUser.getLoginId(), loginUser.getName(), loginUser.getNickname());
-    } else {
-      throw new NoSuchElementException("세션이 존재하지 않습니다.");
     }
   }
 }
