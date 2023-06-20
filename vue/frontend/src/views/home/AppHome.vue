@@ -77,7 +77,7 @@ export default {
       this.$router.push('/login')
     },
     logout() {
-      axios.post(`/logout`)
+      axios.post(`/api/logout`)
       .then((res) => {
         console.log(res);
         location.reload();
@@ -90,7 +90,7 @@ export default {
     },
   },
   beforeMount() {
-    axios.get(`/session`)
+    axios.get(`/api/session`)
       .then((res) => {
         console.log(res);
         if (res.data.id !== -1) {

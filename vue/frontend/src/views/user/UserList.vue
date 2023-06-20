@@ -51,7 +51,7 @@ export default {
         }
     },
     beforeMount() {
-        axios.get('/users')
+        axios.get('/api/users')
             .then((res) => {
                 console.log(res);
                 // JSON.stringify("res => " + res);

@@ -41,7 +41,7 @@
                             </thead>
                             <tbody>
                                 
-                                <tr v-for="(post, index) in data.postList" :key="index">
+                                <tr v-for="(post, index) in posts.postList" :key="index">
                                     <td>{{ post.id }}</td>
                                     <td><a @click="$router.push(`/post/list/${post.id}`)" class="custom-nav">{{ post.title }}</a></td>
                                     <td>{{ post.author }}</td>
@@ -68,7 +68,7 @@ export default {
     name: 'adminPost',
     data() {
         return {
-            data: {
+            posts: {
                 count: -1,
                 postList: [
                     {
@@ -85,7 +85,7 @@ export default {
     },
     methods: {
         deletePost(postId) {
-            axios.delete(`/posts/${postId}`)
+            axios.delete(`/api/posts/${postId}`)
                 .then((res) => {
                     console.log(res);
                     location.reload();
@@ -98,11 +98,11 @@ export default {
         },
     },
     beforeMount() {
-        axios.get('/posts')
+        axios.get('/api/posts')
             .then((res) => {
                 console.log(res);
                 // JSON.stringify("res => " + res);
-                this.data = {...res.data};
+                this.posts = {...res.data};
             }).catch((err) => {
                 JSON.stringify("err => " + err);
             });

@@ -56,7 +56,7 @@ export default {
     },
     methods: {
         deleteMember(userId) {
-            axios.delete(`/users/${userId}`)
+            axios.delete(`/api/users/${userId}`)
                 .then((res) => {
                     console.log(res);
                     location.reload();
@@ -69,7 +69,7 @@ export default {
         },
     },
     beforeMount() {
-        axios.get('/users')
+        axios.get('/api/users')
             .then((res) => {
                 console.log(res);
                 // JSON.stringify("res => " + res);

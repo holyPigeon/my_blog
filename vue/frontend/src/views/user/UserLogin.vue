@@ -58,7 +58,7 @@ export default {
     methods: {
         submitForm() {
             const data = this.formData;
-            axios.post('/login', data)
+            axios.post('/api/login', data)
                 .then((res) => {
                     console.log(res);
                     sessionStorage.setItem("id", res.data.id);

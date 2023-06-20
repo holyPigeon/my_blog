@@ -72,7 +72,7 @@ export default {
         submitForm() {
             const data = this.post;
             console.log("data: " + JSON.stringify(data));
-            axios.post('/posts', data)
+            axios.post('/api/posts', data)
                 .then((res) => {
                     console.log(res);
                     this.$router.push('/');
@@ -103,7 +103,7 @@ export default {
         }
     },
     beforeMount() {
-        axios.get('/users')
+        axios.get('/api/users')
             .then((res) => {
                 console.log(res);
                 // JSON.stringify("res => " + res);

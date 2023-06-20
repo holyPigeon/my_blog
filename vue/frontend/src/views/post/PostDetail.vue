@@ -136,7 +136,7 @@ export default {
         createComment() {
             const postId = this.postId;
 
-            axios.post(`/posts/${postId}/comments`)
+            axios.post(`/api/posts/${postId}/comments`)
                 .then((res) => {
                     console.log(res);
                     this.$router.push('/');
@@ -155,7 +155,7 @@ export default {
         this.postId = postId;
         console.log("postId -> " + postId);
 
-        axios.get(`/posts/${this.postId}`)
+        axios.get(`/api/posts/${this.postId}`)
             .then((res) => {
                 console.log("posts res.data => " + JSON.stringify(res.data));
                 this.post = { ...res.data };
@@ -163,7 +163,7 @@ export default {
                 JSON.stringify("err => " + err);
             });
 
-        axios.get(`/posts/${this.postId}/comments`)
+        axios.get(`/api/posts/${this.postId}/comments`)
             .then((res) => {
                 console.log("comments res.data => " + JSON.stringify(res.data));
                 this.comments = { ...res.data };

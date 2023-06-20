@@ -63,7 +63,7 @@ export default {
     methods: {
         updatePost() {
             const data = this.postData;
-            axios.patch(`/posts/${this.postId}`, data)
+            axios.patch(`/api/posts/${this.postId}`, data)
                 .then((res) => {
                     console.log(res);
                     this.$router.push('/admin/post');
@@ -80,7 +80,7 @@ export default {
         const splitArr = url.split("/");
         this.postId = splitArr[splitArr.length - 1];
 
-        axios.get(`/posts/${this.postId}`)
+        axios.get(`/api/posts/${this.postId}`)
             .then((res) => {
                 console.log(res);
                 // JSON.stringify("res => " + res);
