@@ -26,7 +26,7 @@ public class RequestInterceptor implements HandlerInterceptor{
 
     HttpSession session = request.getSession(false);
     if (Objects.isNull(session) || Objects.isNull(session.getAttribute(SESSION_KEY))) {
-      if (Objects.equals(request.getMethod(), "GET") && PatternMatchUtils.simpleMatch("/api/art/**", request.getRequestURI())) {
+      if (Objects.equals(request.getMethod(), "GET") && PatternMatchUtils.simpleMatch("/api/**", request.getRequestURI())) {
         return true;
       }
 
@@ -37,9 +37,12 @@ public class RequestInterceptor implements HandlerInterceptor{
       response.setContentType("application/json");
       response.setCharacterEncoding("UTF-8");
       response.getWriter().write(errorResponseToJSON);
+      response.sendRedirect("/login");
       return false;
     }
 
     return true;
   }
 }
+
+

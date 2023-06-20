@@ -10,10 +10,11 @@ public class InterceptorConfig implements WebMvcConfigurer {
   public void addInterceptors(InterceptorRegistry registry) {
     registry.addInterceptor(new RequestInterceptor())
         .order(1)
-        .addPathPatterns("/**")
+        .addPathPatterns("/api/**")
         .excludePathPatterns(
             "/login", // LoginController
-            "/session" // UserController
+            "/session", // UserController
+            "/error"
         );
   }
 }
