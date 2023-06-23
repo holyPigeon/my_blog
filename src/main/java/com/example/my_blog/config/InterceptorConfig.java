@@ -12,8 +12,8 @@ public class InterceptorConfig implements WebMvcConfigurer {
         .order(1)
         .addPathPatterns("/api/**")
         .excludePathPatterns(
-            "/login", // LoginController
-            "/session", // UserController
+            "/api/login", // LoginController
+            "/api/session", // UserController
             "/error"
         );
   }
