@@ -26,7 +26,10 @@ public class RequestInterceptor implements HandlerInterceptor{
 
     HttpSession session = request.getSession(false);
     if (Objects.isNull(session) || Objects.isNull(session.getAttribute(SESSION_KEY))) {
-      if (Objects.equals(request.getMethod(), "GET") && PatternMatchUtils.simpleMatch("/api/**", request.getRequestURI())) {
+      if (Objects.equals(request.getMethod(), "GET") && (
+          PatternMatchUtils.simpleMatch("/api/users/", request.getRequestURI()) ||
+              PatternMatchUtils.simpleMatch("/api/posts/", request.getRequestURI())
+      )) {
         return true;
       }
 
