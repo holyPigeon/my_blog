@@ -102,17 +102,6 @@ export default {
             console.log("author: " + this.post.author);
         }
     },
-    beforeMount() {
-        axios.get('/api/users')
-            .then((res) => {
-                console.log(res);
-                // JSON.stringify("res => " + res);
-                this.userList.count = res.data.count;
-                this.userList.data = [...res.data.data];
-            }).catch((err) => {
-                JSON.stringify("err => " + err);
-            });
-    },
 }
 
 </script>
