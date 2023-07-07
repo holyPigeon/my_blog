@@ -10,8 +10,6 @@ import com.example.my_blog.domain.post.Post;
 import com.example.my_blog.domain.post.service.PostService;
 import com.example.my_blog.domain.user.User;
 import com.example.my_blog.domain.user.service.UserService;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -24,7 +22,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 @RequestMapping("/api")
 //@CrossOrigin(origins = {"https://xn--2z1bo3hjrs.xn--yq5b.xn--3e0b707e/"})
-@Api(tags = "댓글 관련 API")
+//@Api(tags = "댓글 관련 API")
 public class CommentController {
 
   private final UserService userService;
@@ -32,7 +30,7 @@ public class CommentController {
   private final CommentService commentService;
 
   @PostMapping("/posts/{postId}/comments")
-  @ApiOperation(value = "댓글 등록 API", notes = "해당 게시물에 댓글 등록")
+//  @ApiOperation(value = "댓글 등록 API", notes = "해당 게시물에 댓글 등록")
   public ResponseEntity<Long> createComment(@PathVariable Long postId, @RequestBody CreateCommentRequest request) {
 
     Post post = postService.findById(postId);
@@ -46,7 +44,7 @@ public class CommentController {
   }
 
   @GetMapping("/posts/{postId}/comments")
-  @ApiOperation(value = "전체 댓글 조회 API", notes = "해당 게시글의 전체 댓글 조회")
+//  @ApiOperation(value = "전체 댓글 조회 API", notes = "해당 게시글의 전체 댓글 조회")
   public ListCommentResponse<List<ListCommentDetailResponse>> listComment(@PathVariable Long postId) {
 
     Post post = postService.findById(postId);
@@ -58,7 +56,7 @@ public class CommentController {
   }
 
   @GetMapping("/posts/{postId}/comments/{commentId}")
-  @ApiOperation(value = "단일 댓글 조회 API", notes = "댓글 상세 정보 조회")
+//  @ApiOperation(value = "단일 댓글 조회 API", notes = "댓글 상세 정보 조회")
   public ListCommentDetailResponse listDetailComment(@PathVariable("postId") Long postId, @PathVariable("commentId") Long commentId) {
 
     Comment comment = commentService.findById(commentId);
@@ -67,7 +65,7 @@ public class CommentController {
   }
 
   @PatchMapping("/posts/{postId}/comments/{commentId}")
-  @ApiOperation(value = "댓글 수정 API", notes = "댓글 본문을 수정")
+//  @ApiOperation(value = "댓글 수정 API", notes = "댓글 본문을 수정")
   public ResponseEntity<Long> updateComment(@PathVariable("postId") Long postId, @PathVariable("commentId") Long commentId, @RequestBody UpdateCommentRequest request) {
 
     commentService.updateComment(commentId, request.getContent());
@@ -76,7 +74,7 @@ public class CommentController {
   }
   
   @DeleteMapping("/posts/{postId}/comments/{commentId}")
-  @ApiOperation(value = "댓글 삭제 API", notes = "댓글 삭제")
+//  @ApiOperation(value = "댓글 삭제 API", notes = "댓글 삭제")
   public ResponseEntity<Object> deleteComment(@PathVariable("postId") Long postId, @PathVariable("commentId") Long commentId) {
 
     commentService.delete(commentId);
