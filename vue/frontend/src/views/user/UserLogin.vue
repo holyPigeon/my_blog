@@ -26,7 +26,7 @@
                         </div> -->
 
                     <div class="row g-3 mt-3">
-                        <button type="button" @click="submitForm($router)"
+                        <button type="button" @click="submitForm()"
                             class="btn btn-outline-dark btn-lg col-md-4 offset-md-4 p-2" id="signup"
                             style="opacity: 0.7;">완료</button>
                     </div>
@@ -57,8 +57,7 @@ export default {
     },
     methods: {
         submitForm() {
-            const data = this.formData;
-            axios.post('/api/login', data)
+            axios.post('/api/login', this.formData)
                 .then((res) => {
                     console.log(res);
                     sessionStorage.setItem("id", res.data.id);

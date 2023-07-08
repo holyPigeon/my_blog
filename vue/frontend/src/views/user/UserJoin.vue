@@ -65,8 +65,7 @@ export default {
     },
     methods: {
         submitForm() {
-            const data = this.formData;
-            axios.post('/api/users', data)
+            axios.post('/api/users', this.formData)
                 .then((res) => {
                     console.log(res);
                     this.$router.push('/');
