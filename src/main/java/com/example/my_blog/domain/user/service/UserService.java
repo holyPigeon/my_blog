@@ -1,7 +1,7 @@
 package com.example.my_blog.domain.user.service;
 
 import com.example.my_blog.domain.user.User;
-import com.example.my_blog.domain.user.repository.UserRepositoryImpl;
+import com.example.my_blog.domain.user.repository.UserRepository;
 import com.example.my_blog.domain.user.service.dto.request.UpdateUserRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -14,7 +14,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class UserService {
 
-  private final UserRepositoryImpl userRepository;
+  private final UserRepository userRepository;
 
   @Transactional
   public Long join(User user) {
