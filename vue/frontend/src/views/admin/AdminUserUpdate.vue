@@ -40,7 +40,7 @@
 import axios from 'axios';
 
 export default {
-    name: 'adminMemberUpdate',
+    name: 'adminUserUpdate',
     data() {
         return {
             userId: -1,
@@ -51,7 +51,7 @@ export default {
         }
     },
     methods: {
-        updateMember() {
+        updateUser() {
             const data = this.data;
             axios.update(`/api/users/${this.userId}`, data)
                 .then((res) => {
