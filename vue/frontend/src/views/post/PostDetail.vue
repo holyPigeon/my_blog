@@ -69,7 +69,7 @@
                                                         <h6>{{ comment.author }}</h6>
                                                     </div>
                                                     <div class="col-md-8"></div>
-                                                    <div class="col-md-2 text-end"><button class="btn btn-outline-danger">삭제</button></div>
+                                                    <div class="col-md-2 text-end"><button @click="deleteComment(comment.id)" class="btn btn-outline-danger">삭제</button></div>
                                                     <div class="col-md-3 text-start">
                                                         <h6>{{ comment.createdAt }}</h6>
                                                     </div>
@@ -145,7 +145,19 @@ export default {
                     console.log("errMsg -> " + errMsg);
                     alert(errMsg);
                 });
-        }
+        },
+        deleteComment(commentId) {
+            axios.delete(`/api/posts/${this.postId}/comments/${commentId}`)
+                .then((res) => {
+                    console.log(res);
+                    location.reload();
+                }).catch((err) => {
+                    let errMsg = JSON.stringify(err.response.data.message);
+                    errMsg = errMsg.substring(1, errMsg.length - 1);
+                    console.log("errMsg -> " + errMsg);
+                    alert(errMsg);
+                });
+        },
     },
     beforeMount() {
         const url = window.location.pathname;
