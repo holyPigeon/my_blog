@@ -128,18 +128,17 @@ export default {
                 ],
             },
             comment: {
+                userId: 0,
                 content: "",
             }
         }
     },
     methods: {
         createComment() {
-            const postId = this.postId;
-
-            axios.post(`/api/posts/${postId}/comments`)
+            axios.post(`/api/posts/${this.postId}/comments`, this.comment)
                 .then((res) => {
                     console.log(res);
-                    this.$router.push('/');
+                    location.reload();
                 }).catch((err) => {
                     let errMsg = JSON.stringify(err.response.data.message);
                     errMsg = errMsg.substring(1, errMsg.length - 1);
@@ -171,6 +170,8 @@ export default {
             }).catch((err) => {
                 JSON.stringify("err => " + err);
             });
+
+        this.comment.userId = sessionStorage.getItem("id");
     },
 }
 
