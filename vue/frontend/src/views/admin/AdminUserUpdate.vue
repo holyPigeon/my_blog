@@ -53,7 +53,7 @@ export default {
     methods: {
         updateUser() {
             const data = this.data;
-            axios.update(`/api/users/${this.userId}`, data)
+            axios.patch(`/api/users/${this.userId}`, data)
                 .then((res) => {
                     console.log(res);
                     this.$router.push('/admin/user');
