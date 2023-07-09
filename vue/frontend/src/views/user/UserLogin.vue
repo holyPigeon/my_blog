@@ -61,7 +61,7 @@ export default {
                 .then((res) => {
                     console.log(res);
                     sessionStorage.setItem("sessionData", JSON.stringify(res.data));
-                    // window.location.href = "/";
+                    window.location.href = "/";
                 }).catch((err) => {
                     let errMsg = JSON.stringify(err.response.data.message);
                     errMsg = errMsg.substring(1, errMsg.length - 1);
