@@ -60,11 +60,8 @@ export default {
             axios.post('/api/login', this.formData)
                 .then((res) => {
                     console.log(res);
-                    sessionStorage.setItem("id", res.data.id);
-                    sessionStorage.setItem("loginId", res.data.loginId);
-                    sessionStorage.setItem("name", res.data.name);
-                    sessionStorage.setItem("nickname", res.data.nickname);
-                    this.$router.push('/');
+                    sessionStorage.setItem("sessionData", JSON.stringify(res.data));
+                    // window.location.href = "/";
                 }).catch((err) => {
                     let errMsg = JSON.stringify(err.response.data.message);
                     errMsg = errMsg.substring(1, errMsg.length - 1);
