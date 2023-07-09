@@ -128,7 +128,7 @@ export default {
                 ],
             },
             comment: {
-                userId: 0,
+                userId: JSON.parse(sessionStorage.getItem("sessionData")).id,
                 content: "",
             }
         }
@@ -182,8 +182,6 @@ export default {
             }).catch((err) => {
                 JSON.stringify("err => " + err);
             });
-
-        this.comment.userId = sessionStorage.getItem("id");
     },
 }
 
