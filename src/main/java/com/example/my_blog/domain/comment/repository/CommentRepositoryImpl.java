@@ -28,7 +28,7 @@ public class CommentRepositoryImpl implements CommentRepository {
   @Override
   public List<Comment> findByAuthor(String author) {
 
-    return em.createQuery("select distinct Comment from Comment c" +
+    return em.createQuery("select distinct c from Comment c" +
             " join fetch c.user u where u.name = :author", Comment.class)
         .setParameter("author", author)
         .getResultList();
