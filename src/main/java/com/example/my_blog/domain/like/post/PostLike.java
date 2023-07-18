@@ -3,8 +3,14 @@ package com.example.my_blog.domain.like.post;
 import com.example.my_blog.domain.post.Post;
 import com.example.my_blog.domain.user.User;
 import jakarta.persistence.*;
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Entity
+@Table(name = "postLikes")
+@Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class PostLike {
 
   @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
