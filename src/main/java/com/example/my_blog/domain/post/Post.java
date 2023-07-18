@@ -1,6 +1,7 @@
 package com.example.my_blog.domain.post;
 
 import com.example.my_blog.domain.comment.Comment;
+import com.example.my_blog.domain.like.post.PostLike;
 import com.example.my_blog.domain.user.User;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
@@ -40,6 +41,9 @@ public class Post {
 
   @Lob
   private String content;
+
+  @OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
+  private List<PostLike> likes = new ArrayList<>();
 
   @OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
   private List<Comment> comments = new ArrayList<>();
