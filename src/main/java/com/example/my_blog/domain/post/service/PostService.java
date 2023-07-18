@@ -1,9 +1,12 @@
 package com.example.my_blog.domain.post.service;
 
+import com.example.my_blog.domain.like.post.PostLike;
+import com.example.my_blog.domain.like.post.repository.PostLikeRepository;
 import com.example.my_blog.domain.post.Post;
 import com.example.my_blog.domain.post.repository.PostRepository;
 import com.example.my_blog.domain.post.service.dto.request.UpdatePostRequest;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -59,4 +62,14 @@ public class PostService {
   }
 
 
+  // 이미 좋아요한 게시글인지 판별
+  public boolean isAlreadyLiked(Long postId, Long userId) {
+
+    PostLike postLike = postLikeRepository.getPostLike(postId, userId);
+    if (postLike == null) {
+      return false;
+    }
+
+    return true;
+  }
 }
