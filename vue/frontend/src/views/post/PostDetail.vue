@@ -134,6 +134,93 @@ export default {
         }
     },
     methods: {
+        listPostDetail() {
+            axios.get(`/api/posts/${this.postId}`)
+            .then((res) => {
+                this.post = { ...res.data };
+            }).catch((err) => {
+                let errMsg = JSON.stringify(err.response.data.message);
+                    errMsg = errMsg.substring(1, errMsg.length - 1);
+                    console.log("errMsg -> " + errMsg);
+                    alert(errMsg);
+            });
+        },
+        likeControl() {
+            if (this.alreadyLiked) {
+                this.cancelLikePost();
+            } else {
+                this.likePost();
+            }
+        },
+        likePost() {
+            axios.post(`/api/posts/like`, {
+                postId: this.postId,
+                userId: JSON.parse(sessionStorage.getItem("sessionData")).id
+            }).then((res) => {
+                // 게시글 좋아요 후 좋아요된 결과를 서버로부터 가져와 클라이언트에 재반영하는 로직
+                this.isAlreadyLiked();
+                this.getPostLikeCount();
+            }).catch((err) => {
+                let errMsg = JSON.stringify(err.response.data.message);
+                errMsg = errMsg.substring(1, errMsg.length - 1);
+                console.log("errMsg -> " + errMsg);
+                alert(errMsg);
+            });
+        },
+        cancelLikePost() {
+            axios.post(`/api/posts/cancelLike`, {
+                postId: this.postId,
+                userId: JSON.parse(sessionStorage.getItem("sessionData")).id
+            }).then((res) => {
+                // 게시글 좋아요 취소 후 취소된 결과를 서버로부터 가져와 클라이언트에 재반영하는 로직
+                this.isAlreadyLiked();
+                this.getPostLikeCount();
+            }).catch((err) => {
+                let errMsg = JSON.stringify(err.response.data.message);
+                errMsg = errMsg.substring(1, errMsg.length - 1);
+                console.log("errMsg -> " + errMsg);
+                alert(errMsg);
+            });
+        },
+        isAlreadyLiked() {
+            axios.post(`/api/posts/isAlreadyLiked`, {
+                postId: this.postId,
+                userId: JSON.parse(sessionStorage.getItem("sessionData")).id
+            }).then((res) => {
+                console.log("alreadyLiked => " + JSON.stringify(res.data));
+                // 게시글 좋아요 후 좋아요된 결과를 서버로부터 가져와 클라이언트에 재반영하는 로직
+                this.alreadyLiked = res.data.alreadyLiked;
+            }).catch((err) => {
+                let errMsg = JSON.stringify(err.response.data.message);
+                errMsg = errMsg.substring(1, errMsg.length - 1);
+                console.log("errMsg -> " + errMsg);
+                alert(errMsg);
+            });
+        },
+        getPostLikeCount() {
+            axios.get(`/api/posts/${this.postId}/getPostLikeCount`)
+                .then((res) => {
+                    console.log("getPostLikeCount => " + JSON.stringify(res.data));
+                    // 게시글 좋아요 후 좋아요된 결과를 서버로부터 가져와 클라이언트에 재반영하는 로직
+                    this.postLikeCount = res.data.count;
+                }).catch((err) => {
+                    let errMsg = JSON.stringify(err.response.data.message);
+                    errMsg = errMsg.substring(1, errMsg.length - 1);
+                    console.log("errMsg -> " + errMsg);
+                    alert(errMsg);
+                });
+        },
+        listComments() {
+            axios.get(`/api/posts/${this.postId}/comments`)
+            .then((res) => {
+                this.comments = { ...res.data };
+            }).catch((err) => {
+                let errMsg = JSON.stringify(err.response.data.message);
+                    errMsg = errMsg.substring(1, errMsg.length - 1);
+                    console.log("errMsg -> " + errMsg);
+                    alert(errMsg);
+            });
+        },
         createComment() {
             axios.post(`/api/posts/${this.postId}/comments`, this.comment)
                 .then((res) => {
