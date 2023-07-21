@@ -253,22 +253,10 @@ export default {
         this.postId = postId;
         console.log("postId -> " + postId);
 
-        axios.get(`/api/posts/${this.postId}`)
-            .then((res) => {
-                console.log("posts res.data => " + JSON.stringify(res.data));
-                this.post = { ...res.data };
-            }).catch((err) => {
-                JSON.stringify("err => " + err);
-            });
-
-        axios.get(`/api/posts/${this.postId}/comments`)
-            .then((res) => {
-                console.log("comments res.data => " + JSON.stringify(res.data));
-                this.comments = { ...res.data };
-                console.log("this.comments ->" + JSON.stringify(this.comments));
-            }).catch((err) => {
-                JSON.stringify("err => " + err);
-            });
+        this.listPostDetail();
+        this.isAlreadyLiked();
+        this.getPostLikeCount();
+        this.listComments();
     },
 }
 
