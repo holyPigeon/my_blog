@@ -26,6 +26,13 @@
                                     <section class="mb-5">
                                         <p class="fs-5 mb-4">{{ post.content }}</p>
                                     </section>
+                                    <div class="mb-4">
+                                        <img v-if="alreadyLiked == false" @click="likeControl" src="../../assets/heart.png"
+                                            style="width: 30px;" />
+                                        <img v-if="alreadyLiked == true" @click="likeControl"
+                                            src="../../assets/heart_fill.png" style="width: 30px;" />
+                                        <p class="mt-3">{{ postLikeCount }}</p>
+                                    </div>
                                 </article>
                                 <div class="row">
                                     <hr class="my-3 col-md-12 offset-md-0 border border-1 border-dark"
@@ -42,8 +49,8 @@
                                                     src="../../assets/profile.png" alt="avatar" width="50" height="50" />
                                             </div>
                                             <div class="col-md-11 p-1">
-                                                <form class="mb-2"><textarea v-model="comment.content" class="form-control" rows="3"
-                                                        style="text-indent: 0.5%; padding-top: 1%; resize: none;"
+                                                <form class="mb-2"><textarea v-model="comment.content" class="form-control"
+                                                        rows="3" style="text-indent: 0.5%; padding-top: 1%; resize: none;"
                                                         placeholder="Leave a comment here"></textarea>
                                                 </form>
                                             </div>
@@ -69,7 +76,9 @@
                                                         <h6>{{ comment.author }}</h6>
                                                     </div>
                                                     <div class="col-md-8"></div>
-                                                    <div class="col-md-2 text-end"><button @click="deleteComment(comment.id)" class="btn btn-outline-danger">삭제</button></div>
+                                                    <div class="col-md-2 text-end"><button
+                                                            @click="deleteComment(comment.id)"
+                                                            class="btn btn-outline-danger">삭제</button></div>
                                                     <div class="col-md-3 text-start">
                                                         <h6>{{ comment.createdAt }}</h6>
                                                     </div>
