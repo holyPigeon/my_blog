@@ -114,6 +114,8 @@ export default {
                 // price: -1,
                 // quantity: -1,
             },
+            alreadyLiked: false,
+            postLikeCount: -1,
             comments: {
                 count: -1,
                 commentList: [
