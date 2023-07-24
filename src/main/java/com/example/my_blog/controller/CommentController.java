@@ -11,6 +11,7 @@ import com.example.my_blog.domain.post.service.PostService;
 import com.example.my_blog.domain.user.User;
 import com.example.my_blog.domain.user.service.UserService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,7 +22,8 @@ import java.util.stream.Collectors;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api")
-//@CrossOrigin(origins = {"https://xn--2z1bo3hjrs.xn--yq5b.xn--3e0b707e/"})
+@Slf4j
+//@CrossOrigin(origins = {"http://localhost:8080"})
 //@Api(tags = "댓글 관련 API")
 public class CommentController {
 
@@ -35,6 +37,7 @@ public class CommentController {
 
     Post post = postService.findById(postId);
     User user = userService.findById(request.getUserId());
+
     Comment comment = Comment.createComment(user, post, request.getContent());
     Long commentId = commentService.save(comment);
 
