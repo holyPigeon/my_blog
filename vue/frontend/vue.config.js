@@ -17,10 +17,4 @@ module.exports = defineConfig({
 
   // blog 프로젝트 폴더 기준
   outputDir: path.resolve(__dirname, "../../src/main/resources/static/vue"),
-
-  pluginOptions: {
-    vuetify: {
-			// https://github.com/vuetifyjs/vuetify-loader/tree/next/packages/vuetify-loader
-		}
-  }
 })
