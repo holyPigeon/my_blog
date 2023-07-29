@@ -1,11 +1,10 @@
 package com.example.my_blog.controller;
 
+import com.example.my_blog.domain.post.service.dto.request.*;
 import com.example.my_blog.domain.user.User;
 import com.example.my_blog.domain.user.service.UserService;
 import com.example.my_blog.domain.post.Post;
 import com.example.my_blog.domain.post.service.PostService;
-import com.example.my_blog.domain.post.service.dto.request.CreatePostRequest;
-import com.example.my_blog.domain.post.service.dto.request.UpdatePostRequest;
 import com.example.my_blog.domain.post.service.dto.response.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -87,5 +86,48 @@ public class PostController {
     postService.deleteById(postId);
 
     return ResponseEntity.noContent().build();
+  }
+
+  /**
+   * 게시글 좋아요
+   */
+  @PostMapping("/posts/like")
+  public ResponseEntity<Object> likePost(@RequestBody LikePostRequest request) {
+
+    postService.likePost(request.getPostId(), request.getUserId());
+
+    return ResponseEntity.noContent().build();
+  }
+
+  /**
+   * 게시글 좋아요 취소
+   */
+  @PostMapping("/posts/cancelLike")
+  public ResponseEntity<Object> cancelLikePost(@RequestBody CancelLikePostRequest request) {
+
+    postService.cancelLikePost(request.getPostId(), request.getUserId());
+
+    return ResponseEntity.noContent().build();
+  }
+
+  /**
+   * 게시글 좋아요 체크
+   */
+  @PostMapping("/posts/isAlreadyLiked")
+  public IsAlreadyLikedResponse isAlreadyLiked(@RequestBody IsAlreadyLikedRequest request) {
+
+    if (postService.isAlreadyLiked(request.getPostId(), request.getUserId())) {
+      return new IsAlreadyLikedResponse(true);
+    } else {
+      return new IsAlreadyLikedResponse(false);
+    }
+  }
+
+  @GetMapping("/posts/{postId}/getPostLikeCount")
+  public GetPostLikeCountResponse getPostLikeCount(@PathVariable Long postId) {
+
+    int postLikeCount = postService.getPostLikeCount(postId);
+
+    return new GetPostLikeCountResponse(postLikeCount);
   }
 }
