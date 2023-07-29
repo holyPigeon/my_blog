@@ -1,34 +1,30 @@
 <template>
-    <div id="wrapper" class="container-fluid">
-        <div class="container px-4s my-5">
-            <div class="row gx-4 justify-content-center m-auto">
-                <div class="col-md-10 position-static d-block p-3 text-black"
-                    style="--bs-bg-opacity: .4; --bs-text-opacity: 0.6;">
-                    <div class="p-4">
-                        <!-- style="--bs-text-opacity: 0.6;" -->
-                        <h4 class="mb-3 text-center text-black fs-3 fw-bold">로그인</h4>
-                    </div>
-                    <div class="row g-3">
-                        <div class="col-md-4 offset-md-4">
-                            <input type="text" v-model="formData.loginId" class="form-control form-control-lg p-2"
-                                id="loginId" name="loginId" placeholder="아이디" required>
+    <div>
+        <div class="hero min-h-screen bg-gradient-to-r from-sky-500 to-emerald-500">
+            <div class="bg-opacity-60 hero-overlay"></div>
+            <div class="hero-content text-center flex w-1/4">
+                <div class="card flex-shrink-0 max-w-2xl w-full shadow-2xl bg-base-100 mb-32">
+                    <div class="card-body">
+                        <div class="form-control">
+                            <label class="label">
+                                <span class="label-text">Id</span>
+                            </label>
+                            <input v-model="formData.loginId" type="text" placeholder="Id"
+                                class="input input-bordered text-neutral-content" />
                         </div>
-                    </div>
-                    <div class="row g-3 mt-2">
-                        <div class="col-md-4 offset-md-4">
-                            <input type="text" v-model="formData.password" class="form-control form-control-lg p-2"
-                                id="password" name="password" placeholder="패스워드" required>
+                        <div class="form-control">
+                            <label class="label">
+                                <span class="label-text">Password</span>
+                            </label>
+                            <input v-model="formData.password" type="text" placeholder="Password"
+                                class="input input-bordered text-neutral-content" />
+                            <!-- <label class="label">
+                                <a href="#" class="label-text-alt link link-hover">Forgot password?</a>
+                            </label> -->
                         </div>
-                    </div>
-
-                    <!-- <div class="row">
-                            <hr class="my-4 col-md-12 offset-md-0 border border-1 border-dark" style="opacity: 0.1;">
-                        </div> -->
-
-                    <div class="row g-3 mt-3">
-                        <button type="button" @click="submitForm()"
-                            class="btn btn-outline-dark btn-lg col-md-4 offset-md-4 p-2" id="signup"
-                            style="opacity: 0.7;">완료</button>
+                        <div class="form-control mt-6">
+                            <button @click="submitForm()" class="btn btn-primary">Login</button>
+                        </div>
                     </div>
                 </div>
             </div>
