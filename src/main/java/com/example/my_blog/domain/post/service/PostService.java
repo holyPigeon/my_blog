@@ -66,6 +66,8 @@ public class PostService {
     postRepository.deleteById(id);
   }
 
+  //== 게시글 좋아요 관련 메소드 ==//
+
   @Transactional
   public void likePost(Long postId, Long userId) {
 
@@ -86,8 +88,6 @@ public class PostService {
     postLikeRepository.delete(postId, userId);
   }
 
-  //== 게시글 좋아요 관련 조건 메소드 ==//
-
   // 이미 좋아요한 게시글인지 판별
   public boolean isAlreadyLiked(Long postId, Long userId) {
 
@@ -97,5 +97,11 @@ public class PostService {
     }
 
     return true;
+  }
+
+  public int getPostLikeCount(Long postId) {
+
+    // Long 타입의 count 변수를 int 타입으로 변환
+    return Math.toIntExact(postLikeRepository.getPostLikeCountByPostId(postId));
   }
 }
