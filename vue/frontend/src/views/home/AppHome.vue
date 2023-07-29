@@ -1,5 +1,5 @@
 <template>
-  <div style="margin: -50px;">
+  <div>
 
     <!-- Header-->
     <header class="bg-dark py-5" style="padding-top: 100px;">
