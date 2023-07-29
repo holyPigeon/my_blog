@@ -49,8 +49,8 @@ public class PostLikeRepositoryImpl implements PostLikeRepository {
   @Override
   public Long getPostLikeCountByPostId(Long postId) {
 
-    return em.createQuery("select distinct count(pl) from Post p" +
-        " join fetch p.likes pl where p.id = :postId", Long.class)
+    return em.createQuery("select count(pl) from Post p" +
+            " join p.likes pl where p.id = :postId", Long.class)
         .setParameter("postId", postId)
         .getSingleResult();
   }
