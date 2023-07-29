@@ -36,43 +36,29 @@
                 </label>
                 <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-primary rounded-box w-52">
                     <!-- 비로그인 시 -->
-                    <div v-if="!isLoggedIn" class="d-flex">
-                        <li class="nav-item">
-                            <a @click="$router.push('/login')" href="#" class="nav-link active mx-2"
-                                aria-current="page">로그인</a>
+                    <div v-if="!isLoggedIn">
+                        <li>
+                            <p class="text-neutral-content">로그인 정보가 없습니다.</p>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link active text-secondary" aria-current="page" href="#">|</a>
+                        <li>
+                            <a @click="$router.push('/login')" class="justify-between">
+                                로그인
+                                <!-- <span class="badge">New</span> -->
+                            </a>
                         </li>
-                        <li class="nav-item">
-                            <a @click="$router.push('/user/join')" href="#" class="nav-link active mx-2">회원가입</a>
-                        </li>
+                        <li><a @click="$router.push('/user/join')">회원가입</a></li>
                     </div>
-
                     <!-- 로그인 시 -->
-                    <div v-if="isLoggedIn" class="d-flex">
-                        <li class="nav-item mx-2">
-                            <a class="nav-link active" aria-current="page" href="#">{{ session.name }}</a>
+                    <div v-if="isLoggedIn">
+                        <li><p>{{ session.name }} | {{ session.nickname }}</p>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link active text-secondary" aria-current="page" href="#">|</a>
-                        </li>
-                        <li class="nav-item mx-2">
-                            <a class="nav-link active" aria-current="page" href="#">{{ session.nickname }}</a>
-                        </li>
-                        <li class="nav-item mx-2">
-                            <a @click="logout" href="#" class="nav-link active">로그아웃</a>
-                        </li>
-                        <li class="nav-item mx-2">
-                            <a @click="$router.push('/admin')" href="#" class="nav-link active text-danger">관리자 콘솔</a>
-                        </li>
+                        <li><a @click="logout" class="justify-between">로그아웃</a></li>
+                        <li><a @click="$router.push('/admin')" class="text-error">관리자 콘솔</a></li>
                     </div>
-
                 </ul>
             </div>
-
         </div>
-    </nav>
+    </div>
 </template>
 
 <script>
