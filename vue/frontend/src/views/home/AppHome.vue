@@ -35,45 +35,17 @@
           <!-- <button class="btn btn-secondary">Get Started</button> -->
         </div>
       </div>
-    </header>
-    <!-- Features section-->
-    <section class="py-5 border-bottom" id="features">
-      <div class="container px-5 my-5">
-        <div class="row gx-5">
-          <div class="col-lg-4 mb-5 mb-lg-0">
-            <div class="feature bg-primary bg-gradient text-white rounded-3 mb-3"><i class="bi bi-collection"></i></div>
-            <h2 class="h4 fw-bolder">Featured title</h2>
-            <p>Paragraph of text beneath the heading to explain the heading. We'll add onto it with another sentence and
-              probably just keep going until we run out of words.</p>
-            <a class="text-decoration-none" href="#!">
-              Call to action
-              <i class="bi bi-arrow-right"></i>
-            </a>
-          </div>
-          <div class="col-lg-4 mb-5 mb-lg-0">
-            <div class="feature bg-primary bg-gradient text-white rounded-3 mb-3"><i class="bi bi-building"></i></div>
-            <h2 class="h4 fw-bolder">Featured title</h2>
-            <p>Paragraph of text beneath the heading to explain the heading. We'll add onto it with another sentence and
-              probably just keep going until we run out of words.</p>
-            <a class="text-decoration-none" href="#!">
-              Call to action
-              <i class="bi bi-arrow-right"></i>
-            </a>
-          </div>
-          <div class="col-lg-4">
-            <div class="feature bg-primary bg-gradient text-white rounded-3 mb-3"><i class="bi bi-toggles2"></i></div>
-            <h2 class="h4 fw-bolder">Featured title</h2>
-            <p>Paragraph of text beneath the heading to explain the heading. We'll add onto it with another sentence and
-              probably just keep going until we run out of words.</p>
-            <a class="text-decoration-none" href="#!">
-              Call to action
-              <i class="bi bi-arrow-right"></i>
-            </a>
-          </div>
-        </div>
-      </div>
-    </section>
+    </div>
 
+    <div class="hero h-screen h-[50vh] bg-base-100">
+  <div class="hero-content flex-col lg:flex-row-reverse">
+    <img :src="require('../../assets/office2.jpg')" class="max-w-sm rounded-lg shadow-2xl" />
+    <div class="text-neutral-content">
+      <h1 class="text-5xl font-bold">돌아버린 UI/UX</h1>
+      <p class="py-6">본 게시판의 UI/UX 역시 돌아버리고 말았습니다. 이로 인해 지구 역시 1년에 한 번씩 태양 주위를 빙빙 돌고 있습니다.</p>
+    </div>
+  </div>
+</div>
   </div>
 </template>
 
