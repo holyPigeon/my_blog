@@ -1,26 +1,19 @@
 <template>
     <div id="wrapper" class="container-fluid">
-        <!-- <img alt="Vue logo" src="../../assets/logo.png"> -->
-        <div class="container px-4s my-5">
-            <div class="row gx-4 justify-content-center m-auto">
-                <div class="col-md-10 position-static d-block p-3 text-black"
-                    style="--bs-bg-opacity: .4; --bs-text-opacity: 0.6;">
-                    <div class="container mt-5">
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <!-- Post content-->
-                                <article>
-                                    <!-- Post header-->
-                                    <header class="mb-4">
-                                        <!-- Post title-->
-                                        <h1 class="fw-bolder mb-1">{{ post.title }}</h1><!-- Post meta content-->
-                                        <div class="text-muted fst-italic mb-2">Posted on
-                                            {{ post.createdAt }}</div>
-                                        <div class="text-muted fst-italic mb-2">Updated on
-                                            {{ post.updatedAt }}</div>
-                                        <div class="text-muted fst-italic mb-2">Posted by {{ post.author }}</div>
-                                    </header><!-- Preview image figure-->
-                                    <!-- <figure class="mb-4"><img class="img-fluid rounded"
+        <div class="hero min-h-screen bg-gradient-to-r from-sky-500 to-emerald-500">
+            <div class="bg-opacity-60 hero-overlay"></div>
+            <div class="hero-content text-center w-full text-neutral-content">
+                <div class="flex-shrink-0 max-w-4xl w-full shadow-2xl bg-base-100 p-8">
+                    <article class="">
+                        <header class="mb-4">
+                            <h1 class="fw-bolder mb-1">{{ post.title }}</h1><!-- Post meta content-->
+                            <div class="mb-2">Posted on
+                                {{ post.createdAt }}</div>
+                            <div class="mb-2">Updated on
+                                {{ post.updatedAt }}</div>
+                            <div class="mb-8">Posted by {{ post.author }}</div>
+                        </header>
+                        <!-- <figure class="mb-4"><img class="img-fluid rounded"
                                             src="https://dummyimage.com/900x400/ced4da/6c757d.jpg" alt="..."></figure> -->
                                     <!-- Post content-->
                                     <section class="mb-5">
