@@ -1,33 +1,38 @@
 <template>
   <div>
 
-    <!-- Header-->
-    <header class="bg-dark py-5" style="padding-top: 100px;">
-      <div class="container px-5">
-        <div class="row gx-5 justify-content-center">
-          <div class="col-lg-6">
-            <div class="text-center my-5">
-              <h1 class="display-5 fw-bolder text-white mb-2">환상적인 게시판</h1>
-              <h5 class="text-white-50 mb-4 mt-3">말도 안되게 놀라운 CRUD를 경험해보세요.
-                <br>
-                쓰기, 읽기, 수정, 삭제 그 모든 것.</h5>
-              <div class="row g-3 mt-3">
+    <div class="hero h-screen h-[50vh] bg-gradient-to-r from-sky-500 to-emerald-500">
+      <div class="hero-overlay bg-opacity-60"></div>
+      <div class="hero-content text-center text-neutral-content">
+        <div class="max-w-md">
+          <h1 class="mb-5 text-5xl font-bold">환상적인 게시판</h1>
+          <p class="mb-5">말도 안되게 놀라운 CRUD를 경험해보세요.
+            <br>
+            쓰기, 읽기, 수정, 삭제 그 모든 것.
+          </p>
 
-                <div class="col-md-8 offset-md-2">
-                  <button @click="$router.push('/user/list')" class="btn btn-outline-light   py-3">
-                    <h6>회원 조회</h6>
-                  </button>
-                  <button @click="$router.push('/post/create')" class="btn btn-outline-light mx-3 py-3">
-                    <h6>게시글 등록</h6>
-                  </button>
-                  <button @click="$router.push('/post/list')" class="btn btn-outline-light   py-3">
-                    <h6>게시글 조회</h6>
-                  </button>
-                </div>
-
-              </div>
-            </div>
+          <div class="col-md-8 offset-md-2">
+            <button @click="$router.push('/user/list')" class="btn btn-outline btn-primary py-3">
+              <h6>회원 조회</h6>
+            </button>
+            <button @click="$router.push('/post/create')" class="btn btn-outline btn-primary mx-3 py-3">
+              <h6>게시글 등록</h6>
+            </button>
+            <button @click="$router.push('/post/list')" class="btn btn-outline btn-primary py-3">
+              <h6>게시글 조회</h6>
+            </button>
           </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero h-screen h-[50vh] bg-base-100">
+      <div class="hero-content flex-col lg:flex-row">
+        <img :src="require('../../assets/office1.jpg')" class="max-w-sm rounded-lg shadow-2xl" />
+        <div class="text-neutral-content">
+          <h1 class="text-5xl font-bold">미쳐버린 디자인</h1>
+          <p class="py-6">본 게시판은 여러분에게 미쳐버린 디자인을 선사합니다. 이걸 목격한 여러분 역시 미쳐버릴 수 있기 떄문에 주의해야 합니다.</p>
+          <!-- <button class="btn btn-secondary">Get Started</button> -->
         </div>
       </div>
     </header>
