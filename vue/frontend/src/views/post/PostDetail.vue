@@ -54,44 +54,32 @@
                         </div>
                     </div>
 
-                                <!-- 댓글 리스트 -->
-                                <div id="comments">
-                                    <div id="comment" v-for="(comment, index) in comments.commentList" :key="index">
-                                        <div class="row" style="padding-right: 4%; padding-left: 2%;">
-                                            <div class="col-md-1 p-2 d-flex justify-content-center">
-                                                <img class="rounded-circle shadow-1-strong me-3 mx-3"
-                                                    src="../../assets/profile.png" alt="avatar" width="50" height="50" />
-                                            </div>
-                                            <div class="col-md-11 p-2">
-                                                <div class="row">
-                                                    <div class="col-md-2 text-start">
-                                                        <h6>{{ comment.author }}</h6>
-                                                    </div>
-                                                    <div class="col-md-8"></div>
-                                                    <div class="col-md-2 text-end"><button
-                                                            @click="deleteComment(comment.id)"
-                                                            class="btn btn-outline-danger">삭제</button></div>
-                                                    <div class="col-md-3 text-start">
-                                                        <h6>{{ comment.createdAt }}</h6>
-                                                    </div>
-                                                    <div class="col-md-9"></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row" style="padding-right: 4%; padding-left: 2%;">
-                                            <div class="col-md-11 text-start">
-                                                <p class="mt-3">
-                                                    {{ comment.content }}
-                                                </p>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <hr class="my-4 col-md-12 offset-md-0 border border-1 border-dark"
-                                            style="opacity: 0.1;">
-                                        </div>
-                                    </div>
+                    <!-- 댓글 리스트 -->
+                    <div id="comments">
+                        <div id="comment" v-for="(comment, index) in comments.commentList" :key="index">
+                            <div class="grid grid-col-12 p-5">
+                                <div class="col-start-1 col-span-1 p-2">
+                                    <img class="" :src="require('../../assets/profile.png')" alt="avatar" width="50"
+                                        height="50" />
                                 </div>
-
+                                <div class="col-start-2 col-span-3 text-start">
+                                    <p>{{ comment.author }}</p>
+                                    <p>{{ comment.createdAt }}</p>
+                                </div>
+                                <div class="col-start-5 col-end-10 text-start">
+                                </div>
+                                <div class="col-start-11 col-span-2 text-end"><button @click="deleteComment(comment.id)"
+                                        class="btn btn-outline btn-error">삭제</button></div>
+                            </div>
+                            <div class="grid grid-col-12 px-4" style="padding-right: 4%; padding-left: 2%;">
+                                <div class="col-start-1 col-span-11 text-start">
+                                    <p class="mt-3">
+                                        {{ comment.content }}
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <hr class="my-4 col-md-12 offset-md-0 border border-1 border-dark" style="opacity: 0.1;">
                             </div>
                         </div>
                     </div>
