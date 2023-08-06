@@ -15,22 +15,21 @@
                         </header>
                         <!-- <figure class="mb-4"><img class="img-fluid rounded"
                                             src="https://dummyimage.com/900x400/ced4da/6c757d.jpg" alt="..."></figure> -->
-                                    <!-- Post content-->
-                                    <section class="mb-5">
-                                        <p class="fs-5 mb-4">{{ post.content }}</p>
-                                    </section>
-                                    <div class="mb-4">
-                                        <img v-if="alreadyLiked == false" @click="likeControl" src="../../assets/heart.png"
-                                            style="width: 30px;" />
-                                        <img v-if="alreadyLiked == true" @click="likeControl"
-                                            src="../../assets/heart_fill.png" style="width: 30px;" />
-                                        <p class="mt-3">{{ postLikeCount }}</p>
-                                    </div>
-                                </article>
-                                <div class="row">
-                                    <hr class="my-3 col-md-12 offset-md-0 border border-1 border-dark"
-                                        style="opacity: 0.1;">
-                                </div>
+                        <section class="mb-5">
+                            <p class="fs-5 mb-4">{{ post.content }}</p>
+                        </section>
+                        <div class="mt-16 flex justify-center items-center">
+                            <img v-if="alreadyLiked == false" @click="likeControl" :src="require('../../assets/heart.png')"
+                                style="width: 30px;" class="heart-filter" />
+                            <img v-if="alreadyLiked == true" @click="likeControl"
+                                :src="require('../../assets/heart_fill.png')" style="width: 30px;"
+                                class="heart-fill-filter" />
+                        </div>
+                        <p class="mt-3">{{ postLikeCount }}</p>
+                    </article>
+                    <div class="row">
+                        <hr class="my-3 col-md-12 offset-md-0 border border-1 border-dark" style="opacity: 0.1;">
+                    </div>
 
                                 <!-- 댓글 작성란 -->
                                 <div id="write_comment" class="mb-5">
@@ -273,5 +272,13 @@ export default {
 
 td {
     padding: 5px;
+}
+
+.heart-filter {
+    filter: invert(75%) sepia(11%) saturate(76%) hue-rotate(98deg) brightness(98%) contrast(93%);
+}
+
+.heart-fill-filter {
+    background-color: invert(48%) sepia(20%) saturate(6759%) hue-rotate(332deg) brightness(89%) contrast(118%);
 }
 </style>
