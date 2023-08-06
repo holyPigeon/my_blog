@@ -31,28 +31,28 @@
                         <hr class="my-3 col-md-12 offset-md-0 border border-1 border-dark" style="opacity: 0.1;">
                     </div>
 
-                                <!-- 댓글 작성란 -->
-                                <div id="write_comment" class="mb-5">
-                                    <h5 class="row text-left p-3">{{ comments.count }}개의 댓글</h5>
-                                    <div class="card border rounded-3">
-                                        <div class="card-body row" style="padding-right: 4%; padding-top: 2%;">
-                                            <div class="col-md-1">
-                                                <img class="rounded-circle shadow-1-strong me-3"
-                                                    src="../../assets/profile.png" alt="avatar" width="50" height="50" />
-                                            </div>
-                                            <div class="col-md-11 p-1">
-                                                <form class="mb-2"><textarea v-model="comment.content" class="form-control"
-                                                        rows="3" style="text-indent: 0.5%; padding-top: 1%; resize: none;"
-                                                        placeholder="Leave a comment here"></textarea>
-                                                </form>
-                                            </div>
-                                            <div class="offset-md-10 col-md-2 p-1 text-end d-grid gap-2">
-                                                <button @click="createComment" class="btn btn text-white"
-                                                    style="background-color: #0090F8;">댓글 쓰기</button>
-                                            </div>
-                                        </div>
-                                    </div>
+                    <!-- 댓글 작성란 -->
+                    <div id="write_comment" class="mb-5">
+                        <h5 class="text-left p-3">{{ comments.count }}개의 댓글</h5>
+                        <div class="card border rounded-3 border-neutral-content">
+                            <div class="card-body grid grid-col-12 p-5">
+                                <div class="col-start-1 col-span-1">
+                                    <img class="mx-auto" :src="require('../../assets/profile.png')" alt="avatar" width="50"
+                                        height="50" />
                                 </div>
+                                <div class="col-end-12 col-span-10 p-1">
+                                    <form class="mb-2"><textarea v-model="comment.content"
+                                            class="textarea border border-neutral-content w-full" rows="3"
+                                            style="text-indent: 0.5%; padding-top: 1%; resize: none;"
+                                            placeholder="Leave a comment here"></textarea>
+                                    </form>
+                                </div>
+                                <div class="col-start-10 col-span-2 p-1 text-end d-grid gap-2">
+                                    <button @click="createComment" class="btn btn-outline btn-info">댓글 쓰기</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
                                 <!-- 댓글 리스트 -->
                                 <div id="comments">
