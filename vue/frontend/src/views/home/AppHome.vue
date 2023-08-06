@@ -31,7 +31,7 @@
         <img :src="require('../../assets/office1.jpg')" class="max-w-sm rounded-lg shadow-2xl" />
         <div class="text-neutral-content">
           <h1 class="text-5xl font-bold">미쳐버린 디자인</h1>
-          <p class="py-6">본 게시판은 여러분에게 미쳐버린 디자인을 선사합니다. 이걸 목격한 여러분 역시 미쳐버릴 수 있기 떄문에 주의해야 합니다.</p>
+          <p class="py-6">본 게시판은 여러분에게 미쳐버린 디자인을 선사합니다. 이걸 목격한 여러분 역시 미쳐버릴 수 있으므로 주의합시다.</p>
           <!-- <button class="btn btn-secondary">Get Started</button> -->
         </div>
       </div>
