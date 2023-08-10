@@ -37,8 +37,8 @@
                         <div class="card border rounded-3 border-neutral-content">
                             <div class="card-body grid grid-col-12 p-5">
                                 <div class="col-start-1 col-span-1">
-                                    <img class="mx-auto" :src="require('../../assets/profile.png')" alt="avatar" width="50"
-                                        height="50" />
+                                    <img class="mx-auto my-2" :src="require('../../assets/profile.png')" alt="avatar"
+                                        width="50" height="50" />
                                 </div>
                                 <div class="col-end-12 col-span-10 p-1">
                                     <form class="mb-2"><textarea v-model="comment.content"
@@ -68,11 +68,11 @@
                                 </div>
                                 <div class="col-start-5 col-end-10 text-start">
                                 </div>
-                                <div class="col-start-11 col-span-2 text-end"><button @click="deleteComment(comment.id)"
-                                        class="btn btn-outline btn-error">삭제</button></div>
-                            </div>
-                            <div class="grid grid-col-12 px-4" style="padding-right: 4%; padding-left: 2%;">
-                                <div class="col-start-1 col-span-11 text-start">
+                                <div class="col-start-11 col-span-2 text-end">
+                                    <button @click="createReplyCommentInput" class="btn btn-outline btn-neutral-content mr-4">답글</button>
+                                    <button @click="deleteComment(comment.id)" class="btn btn-outline btn-error">삭제</button>
+                                </div>
+                                <div class="col-start-1 col-span-11 text-start px-2">
                                     <p class="mt-3">
                                         {{ comment.content }}
                                     </p>
