@@ -24,6 +24,19 @@ public class CommentService {
     return comment.getId();
   }
 
+  @Transactional
+  public Long saveReplyComment(Long parentId, Comment comment) {
+
+    // 부모 댓글과 자식 댓글(대댓글)간 연관관계 정의
+    Comment parentComment = commentRepository.findById(parentId);
+    parentComment.getChildrens().add(comment);
+    comment.setParent(parentComment);
+
+    commentRepository.save(comment);
+
+    return comment.getId();
+  }
+
   public Comment findById(Long id) {
 
     return commentRepository.findById(id);
