@@ -3,6 +3,7 @@ package com.example.my_blog.controller;
 import com.example.my_blog.domain.comment.Comment;
 import com.example.my_blog.domain.comment.service.CommentService;
 import com.example.my_blog.domain.comment.service.dto.request.CreateCommentRequest;
+import com.example.my_blog.domain.comment.service.dto.request.CreateReplyCommentRequest;
 import com.example.my_blog.domain.comment.service.dto.request.UpdateCommentRequest;
 import com.example.my_blog.domain.comment.service.dto.response.ListCommentDetailResponse;
 import com.example.my_blog.domain.comment.service.dto.response.ListCommentResponse;
@@ -40,6 +41,21 @@ public class CommentController {
 
     Comment comment = Comment.createComment(user, post, request.getContent());
     Long commentId = commentService.save(comment);
+
+    return ResponseEntity
+        .created(URI.create("/posts/" + postId + "/comments/" + commentId))
+        .build();
+  }
+
+  @PostMapping("/posts/{postId}/comments/reply")
+//  @ApiOperation(value = "댓글 등록 API", notes = "해당 게시물에 댓글 등록")
+  public ResponseEntity<Long> createReplyComment(@PathVariable Long postId, @RequestBody CreateReplyCommentRequest request) {
+
+    Post post = postService.findById(postId);
+    User user = userService.findById(request.getUserId());
+
+    Comment comment = Comment.createComment(user, post, request.getContent());
+    Long commentId = commentService.saveReplyComment(request.getParentId(), comment);
 
     return ResponseEntity
         .created(URI.create("/posts/" + postId + "/comments/" + commentId))
