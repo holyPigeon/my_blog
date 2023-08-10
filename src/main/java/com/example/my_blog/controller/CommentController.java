@@ -48,7 +48,7 @@ public class CommentController {
   }
 
   @PostMapping("/posts/{postId}/comments/reply")
-//  @ApiOperation(value = "댓글 등록 API", notes = "해당 게시물에 댓글 등록")
+//  @ApiOperation(value = "대댓글 등록 API", notes = "해당 게시물에 대댓글 등록")
   public ResponseEntity<Long> createReplyComment(@PathVariable Long postId, @RequestBody CreateReplyCommentRequest request) {
 
     Post post = postService.findById(postId);
