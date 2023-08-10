@@ -243,6 +243,22 @@ export default {
                     alert(errMsg);
                 });
         },
+        createReplyCommentInput() {
+            this.replyCommentActive = true;
+        },
+        createReplyComment(parentId) {
+            this.replyComment.parentId = parentId;
+            axios.post(`/api/posts/${this.postId}/comments/reply`, this.replyComment)
+                .then((res) => {
+                    console.log(res);
+                    location.reload();
+                }).catch((err) => {
+                    let errMsg = JSON.stringify(err.response.data.message);
+                    errMsg = errMsg.substring(1, errMsg.length - 1);
+                    console.log("errMsg -> " + errMsg);
+                    alert(errMsg);
+                });
+        },
         deleteComment(commentId) {
             axios.delete(`/api/posts/${this.postId}/comments/${commentId}`)
                 .then((res) => {
