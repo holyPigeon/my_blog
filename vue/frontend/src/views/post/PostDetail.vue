@@ -118,10 +118,29 @@ export default {
                     }
                 ],
             },
+            replyComments: {
+                count: -1,
+                commentList: [
+                    {
+                        // id: 1,
+                        // postId: 1,
+                        // author: '',
+                        // content: '',
+                        // createdAt: '',
+                        // updatedAt: '',
+                    }
+                ],
+            },
             comment: {
                 userId: JSON.parse(sessionStorage.getItem("sessionData")).id,
                 content: "",
-            }
+            },
+            replyComment: {
+                userId: JSON.parse(sessionStorage.getItem("sessionData")).id,
+                parentId: -1,
+                content: "",
+            },
+            replyCommentActive: false, // 대댓글 작성란 활성화
         }
     },
     methods: {
