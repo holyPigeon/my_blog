@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Getter
 @NoArgsConstructor
@@ -25,4 +26,6 @@ public class ListCommentDetailResponse {
 
   @JsonFormat(pattern = "yyyy.MM.dd HH:mm:ss")
   private LocalDateTime updatedAt;
+
+  private List<ListCommentDetailResponse> children;
 }
