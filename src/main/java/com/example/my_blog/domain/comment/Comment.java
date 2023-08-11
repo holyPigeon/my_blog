@@ -46,7 +46,7 @@ public class Comment {
   private Comment parent;
 
   @OneToMany(mappedBy = "parent", orphanRemoval = true)
-  private List<Comment> childrens = new ArrayList<>();
+  private List<Comment> children = new ArrayList<>();
 
   //==연관관계 편의 메소드==//
   public void setPost(Post post) {
