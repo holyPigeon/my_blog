@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
+import java.util.Comparator;
 import java.util.List;
 
 @RestController
@@ -49,7 +50,11 @@ public class PostController {
         new DetailPostResponse(p.getId(), p.getUser().getNickname(), p.getTitle(), p.getContent(),
             p.getCreatedAt(), p.getUpdatedAt())).toList();
 
-    return new ListPostResponse<>(collect.size(), collect);
+    List<DetailPostResponse> sorted = collect.stream()
+        .sorted(Comparator.comparing(DetailPostResponse::getId).reversed())
+        .toList();
+
+    return new ListPostResponse<>(sorted.size(), sorted);
 
   }
 
