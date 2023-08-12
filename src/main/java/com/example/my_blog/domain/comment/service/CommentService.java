@@ -47,6 +47,12 @@ public class CommentService {
     return commentRepository.findAll();
   }
 
+  // 해당 게시글의 모든 부모 댓글을 조회한다.
+  public List<Comment> findAllParentCommentByPost(Long postId) {
+
+    return commentRepository.findAllParentCommentByPost(postId);
+  }
+
   @Transactional
   public void updateComment(Long id, String content) {
 
