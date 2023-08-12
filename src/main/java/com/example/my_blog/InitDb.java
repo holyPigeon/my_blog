@@ -51,8 +51,8 @@ public class InitDb {
 
       Comment comment1 = createComment(user2, post1, "こんにちは");
       Comment comment2 = createComment(user3, post1, "반갑습니다.");
-      Comment replyComment1 = createComment(user1, post1, "반가워요~~~");
-      Comment replyComment2 = createComment(user3, post1, "Nice to meet you.");
+      Comment replyComment1 = createComment(user1, post1, "환영합니다!");
+      Comment replyComment2 = createComment(user3, post1, "Nice to meet you");
       em.persist(comment1);
       em.persist(comment2);
       commentService.saveReplyComment(comment1.getId(), replyComment1);
