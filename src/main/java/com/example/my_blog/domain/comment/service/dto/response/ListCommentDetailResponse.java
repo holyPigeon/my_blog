@@ -27,5 +27,5 @@ public class ListCommentDetailResponse {
   @JsonFormat(pattern = "yyyy.MM.dd HH:mm:ss")
   private LocalDateTime updatedAt;
 
-  private List<ListCommentDetailResponse> children;
+  private List<ListReplyCommentDetailResponse> children;
 }
