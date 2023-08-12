@@ -195,14 +195,14 @@ export default {
     methods: {
         listPostDetail() {
             axios.get(`/api/posts/${this.postId}`)
-            .then((res) => {
-                this.post = { ...res.data };
-            }).catch((err) => {
-                let errMsg = JSON.stringify(err.response.data.message);
+                .then((res) => {
+                    this.post = { ...res.data };
+                }).catch((err) => {
+                    let errMsg = JSON.stringify(err.response.data.message);
                     errMsg = errMsg.substring(1, errMsg.length - 1);
                     console.log("errMsg -> " + errMsg);
                     alert(errMsg);
-            });
+                });
         },
         likeControl() {
             if (this.alreadyLiked) {
@@ -271,14 +271,14 @@ export default {
         },
         listComments() {
             axios.get(`/api/posts/${this.postId}/comments`)
-            .then((res) => {
-                this.comments = { ...res.data };
-            }).catch((err) => {
-                let errMsg = JSON.stringify(err.response.data.message);
+                .then((res) => {
+                    this.comments = { ...res.data };
+                }).catch((err) => {
+                    let errMsg = JSON.stringify(err.response.data.message);
                     errMsg = errMsg.substring(1, errMsg.length - 1);
                     console.log("errMsg -> " + errMsg);
                     alert(errMsg);
-            });
+                });
         },
         createComment() {
             axios.post(`/api/posts/${this.postId}/comments`, this.comment)
