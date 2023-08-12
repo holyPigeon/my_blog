@@ -1,6 +1,7 @@
 package com.example.my_blog;
 
 import com.example.my_blog.domain.comment.Comment;
+import com.example.my_blog.domain.comment.service.CommentService;
 import com.example.my_blog.domain.post.Post;
 import com.example.my_blog.domain.user.User;
 import lombok.RequiredArgsConstructor;
@@ -32,6 +33,7 @@ public class InitDb {
   static class InitService {
 
     private final EntityManager em;
+    private final CommentService commentService;
 
     public void dbInit() {
 
@@ -49,8 +51,12 @@ public class InitDb {
 
       Comment comment1 = createComment(user2, post1, "こんにちは");
       Comment comment2 = createComment(user3, post1, "반갑습니다.");
+      Comment replyComment1 = createComment(user1, post1, "반가워요~~~");
+      Comment replyComment2 = createComment(user3, post1, "Nice to meet you.");
       em.persist(comment1);
       em.persist(comment2);
+      commentService.saveReplyComment(comment1.getId(), replyComment1);
+      commentService.saveReplyComment(comment1.getId(), replyComment2);
 
       em.flush();
     }
