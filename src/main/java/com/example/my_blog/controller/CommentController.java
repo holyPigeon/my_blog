@@ -67,12 +67,8 @@ public class CommentController {
   public ListCommentResponse<List<ListCommentDetailResponse>> listComment(@PathVariable Long postId) {
 
     Post post = postService.findById(postId);
-    List<ListCommentDetailResponse> listCommentData = post.getComments().stream()
-        .map(comment -> new ListCommentDetailResponse(comment.getId(), post.getId(), comment.getUser().getNickname(),
-            comment.getContent(), comment.getCreatedAt(), comment.getUpdatedAt())).collect(Collectors.toList());
 
-    return new ListCommentResponse<>(listCommentData.size(), listCommentData);
-  }
+    List<Comment> parentCommentList = commentService.findAllParentCommentByPost(postId);
 
     List<ListCommentDetailResponse> adaptedCommentList = parentCommentList.stream()
         .map(comment -> {
