@@ -42,6 +42,15 @@ public class CommentRepositoryImpl implements CommentRepository {
   }
 
   @Override
+  public List<Comment> findAllParentCommentByPost(Long postId) {
+
+    return em.createQuery("select distinct c from Comment c" +
+            " join fetch c.post p where c.parent is null and p.id = :postId", Comment.class)
+        .setParameter("postId", postId)
+        .getResultList();
+  }
+
+  @Override
   public void deleteComment(Long id) {
 
     Comment comment = findById(id);
