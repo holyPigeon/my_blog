@@ -46,6 +46,7 @@ public class PostController {
   public ListPostResponse<List<DetailPostResponse>> listPost() {
 
     List<Post> posts = postService.findAll();
+
     List<DetailPostResponse> collect = posts.stream().map(p ->
         new DetailPostResponse(p.getId(), p.getUser().getNickname(), p.getTitle(), p.getContent(),
             p.getCreatedAt(), p.getUpdatedAt())).toList();

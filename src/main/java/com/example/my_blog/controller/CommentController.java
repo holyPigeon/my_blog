@@ -7,6 +7,7 @@ import com.example.my_blog.domain.comment.service.dto.request.CreateReplyComment
 import com.example.my_blog.domain.comment.service.dto.request.UpdateCommentRequest;
 import com.example.my_blog.domain.comment.service.dto.response.ListCommentDetailResponse;
 import com.example.my_blog.domain.comment.service.dto.response.ListCommentResponse;
+import com.example.my_blog.domain.comment.service.dto.response.ListReplyCommentDetailResponse;
 import com.example.my_blog.domain.post.Post;
 import com.example.my_blog.domain.post.service.PostService;
 import com.example.my_blog.domain.user.User;
@@ -18,7 +19,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @RequiredArgsConstructor
@@ -74,13 +74,17 @@ public class CommentController {
     return new ListCommentResponse<>(listCommentData.size(), listCommentData);
   }
 
-  @GetMapping("/posts/{postId}/comments/{commentId}")
-//  @ApiOperation(value = "단일 댓글 조회 API", notes = "댓글 상세 정보 조회")
-  public ListCommentDetailResponse listDetailComment(@PathVariable("postId") Long postId, @PathVariable("commentId") Long commentId) {
+    List<ListCommentDetailResponse> adaptedCommentList = parentCommentList.stream()
+        .map(comment -> {
+          List<ListReplyCommentDetailResponse> replyCommentList = comment.getChildren().stream()
+              .map(replyComment -> new ListReplyCommentDetailResponse(replyComment.getId(), post.getId(), replyComment.getUser().getNickname(),
+                  replyComment.getContent(), replyComment.getCreatedAt(), replyComment.getUpdatedAt())).toList();
 
-    Comment comment = commentService.findById(commentId);
-    return new ListCommentDetailResponse(comment.getId(), comment.getPost().getId(), comment.getUser().getNickname(),
-        comment.getContent(), comment.getCreatedAt(), comment.getUpdatedAt());
+          return new ListCommentDetailResponse(comment.getId(), post.getId(), comment.getUser().getNickname(),
+              comment.getContent(), comment.getCreatedAt(), comment.getUpdatedAt(), replyCommentList);
+        }).toList();
+
+    return new ListCommentResponse<>(adaptedCommentList.size(), adaptedCommentList);
   }
 
   @PatchMapping("/posts/{postId}/comments/{commentId}")
