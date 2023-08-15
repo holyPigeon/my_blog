@@ -5,7 +5,7 @@ blog with Vue.js &amp; Spring Boot
 ## 소개
 #### 간단한 CRUD 기능을 갖춘 커뮤니티 서비스
 
-![스크린샷 2023-08-15 오후 5 27 08](https://github.com/holyPigeon/my_blog/assets/89138189/82839414-6cb4-48a8-bc86-02e084ca8883)
+![스크린샷 2023-08-15 오후 6 18 45](https://github.com/holyPigeon/my_blog/assets/89138189/3bac3b1b-6bd9-4595-b474-9e353f63c112)
 
 ## Tech Stacks
 ### Frontend
