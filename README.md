@@ -17,7 +17,7 @@ blog with Vue.js &amp; Spring Boot
 ### Backend
 
 <img src="https://img.shields.io/badge/Java%2017-188EC9?style=flat-square&logo=&logoColor=white"/></a> &nbsp;
-<img src="https://img.shields.io/badge/Gradle%2017-02303A?style=flat-square&logo=gradle&logoColor=white"/></a> &nbsp;
+<img src="https://img.shields.io/badge/Gradle-02303A?style=flat-square&logo=gradle&logoColor=white"/></a> &nbsp;
 <img src="https://img.shields.io/badge/Spring-6DB33F?style=flat-square&logo=Spring&logoColor=white"/></a> &nbsp;
 <img src="https://img.shields.io/badge/Spring%20Boot-6DB33F?style=flat-square&logo=Spring%20Boot&logoColor=white"/></a> &nbsp;
 <img src="https://img.shields.io/badge/Spring%20Data%20JPA-6DB33F?style=flat-square&logo=&logoColor=white"/></a> &nbsp;
