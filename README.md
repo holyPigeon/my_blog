@@ -27,7 +27,9 @@ blog with Vue.js &amp; Spring Boot
 ### Develop Tool
 
 <img src="https://img.shields.io/badge/Visual%20Studio%20Code-007ACC?style=flat-square&logo=visualstudiocode&logoColor=white"/></a> &nbsp;
-<img src="https://img.shields.io/badge/intelliJ%20IDEA-000000?style=flat-square&logo=intellijidea&logoColor=white"/></a> &nbsp;
+<img src="https://img.shields.io/badge/IntelliJ%20IDEA-000000?style=flat-square&logo=intellijidea&logoColor=white"/></a> &nbsp;
+<img src="https://img.shields.io/badge/Postman-FF6C37?style=flat-square&logo=postman&logoColor=white"/></a> &nbsp;
+<img src="https://img.shields.io/badge/Notion-000000?style=flat-square&logo=notion&logoColor=white"/></a> &nbsp;
 
 <br>
 
