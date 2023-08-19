@@ -310,6 +310,9 @@ export default {
         createReplyCommentInput(parentId) {
             this.replyCommentActive[parentId] = true;
         },
+        onReplyCommentInputChange(event) {
+          this.replyComment.content = event.target.value;
+        },
         createReplyComment(parentId) {
             this.replyComment.parentId = parentId;
             axios.post(`/api/posts/${this.postId}/comments/reply`, this.replyComment)
