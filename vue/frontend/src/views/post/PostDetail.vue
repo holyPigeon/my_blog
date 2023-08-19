@@ -116,11 +116,11 @@
 
                             <!-- 대댓글 작성란 -->
                             <div class="grid grid-col-12">
-                                <div v-if="replyCommentActive == true" class="col-start-2 col-span-10 py-4">
-                                    <input v-model="replyComment.content" type="text" placeholder="Type here"
+                                <div v-if="replyCommentActive[comment.id] === true" class="col-start-2 col-span-10 py-4">
+                                    <input @input="onReplyCommentInputChange" type="text" placeholder="Type here"
                                         class="input input-bordered border border-neutral-content w-full max" />
                                 </div>
-                                <div v-if="replyCommentActive == true" class="col-start-12 col-span-1 py-4">
+                                <div v-if="replyCommentActive[comment.id] === true" class="col-start-12 col-span-1 py-4">
                                     <button @click="createReplyComment(comment.id)" class="btn btn-outline btn-info mr-4">댓글
                                         쓰기</button>
                                 </div>
