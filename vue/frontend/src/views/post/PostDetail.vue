@@ -82,7 +82,7 @@
 
                             <!-- 대댓글 리스트 -->
                             <div id="replyComment" v-for="(comment2, index) in comment.children" :key="index">
-                                <div class="grid grid-col-12 mb-4" style="padding-right: 4%; padding-left: 2%;">
+                                <div class="grid grid-col-12 p-5" style="">
                                     <div class="col-start-1 col-span-1 py-6">
                                         ㄴ
                                     </div>
