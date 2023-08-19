@@ -69,7 +69,7 @@
                                 <div class="col-start-5 col-end-10 text-start">
                                 </div>
                                 <div class="col-start-11 col-span-2 text-end">
-                                    <button @click="createReplyCommentInput"
+                                    <button @click="createReplyCommentInput(comment.id)"
                                         class="btn btn-outline btn-neutral-content mr-4">답글</button>
                                     <button @click="deleteComment(comment.id)" class="btn btn-outline btn-error">삭제</button>
                                 </div>
