@@ -194,7 +194,11 @@ export default {
                 parentId: -1,
                 content: "",
             },
-            replyCommentActive: false, // 대댓글 작성란 활성화
+            replyCommentActive: {  // 대댓글 작성란 활성화
+                // 1: false,
+                // 2: false,
+                // 3: true,
+            },
         }
     },
     methods: {
@@ -297,8 +301,8 @@ export default {
                     alert(errMsg);
                 });
         },
-        createReplyCommentInput() {
-            this.replyCommentActive = true;
+        createReplyCommentInput(parentId) {
+            this.replyCommentActive[parentId] = true;
         },
         createReplyComment(parentId) {
             this.replyComment.parentId = parentId;
