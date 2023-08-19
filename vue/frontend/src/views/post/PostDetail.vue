@@ -282,6 +282,12 @@ export default {
             axios.get(`/api/posts/${this.postId}/comments`)
                 .then((res) => {
                     this.comments = { ...res.data };
+                    let obj = new Object();
+                    for (let i = 0; i < this.comments.commentList.length; i++) {
+                        let string = this.comments.commentList[i].id;
+                        obj[string] = false;
+                    }
+                    this.replyCommentActive = obj;
                 }).catch((err) => {
                     let errMsg = JSON.stringify(err.response.data.message);
                     errMsg = errMsg.substring(1, errMsg.length - 1);
