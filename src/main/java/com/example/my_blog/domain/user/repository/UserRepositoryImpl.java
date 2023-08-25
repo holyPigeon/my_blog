@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 @RequiredArgsConstructor
@@ -19,31 +20,39 @@ public class UserRepositoryImpl implements UserRepository {
   }
 
   @Override
-  public User findById(Long id) {
+  public Optional<User> findById(Long id) {
 
-    return em.find(User.class, id);
+    return Optional.ofNullable(
+        em.find(User.class, id)
+    );
   }
 
   @Override
-  public User findByLoginId(String loginId) {
-    return em.createQuery("select u from User u where u.loginId = :loginId", User.class)
+  public Optional<User> findByLoginId(String loginId) {
+    return Optional.ofNullable(
+        em.createQuery("select u from User u where u.loginId = :loginId", User.class)
         .setParameter("loginId", loginId)
-        .getSingleResult();
+        .getSingleResult()
+    );
   }
 
   @Override
-  public User findByName(String name) {
+  public Optional<User> findByName(String name) {
 
-    return em.createQuery("select u from User u where u.name = :name", User.class)
+    return Optional.ofNullable(
+        em.createQuery("select u from User u where u.name = :name", User.class)
         .setParameter("name", name)
-        .getSingleResult();
+        .getSingleResult()
+    );
   }
 
   @Override
-  public User findByNickname(String nickname) {
-    return em.createQuery("select u from User u where u.nickname = :nickname", User.class)
+  public Optional<User> findByNickname(String nickname) {
+    return Optional.ofNullable(
+        em.createQuery("select u from User u where u.nickname = :nickname", User.class)
         .setParameter("nickname", nickname)
-        .getSingleResult();
+        .getSingleResult()
+    );
   }
 
   @Override
