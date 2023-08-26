@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @Service
 @Transactional(readOnly = true)
@@ -28,7 +29,10 @@ public class CommentService {
   public Long saveReplyComment(Long parentId, Comment comment) {
 
     // 부모 댓글과 자식 댓글(대댓글)간 연관관계 정의
-    Comment parentComment = commentRepository.findById(parentId);
+    Comment parentComment = commentRepository.findById(parentId).orElseThrow(
+        () -> new NoSuchElementException("해당 부모 댓글이 존재하지 않습니다.")
+    );
+
     parentComment.getChildren().add(comment);
     comment.setParent(parentComment);
 
@@ -39,7 +43,9 @@ public class CommentService {
 
   public Comment findById(Long id) {
 
-    return commentRepository.findById(id);
+    return commentRepository.findById(id).orElseThrow(
+        () -> new NoSuchElementException("해당 댓글이 존재하지 않습니다.")
+    );
   }
 
   public List<Comment> findAll() {
