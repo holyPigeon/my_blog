@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 @RestController
 @RequiredArgsConstructor
@@ -69,6 +70,7 @@ public class CommentController {
     Post post = postService.findById(postId);
 
     List<Comment> parentCommentList = commentService.findAllParentCommentByPost(postId);
+    AtomicInteger commentCount = new AtomicInteger(); // 일반적인 int 타입의 변수는 람다 표현식 안에서 값을 변경할 수 없으므로 AtomicInteger를 사용한다.
 
     // 기존의 댓글 리스트에서 부모 댓글 하나하나의 children 자리에 대댓글 리스트를 삽입하여 새로운 response DTO를 생성한다.
     List<ListCommentDetailResponse> adaptedCommentList = parentCommentList.stream()
@@ -77,11 +79,15 @@ public class CommentController {
               .map(replyComment -> new ListReplyCommentDetailResponse(replyComment.getId(), post.getId(), replyComment.getUser().getNickname(),
                   replyComment.getContent(), replyComment.getCreatedAt(), replyComment.getUpdatedAt())).toList();
 
+          commentCount.addAndGet(replyCommentList.size());
+
           return new ListCommentDetailResponse(comment.getId(), post.getId(), comment.getUser().getNickname(),
               comment.getContent(), comment.getCreatedAt(), comment.getUpdatedAt(), replyCommentList);
         }).toList();
 
-    return new ListCommentResponse<>(adaptedCommentList.size(), adaptedCommentList);
+    commentCount.addAndGet(adaptedCommentList.size());
+
+    return new ListCommentResponse<>(commentCount.get(), adaptedCommentList);
   }
 
   @PatchMapping("/posts/{postId}/comments/{commentId}")
