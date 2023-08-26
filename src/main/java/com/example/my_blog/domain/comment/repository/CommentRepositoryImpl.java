@@ -6,6 +6,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.Optional;
 
 @Repository
 @RequiredArgsConstructor
@@ -20,9 +22,11 @@ public class CommentRepositoryImpl implements CommentRepository {
   }
 
   @Override
-  public Comment findById(Long id) {
+  public Optional<Comment> findById(Long id) {
 
-    return em.find(Comment.class, id);
+    return Optional.ofNullable(
+        em.find(Comment.class, id)
+    );
   }
 
   @Override
@@ -53,7 +57,10 @@ public class CommentRepositoryImpl implements CommentRepository {
   @Override
   public void deleteComment(Long id) {
 
-    Comment comment = findById(id);
+    Comment comment = findById(id).orElseThrow(
+        () -> new NoSuchElementException("해당 댓글이 존재하지 않습니다.")
+    );
+
     em.remove(comment);
   }
 }
