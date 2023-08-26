@@ -89,7 +89,7 @@ public class PostService {
   @Transactional
   public void cancelLikePost(Long postId, Long userId) {
 
-    if (!isAlreadyLiked(postId, userId)) { // 이미 좋아요한 게시글이라면 에러 반환
+    if (!isAlreadyLiked(postId, userId)) { // 좋아요하지 않은 게시글이라면 에러 반환
       throw new IllegalStateException("좋아요하지 않은 게시글의 좋아요를 취소할 수 없습니다.");
     }
     postLikeRepository.delete(postId, userId);
