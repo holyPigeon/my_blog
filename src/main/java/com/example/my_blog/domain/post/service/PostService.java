@@ -80,7 +80,7 @@ public class PostService {
         () -> new NoSuchElementException("해당 게시글이 존재하지 않습니다.")
     );
     User user = userRepository.findById(userId).orElseThrow(
-        () -> new NoSuchElementException("해당 유저가 존재하지 않습니다.")
+        () -> new NoSuchElementException("해당 사용자가 존재하지 않습니다.")
     );
 
     postLikeRepository.save(PostLike.createPostLike(user, post));

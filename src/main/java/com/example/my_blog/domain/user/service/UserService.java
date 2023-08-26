@@ -28,13 +28,13 @@ public class UserService {
   public User findById(Long id) {
 
     return userRepository.findById(id).orElseThrow(
-        () -> new NoSuchElementException("해당 유저가 존재하지 않습니다."));
+        () -> new NoSuchElementException("해당 사용자가 존재하지 않습니다."));
   }
 
   public User findByName(String name) {
 
     return userRepository.findByName(name).orElseThrow(
-        () -> new NoSuchElementException("해당 유저가 존재하지 않습니다."));
+        () -> new NoSuchElementException("해당 사용자가 존재하지 않습니다."));
   }
 
   public List<User> findAll() {
@@ -45,7 +45,7 @@ public class UserService {
   @Transactional
   public void updateUser(Long id, UpdateUserRequest updateUserRequest) {
     User findUser = userRepository.findById(id).orElseThrow(
-        () -> new NoSuchElementException("해당 유저가 존재하지 않습니다."));
+        () -> new NoSuchElementException("해당 사용자가 존재하지 않습니다."));
 
     findUser.setNickname(updateUserRequest.getNickname());
   }
