@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @Service
 @Transactional(readOnly = true)
@@ -26,12 +27,14 @@ public class UserService {
 
   public User findById(Long id) {
 
-    return userRepository.findById(id);
+    return userRepository.findById(id).orElseThrow(
+        () -> new NoSuchElementException("유저가 존재하지 않습니다."));
   }
 
   public User findByName(String name) {
 
-    return userRepository.findByName(name);
+    return userRepository.findByName(name).orElseThrow(
+        () -> new NoSuchElementException("유저가 존재하지 않습니다."));
   }
 
   public List<User> findAll() {
@@ -41,11 +44,10 @@ public class UserService {
 
   @Transactional
   public void updateUser(Long id, UpdateUserRequest updateUserRequest) {
-    User findUser = userRepository.findById(id);
+    User findUser = userRepository.findById(id).orElseThrow(
+        () -> new NoSuchElementException("유저가 존재하지 않습니다."));
 
-    if (findUser != null) {
-      findUser.setNickname(updateUserRequest.getNickname());
-    }
+    findUser.setNickname(updateUserRequest.getNickname());
   }
 
   @Transactional
