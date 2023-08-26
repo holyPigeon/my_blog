@@ -64,11 +64,8 @@ public class CommentService {
 
     Comment comment = findById(id);
 
-    if (comment!= null) {
       comment.setContent(content);
       comment.setUpdatedAt(LocalDateTime.now());
-    }
-
   }
 
   @Transactional
