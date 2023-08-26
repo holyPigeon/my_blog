@@ -3,12 +3,13 @@ package com.example.my_blog.domain.post.repository;
 import com.example.my_blog.domain.post.Post;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface PostRepository {
 
   void save(Post post);
 
-  Post findById(Long id);
+  Optional<Post> findById(Long id);
 
   List<Post> findByUserId(Long memberId);
 
