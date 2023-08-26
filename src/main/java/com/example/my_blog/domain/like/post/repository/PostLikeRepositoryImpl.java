@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 @RequiredArgsConstructor
@@ -21,18 +22,26 @@ public class PostLikeRepositoryImpl implements PostLikeRepository {
   }
 
   @Override
-  public PostLike getPostLike(Long postId, Long userId) {
+  public Optional<PostLike> getPostLike(Long postId, Long userId) {
 
-    try { // 만약 해당 게시물에 해당 유저가 좋아요를 했다면 PostLike 객체 반환
-      return em.createQuery("select distinct pl from PostLike pl" +
-              " join fetch pl.post p" +
-              " join fetch pl.user u where p.id = :postId and u.id = :userId", PostLike.class)
-          .setParameter("postId", postId)
-          .setParameter("userId", userId)
-          .getSingleResult();
-    } catch (NoResultException e) { // 만약 해당 게시물에 해당 유저가 좋아요를 하지 않았다면 null 반환
-      return null;
-    }
+//    try { // 만약 해당 게시물에 해당 유저가 좋아요를 했다면 PostLike 객체 반환
+//      return em.createQuery("select distinct pl from PostLike pl" +
+//              " join fetch pl.post p" +
+//              " join fetch pl.user u where p.id = :postId and u.id = :userId", PostLike.class)
+//          .setParameter("postId", postId)
+//          .setParameter("userId", userId)
+//          .getSingleResult();
+//    } catch (NoResultException e) { // 만약 해당 게시물에 해당 유저가 좋아요를 하지 않았다면 null 반환
+//      return null;
+//    }
+    return Optional.ofNullable(
+        em.createQuery("select distinct pl from PostLike pl" +
+                " join fetch pl.post p" +
+                " join fetch pl.user u where p.id = :postId and u.id = :userId", PostLike.class)
+            .setParameter("postId", postId)
+            .setParameter("userId", userId)
+            .getSingleResult()
+    );
 
   }
 
