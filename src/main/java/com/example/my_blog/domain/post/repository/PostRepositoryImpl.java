@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 @RequiredArgsConstructor
@@ -20,9 +21,11 @@ public class PostRepositoryImpl implements PostRepository {
   }
 
   @Override
-  public Post findById(Long id) {
+  public Optional<Post> findById(Long id) {
 
-    return em.find(Post.class, id);
+    return Optional.ofNullable(
+        em.find(Post.class, id)
+    );
   }
 
   @Override
