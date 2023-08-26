@@ -75,7 +75,10 @@ public class PostService {
       throw new IllegalStateException("이미 좋아요한 게시글을 좋아요할 수 없습니다.");
     }
     Post post = postRepository.findById(postId);
-    User user = userRepository.findById(userId);
+    User user = userRepository.findById(userId).orElseThrow(
+        () -> new NoSuchElementException("해당 유저가 존재하지 않습니다.")
+    );
+
     postLikeRepository.save(PostLike.createPostLike(user, post));
   }
 
