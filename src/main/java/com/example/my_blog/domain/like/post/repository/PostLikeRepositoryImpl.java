@@ -2,11 +2,11 @@ package com.example.my_blog.domain.like.post.repository;
 
 import com.example.my_blog.domain.like.post.PostLike;
 import jakarta.persistence.EntityManager;
-import jakarta.persistence.NoResultException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @Repository
@@ -67,7 +67,10 @@ public class PostLikeRepositoryImpl implements PostLikeRepository {
   @Override
   public void delete(Long postId, Long userId) {
 
-    PostLike postLike = getPostLike(postId, userId);
+    PostLike postLike = getPostLike(postId, userId).orElseThrow(
+        () -> new NoSuchElementException("해당 좋아요가 존재하지 않습니다.")
+    );
+
     em.remove(postLike);
   }
 }
