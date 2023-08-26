@@ -70,6 +70,7 @@ public class CommentController {
 
     List<Comment> parentCommentList = commentService.findAllParentCommentByPost(postId);
 
+    // 기존의 댓글 리스트에서 부모 댓글 하나하나의 children 자리에 대댓글 리스트를 삽입하여 새로운 response DTO를 생성한다.
     List<ListCommentDetailResponse> adaptedCommentList = parentCommentList.stream()
         .map(comment -> {
           List<ListReplyCommentDetailResponse> replyCommentList = comment.getChildren().stream()
