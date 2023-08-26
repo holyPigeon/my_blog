@@ -98,12 +98,8 @@ public class PostService {
   // 이미 좋아요한 게시글인지 판별
   public boolean isAlreadyLiked(Long postId, Long userId) {
 
-    PostLike postLike = postLikeRepository.getPostLike(postId, userId);
-    if (postLike == null) {
-      return false;
-    }
-
-    return true;
+    // 해당 postId와 userId의 좋아요가 존재하는지, 아니면 존재하지 않는지(null인지) 반환
+    return postLikeRepository.getPostLike(postId, userId).isPresent();
   }
 
   public int getPostLikeCount(Long postId) {
