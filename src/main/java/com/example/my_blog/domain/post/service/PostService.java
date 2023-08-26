@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @Service
 @Transactional(readOnly = true)
@@ -35,7 +36,9 @@ public class PostService {
 
   public Post findById(Long id) {
 
-    return postRepository.findById(id);
+    return postRepository.findById(id).orElseThrow(
+        () -> new NoSuchElementException("해당 게시글이 존재하지 않습니다.")
+    );
   }
 
   public List<Post> findByUserId(Long userId) {
@@ -74,7 +77,10 @@ public class PostService {
     if (isAlreadyLiked(postId, userId)) { // 이미 좋아요한 게시글이라면 에러 반환
       throw new IllegalStateException("이미 좋아요한 게시글을 좋아요할 수 없습니다.");
     }
-    Post post = postRepository.findById(postId);
+
+    Post post = postRepository.findById(postId).orElseThrow(
+        () -> new NoSuchElementException("해당 게시글이 존재하지 않습니다.")
+    );
     User user = userRepository.findById(userId).orElseThrow(
         () -> new NoSuchElementException("해당 유저가 존재하지 않습니다.")
     );
