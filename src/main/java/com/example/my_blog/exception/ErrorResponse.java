@@ -12,13 +12,13 @@ public class ErrorResponse {
   private String code; // 상태 코드 설명 [BAD_REQUEST, NOT_FOUND, ..]
   private String message;
 
-  private ErrorResponse(ErrorCode errorCode) {
+  private ErrorResponse(MyBlogErrorCode errorCode) {
     this.status = errorCode.getStatus().value();
     this.code = errorCode.getStatus().getReasonPhrase();
     this.message = errorCode.getMessage();
   }
 
-  public static ErrorResponse of(ErrorCode errorCode) {
+  public static ErrorResponse of(MyBlogErrorCode errorCode) {
     return new ErrorResponse(errorCode);
   }
 }
