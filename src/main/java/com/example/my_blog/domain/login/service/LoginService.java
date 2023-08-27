@@ -2,11 +2,12 @@
 
 import com.example.my_blog.domain.user.User;
 import com.example.my_blog.domain.user.repository.UserRepository;
+import com.example.my_blog.exception.MyBlogException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.NoSuchElementException;
+import static com.example.my_blog.exception.MyBlogErrorCode.USER_NOT_FOUND;
 
  @Service
 @Transactional(readOnly = true)
@@ -17,9 +18,8 @@ public class LoginService {
 
   public User login(String username, String password) {
 
-    User findUser = userRepository.findByLoginId(username).orElseThrow(
-        () -> new NoSuchElementException("해당 사용자가 존재하지 않습니다.")
-    );
+    User findUser = userRepository.findByLoginId(username)
+        .orElseThrow(() -> MyBlogException.type(USER_NOT_FOUND));
 
     if (!isCorrectPassword(password, findUser)) {
       return null;
