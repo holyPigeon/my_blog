@@ -12,7 +12,7 @@ import jakarta.servlet.http.HttpSession;
 import java.util.Objects;
 
 import static com.example.my_blog.SessionConst.SESSION_KEY;
-import static com.example.my_blog.exception.ErrorCode.AUTHENTICATION_USER;
+import static com.example.my_blog.exception.MyBlogErrorCode.AUTHENTICATION_USER;
 
 
 @Slf4j
