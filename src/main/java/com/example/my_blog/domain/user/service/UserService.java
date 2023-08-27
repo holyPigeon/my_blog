@@ -3,12 +3,14 @@ package com.example.my_blog.domain.user.service;
 import com.example.my_blog.domain.user.User;
 import com.example.my_blog.domain.user.repository.UserRepository;
 import com.example.my_blog.domain.user.service.dto.request.UpdateUserRequest;
+import com.example.my_blog.exception.MyBlogException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.NoSuchElementException;
+
+import static com.example.my_blog.exception.MyBlogErrorCode.USER_NOT_FOUND;
 
 @Service
 @Transactional(readOnly = true)
@@ -28,14 +30,14 @@ public class UserService {
 
   public User findById(Long id) {
 
-    return userRepository.findById(id).orElseThrow(
-        () -> new NoSuchElementException("해당 사용자가 존재하지 않습니다."));
+    return userRepository.findById(id)
+        .orElseThrow(() -> MyBlogException.type(USER_NOT_FOUND));
   }
 
   public User findByName(String name) {
 
-    return userRepository.findByName(name).orElseThrow(
-        () -> new NoSuchElementException("해당 사용자가 존재하지 않습니다."));
+    return userRepository.findByName(name)
+        .orElseThrow(() -> MyBlogException.type(USER_NOT_FOUND));
   }
 
   public List<User> findAll() {
@@ -46,8 +48,8 @@ public class UserService {
   @Transactional
   public void updateUser(Long id, UpdateUserRequest updateUserRequest) {
 
-    User findUser = userRepository.findById(id).orElseThrow(
-        () -> new NoSuchElementException("해당 사용자가 존재하지 않습니다."));
+    User findUser = userRepository.findById(id)
+        .orElseThrow(() -> MyBlogException.type(USER_NOT_FOUND));
 
     findUser.setNickname(updateUserRequest.getNickname());
   }
