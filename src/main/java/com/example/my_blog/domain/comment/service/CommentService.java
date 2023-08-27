@@ -2,13 +2,16 @@ package com.example.my_blog.domain.comment.service;
 
 import com.example.my_blog.domain.comment.Comment;
 import com.example.my_blog.domain.comment.repository.CommentRepository;
+import com.example.my_blog.exception.MyBlogException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.NoSuchElementException;
+
+import static com.example.my_blog.exception.MyBlogErrorCode.COMMENT_NOT_FOUND;
+import static com.example.my_blog.exception.MyBlogErrorCode.PARENT_COMMENT_NOT_FOUND;
 
 @Service
 @Transactional(readOnly = true)
@@ -28,9 +31,8 @@ public class CommentService {
   @Transactional
   public Long saveReplyComment(Long parentId, Comment comment) {
 
-    Comment parentComment = commentRepository.findById(parentId).orElseThrow(
-        () -> new NoSuchElementException("해당 부모 댓글이 존재하지 않습니다.")
-    );
+    Comment parentComment = commentRepository.findById(parentId)
+        .orElseThrow(() -> MyBlogException.type(PARENT_COMMENT_NOT_FOUND));
 
     // 부모 댓글과 자식 댓글(대댓글)간 연관관계 정의
     parentComment.getChildren().add(comment);
@@ -43,9 +45,8 @@ public class CommentService {
 
   public Comment findById(Long id) {
 
-    return commentRepository.findById(id).orElseThrow(
-        () -> new NoSuchElementException("해당 댓글이 존재하지 않습니다.")
-    );
+    return commentRepository.findById(id)
+        .orElseThrow(() -> MyBlogException.type(COMMENT_NOT_FOUND));
   }
 
   public List<Comment> findAll() {
