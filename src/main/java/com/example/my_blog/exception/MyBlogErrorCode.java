@@ -4,7 +4,7 @@ import lombok.Getter;
 import org.springframework.http.HttpStatus;
 
 @Getter
-public enum ErrorCode {
+public enum MyBlogErrorCode {
   // User
   AUTHENTICATION_USER(HttpStatus.UNAUTHORIZED, "로그인하지 않은 사용자입니다"),
   USER_NOT_FOUND(HttpStatus.NOT_FOUND, "사용자 정보가 존재하지 않습니다"),
@@ -50,7 +50,7 @@ public enum ErrorCode {
   private final HttpStatus status;
   private final String message;
 
-  ErrorCode(HttpStatus status, String message) {
+  MyBlogErrorCode(HttpStatus status, String message) {
     this.status = status;
     this.message = message;
   }
