@@ -19,6 +19,7 @@ public class UserService {
 
   @Transactional
   public Long join(User user) {
+
     userRepository.save(user);
 
     return user.getId();
@@ -44,6 +45,7 @@ public class UserService {
 
   @Transactional
   public void updateUser(Long id, UpdateUserRequest updateUserRequest) {
+
     User findUser = userRepository.findById(id).orElseThrow(
         () -> new NoSuchElementException("해당 사용자가 존재하지 않습니다."));
 
@@ -52,6 +54,7 @@ public class UserService {
 
   @Transactional
   public void deleteById(Long id) {
+
     userRepository.deleteById(id);
   }
 

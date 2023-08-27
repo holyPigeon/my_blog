@@ -36,6 +36,7 @@ public class User {
   public static User createUser(String loginId, String password, String name, String nickname) {
 
     User user = new User();
+
     user.setLoginId(loginId);
     user.setPassword(password);
     user.setName(name);

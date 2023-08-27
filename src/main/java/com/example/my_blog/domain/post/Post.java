@@ -51,12 +51,14 @@ public class Post {
 
   //==연관관계 편의 메소드==//
   public void setUser(User user) {
+
     this.user = user;
     user.getPosts().add(this);
   }
 
   //==생성 메소드==//
   public static Post createPost(User user, String title, String content) {
+
     Post post = new Post();
 
     post.setUser(user);

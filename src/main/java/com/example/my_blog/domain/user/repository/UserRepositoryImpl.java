@@ -29,6 +29,7 @@ public class UserRepositoryImpl implements UserRepository {
 
   @Override
   public Optional<User> findByLoginId(String loginId) {
+
     return Optional.ofNullable(
         em.createQuery("select u from User u where u.loginId = :loginId", User.class)
         .setParameter("loginId", loginId)
@@ -48,6 +49,7 @@ public class UserRepositoryImpl implements UserRepository {
 
   @Override
   public Optional<User> findByNickname(String nickname) {
+
     return Optional.ofNullable(
         em.createQuery("select u from User u where u.nickname = :nickname", User.class)
         .setParameter("nickname", nickname)

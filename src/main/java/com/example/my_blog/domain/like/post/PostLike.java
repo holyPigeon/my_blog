@@ -25,6 +25,7 @@ public class PostLike {
   private Post post;
 
   public static PostLike createPostLike(User user, Post post) {
+
     PostLike postLike = new PostLike();
 
     postLike.user = user;

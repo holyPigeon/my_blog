@@ -29,6 +29,7 @@ public class LoginService {
   }
 
   private boolean isCorrectPassword(String password, User findUser) {
+
     return findUser.getPassword().equals(password);
   }
 }

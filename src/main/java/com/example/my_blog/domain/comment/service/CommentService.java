@@ -28,11 +28,11 @@ public class CommentService {
   @Transactional
   public Long saveReplyComment(Long parentId, Comment comment) {
 
-    // 부모 댓글과 자식 댓글(대댓글)간 연관관계 정의
     Comment parentComment = commentRepository.findById(parentId).orElseThrow(
         () -> new NoSuchElementException("해당 부모 댓글이 존재하지 않습니다.")
     );
 
+    // 부모 댓글과 자식 댓글(대댓글)간 연관관계 정의
     parentComment.getChildren().add(comment);
     comment.setParent(parentComment);
 
@@ -64,8 +64,8 @@ public class CommentService {
 
     Comment comment = findById(id);
 
-      comment.setContent(content);
-      comment.setUpdatedAt(LocalDateTime.now());
+    comment.setContent(content);
+    comment.setUpdatedAt(LocalDateTime.now());
   }
 
   @Transactional

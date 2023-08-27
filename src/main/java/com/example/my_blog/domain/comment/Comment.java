@@ -16,12 +16,14 @@ import java.util.List;
 
 @Entity
 @Table(name = "comments")
-@Getter @Setter
+@Getter
+@Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Comment {
 
-  @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Column(name="comment_id")
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @Column(name = "comment_id")
   private Long id;
 
   @Lob
