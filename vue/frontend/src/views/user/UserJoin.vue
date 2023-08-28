@@ -49,27 +49,6 @@
                 </div>
             </div>
         </div>
-        <div class="container px-4s my-5">
-            <div class="row gx-4 justify-content-center m-auto">
-                <div class="col-md-10 position-static d-block p-3 text-black"
-                    style="--bs-bg-opacity: .4; --bs-text-opacity: 0.6;">
-                    <div class="p-4">
-                        <!-- style="--bs-text-opacity: 0.6;" -->
-                        <h4 class="mb-3 text-center text-black fs-3 fw-bold">회원가입</h4>
-                    </div>
-
-                        <!-- <div class="row">
-                            <hr class="my-4 col-md-12 offset-md-0 border border-1 border-dark" style="opacity: 0.1;">
-                        </div> -->
-
-                        <div class="row g-3 mt-3">
-                            <button type="button" @click="submitForm()"
-                                class="btn btn-outline-dark btn-lg col-md-4 offset-md-4 p-2" id="signup"
-                                style="opacity: 0.7;">완료</button>
-                        </div>
-                    </div>
-            </div>
-        </div>
     </div>
 </template>
 
