@@ -29,7 +29,7 @@ public class PostController {
   @PostMapping("/posts")
   public ResponseEntity<Object> registerPost(@RequestBody CreatePostRequest request) {
 
-    User findUser = userService.findByName(request.getAuthor());
+    User findUser = userService.findByNickname(request.getAuthor());
     Post post = Post.createPost(findUser, request.getTitle(), request.getContent());
     Long postId = postService.save(post);
 
