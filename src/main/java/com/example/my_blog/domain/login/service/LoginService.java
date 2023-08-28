@@ -29,6 +29,8 @@ public class LoginService {
 
   private void checkIsCorrectPassword(User findUser, String password) {
 
-    return findUser.getPassword().equals(password);
+    if (!findUser.getPassword().equals(password)) {
+      throw MyBlogException.type(WRONG_PASSWORD);
+    }
   }
 }
