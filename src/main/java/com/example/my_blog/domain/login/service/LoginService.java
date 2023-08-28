@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import static com.example.my_blog.exception.MyBlogErrorCode.USER_NOT_FOUND;
+import static com.example.my_blog.exception.MyBlogErrorCode.WRONG_PASSWORD;
 
  @Service
 @Transactional(readOnly = true)
@@ -21,14 +22,12 @@ public class LoginService {
     User findUser = userRepository.findByLoginId(username)
         .orElseThrow(() -> MyBlogException.type(USER_NOT_FOUND));
 
-    if (!isCorrectPassword(password, findUser)) {
-      return null;
-    }
+    checkIsCorrectPassword(findUser, password);
 
     return findUser;
   }
 
-  private boolean isCorrectPassword(String password, User findUser) {
+  private void checkIsCorrectPassword(User findUser, String password) {
 
     return findUser.getPassword().equals(password);
   }
