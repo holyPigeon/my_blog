@@ -7,23 +7,23 @@
                     <div class="card-body">
                         <div class="form-control">
                             <label class="label">
-                                <span class="label-text">Id</span>
+                                <span class="label-text">아이디</span>
                             </label>
-                            <input v-model="formData.loginId" type="text" placeholder="Id"
+                            <input v-model="formData.loginId" type="text" placeholder="아이디"
                                 class="input input-bordered text-neutral-content" />
                         </div>
                         <div class="form-control">
                             <label class="label">
-                                <span class="label-text">Password</span>
+                                <span class="label-text">비밀번호</span>
                             </label>
-                            <input v-model="formData.password" type="text" placeholder="Password"
+                            <input v-model="formData.password" type="text" placeholder="비밀번호"
                                 class="input input-bordered text-neutral-content" />
                             <!-- <label class="label">
                                 <a href="#" class="label-text-alt link link-hover">Forgot password?</a>
                             </label> -->
                         </div>
                         <div class="form-control mt-6">
-                            <button @click="submitForm()" class="btn btn-primary">Login</button>
+                            <button @click="submitForm()" class="btn btn-primary">로그인</button>
                         </div>
                     </div>
                 </div>
