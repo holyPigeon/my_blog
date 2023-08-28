@@ -59,7 +59,7 @@
 
                 <!-- 댓글 리스트 -->
                 <div id="comments">
-                    <div id="comment" v-for="(comment, index) in comments.commentList" :key="index">
+                    <div v-for="(comment, index) in comments.commentList" :key="index">
                         <div class="grid grid-col-12 p-5">
                             <div class="col-start-1 col-span-1 p-2">
                                 <img class="" :src="require('../../assets/profile.png')" alt="avatar" width="50"
