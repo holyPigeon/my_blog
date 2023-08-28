@@ -40,6 +40,12 @@ public class UserService {
         .orElseThrow(() -> MyBlogException.type(USER_NOT_FOUND));
   }
 
+  public User findByNickname(String nickname) {
+
+    return userRepository.findByNickname(nickname)
+        .orElseThrow(() -> MyBlogException.type(USER_NOT_FOUND));
+  }
+
   public List<User> findAll() {
 
     return userRepository.findAll();
