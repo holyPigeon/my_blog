@@ -129,7 +129,7 @@
                             </div>
                         </div>
 
-                        <div class="row">
+                        <div v-if="index !== comments.commentList.length - 1" class="row">
                             <hr class="my-4 col-md-12 offset-md-0 border border-1 border-dark" style="opacity: 0.1;">
                         </div>
 
