@@ -19,123 +19,121 @@
                     </header>
                     <!-- <figure class="mb-4"><img class="img-fluid rounded"
                                             src="https://dummyimage.com/900x400/ced4da/6c757d.jpg" alt="..."></figure> -->
-                        <section class="mb-5">
-                            <p class="fs-5 mb-4">{{ post.content }}</p>
-                        </section>
-                        <div class="mt-16 flex justify-center items-center">
-                            <img v-if="alreadyLiked == false" @click="likeControl" :src="require('../../assets/heart.png')"
-                                style="width: 30px;" class="heart-filter" />
-                            <img v-if="alreadyLiked == true" @click="likeControl"
-                                :src="require('../../assets/heart_fill.png')" style="width: 30px;"
-                                class="heart-fill-filter" />
-                        </div>
-                        <p class="mt-3">{{ postLikeCount }}</p>
-                    </article>
-                    <div class="row">
-                        <hr class="my-3 col-md-12 offset-md-0 border border-1 border-dark" style="opacity: 0.1;">
+                    <section class="mb-5">
+                        <p class="fs-5 mb-4">{{ post.content }}</p>
+                    </section>
+                    <div class="mt-16 flex justify-center items-center">
+                        <img v-if="alreadyLiked == false" @click="likeControl" :src="require('../../assets/heart.png')"
+                            style="width: 30px;" class="heart-filter" />
+                        <img v-if="alreadyLiked == true" @click="likeControl" :src="require('../../assets/heart_fill.png')"
+                            style="width: 30px;" class="heart-fill-filter" />
                     </div>
+                    <p class="mt-3 text-center">{{ postLikeCount }}</p>
+                </article>
+                <div class="row">
+                    <hr class="my-3 col-md-12 offset-md-0 border border-1 border-dark" style="opacity: 0.1;">
+                </div>
 
-                    <!-- 댓글 작성란 -->
-                    <div id="write_comment" class="mb-5">
-                        <h5 class="text-left p-3">{{ comments.count }}개의 댓글</h5>
-                        <div class="card border rounded-3 border-neutral-content">
-                            <div class="card-body grid grid-col-12 p-5">
-                                <div class="col-start-1 col-span-1">
-                                    <img class="mx-auto my-2" :src="require('../../assets/profile.png')" alt="avatar"
-                                        width="50" height="50" />
-                                </div>
-                                <div class="col-end-12 col-span-10 p-1">
-                                    <form class="mb-2"><textarea v-model="comment.content"
-                                            class="textarea border border-neutral-content w-full" rows="3"
-                                            style="text-indent: 0.5%; padding-top: 1%; resize: none;"
-                                            placeholder="Leave a comment here"></textarea>
-                                    </form>
-                                </div>
-                                <div class="col-start-10 col-span-2 p-1 text-end d-grid gap-2">
-                                    <button @click="createComment" class="btn btn-outline btn-info">댓글 쓰기</button>
-                                </div>
+                <!-- 댓글 작성란 -->
+                <div id="write_comment" class="mb-5">
+                    <h5 class="text-left p-3">{{ comments.count }}개의 댓글</h5>
+                    <div class="card border rounded-3 border-neutral-content">
+                        <div class="card-body grid grid-col-12 p-5">
+                            <div class="col-start-1 col-span-1">
+                                <img class="mx-auto my-2" :src="require('../../assets/profile.png')" alt="avatar" width="50"
+                                    height="50" />
+                            </div>
+                            <div class="col-end-12 col-span-10 p-1">
+                                <form class="mb-2"><textarea v-model="comment.content"
+                                        class="textarea border border-neutral-content w-full" rows="3"
+                                        style="text-indent: 0.5%; padding-top: 1%; resize: none;"
+                                        placeholder="Leave a comment here"></textarea>
+                                </form>
+                            </div>
+                            <div class="col-start-10 col-span-2 p-1 text-end d-grid gap-2">
+                                <button @click="createComment" class="btn btn-outline btn-info">댓글 쓰기</button>
                             </div>
                         </div>
                     </div>
+                </div>
 
-                    <!-- 댓글 리스트 -->
-                    <div id="comments">
-                        <div id="comment" v-for="(comment, index) in comments.commentList" :key="index">
-                            <div class="grid grid-col-12 p-5">
-                                <div class="col-start-1 col-span-1 p-2">
-                                    <img class="" :src="require('../../assets/profile.png')" alt="avatar" width="50"
-                                        height="50" />
-                                </div>
-                                <div class="col-start-2 col-span-3 text-start">
-                                    <p>{{ comment.author }}</p>
-                                    <p>{{ comment.createdAt }}</p>
-                                </div>
-                                <div class="col-start-5 col-end-10 text-start">
-                                </div>
-                                <div class="col-start-11 col-span-2 text-end">
-                                    <button @click="createReplyCommentInput(comment.id)"
-                                        class="btn btn-outline btn-neutral-content mr-4">답글</button>
-                                    <button @click="deleteComment(comment.id)" class="btn btn-outline btn-error">삭제</button>
-                                </div>
-                                <div class="col-start-1 col-span-11 text-start px-2">
-                                    <p class="mt-3">
-                                        {{ comment.content }}
-                                    </p>
-                                </div>
+                <!-- 댓글 리스트 -->
+                <div id="comments">
+                    <div id="comment" v-for="(comment, index) in comments.commentList" :key="index">
+                        <div class="grid grid-col-12 p-5">
+                            <div class="col-start-1 col-span-1 p-2">
+                                <img class="" :src="require('../../assets/profile.png')" alt="avatar" width="50"
+                                    height="50" />
                             </div>
+                            <div class="col-start-2 col-span-3 text-start">
+                                <p>{{ comment.author }}</p>
+                                <p>{{ comment.createdAt }}</p>
+                            </div>
+                            <div class="col-start-5 col-end-11 text-start">
+                            </div>
+                            <div class="col-start-11 col-span-2 text-end">
+                                <button @click="createReplyCommentInput(comment.id)"
+                                    class="btn btn-outline btn-neutral-content mr-4">답글</button>
+                                <button @click="deleteComment(comment.id)" class="btn btn-outline btn-error">삭제</button>
+                            </div>
+                            <div class="col-start-1 col-span-11 text-start px-2">
+                                <p class="mt-3">
+                                    {{ comment.content }}
+                                </p>
+                            </div>
+                        </div>
 
-                            <!-- 대댓글 리스트 -->
-                            <div id="replyComment" v-for="(comment2, index) in comment.children" :key="index">
-                                <div class="grid grid-col-12 p-5" style="">
-                                    <div class="col-start-1 col-span-1 py-6">
-                                        ㄴ
-                                    </div>
-                                    <div class="col-start-2 col-span-11 text-start">
-                                        <div class="grid grid-col-12">
-                                            <div class="col-start-1 col-span-1 p-2">
-                                                <img class="" :src="require('../../assets/profile.png')" alt="avatar"
-                                                    width="50" height="50" />
-                                            </div>
-                                            <div class="col-start-2 col-span-3 text-start">
-                                                <p>{{ comment2.author }}</p>
-                                                <p>{{ comment2.createdAt }}</p>
-                                            </div>
-                                            <div class="col-start-5 col-end-10 text-start">
-                                            </div>
-                                            <div class="col-start-11 col-span-2 text-end">
-                                                <button @click="createReplyCommentInput(comment.id)"
-                                                    class="btn btn-outline btn-neutral-content mr-4">답글</button>
-                                                <button @click="deleteComment(comment2.id)"
-                                                    class="btn btn-outline btn-error">삭제</button>
-                                            </div>
-                                            <div class="col-start-1 col-span-11 text-start px-2">
-                                                <p class="mt-3">
-                                                    {{ comment2.content }}
-                                                </p>
-                                            </div>
+                        <!-- 대댓글 리스트 -->
+                        <div id="replyComment" v-for="(comment2, index) in comment.children" :key="index">
+                            <div class="grid grid-col-12 p-5" style="">
+                                <div class="col-start-1 col-span-1 py-6">
+                                    ㄴ
+                                </div>
+                                <div class="col-start-2 col-span-11 text-start">
+                                    <div class="grid grid-col-12">
+                                        <div class="col-start-1 col-span-1 p-2">
+                                            <img class="" :src="require('../../assets/profile.png')" alt="avatar" width="50"
+                                                height="50" />
+                                        </div>
+                                        <div class="col-start-2 col-span-3 text-start">
+                                            <p>{{ comment2.author }}</p>
+                                            <p>{{ comment2.createdAt }}</p>
+                                        </div>
+                                        <div class="col-start-5 col-end-11 text-start">
+                                        </div>
+                                        <div class="col-start-11 col-span-2 text-end">
+                                            <button @click="createReplyCommentInput(comment.id)"
+                                                class="btn btn-outline btn-neutral-content mr-4">답글</button>
+                                            <button @click="deleteComment(comment2.id)"
+                                                class="btn btn-outline btn-error">삭제</button>
+                                        </div>
+                                        <div class="col-start-1 col-span-11 text-start px-2">
+                                            <p class="mt-3">
+                                                {{ comment2.content }}
+                                            </p>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                        </div>
 
-                            <!-- 대댓글 작성란 -->
-                            <div class="grid grid-col-12">
-                                <div v-if="replyCommentActive[comment.id] === true" class="col-start-2 col-span-10 py-4">
-                                    <input @input="onReplyCommentInputChange" type="text" placeholder="Type here"
-                                        class="input input-bordered border border-neutral-content w-full max" />
-                                </div>
-                                <div v-if="replyCommentActive[comment.id] === true" class="col-start-12 col-span-1 py-4">
-                                    <button @click="createReplyComment(comment.id)" class="btn btn-outline btn-info mr-4">댓글
-                                        쓰기</button>
-                                </div>
+                        <!-- 대댓글 작성란 -->
+                        <div class="grid grid-col-12">
+                            <div v-if="replyCommentActive[comment.id] === true" class="col-start-2 col-span-10 py-4">
+                                <input @input="onReplyCommentInputChange" type="text" placeholder="Type here"
+                                    class="input input-bordered border border-neutral-content w-full max" />
                             </div>
-
-                            <div class="row">
-                                <hr class="my-4 col-md-12 offset-md-0 border border-1 border-dark" style="opacity: 0.1;">
+                            <div v-if="replyCommentActive[comment.id] === true" class="col-start-12 col-span-1 py-4">
+                                <button @click="createReplyComment(comment.id)" class="btn btn-outline btn-info mr-4">댓글
+                                    쓰기</button>
                             </div>
                         </div>
-                    </div>
 
+                        <div class="row">
+                            <hr class="my-4 col-md-12 offset-md-0 border border-1 border-dark" style="opacity: 0.1;">
+                        </div>
+
+                    </div>
                 </div>
             </div>
         </div>
@@ -315,7 +313,7 @@ export default {
             this.replyCommentActive[parentId] = true;
         },
         onReplyCommentInputChange(event) {
-          this.replyComment.content = event.target.value;
+            this.replyComment.content = event.target.value;
         },
         createReplyComment(parentId) {
             this.replyComment.parentId = parentId;
