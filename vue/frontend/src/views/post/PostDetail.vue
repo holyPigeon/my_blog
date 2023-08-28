@@ -1,19 +1,23 @@
 <template>
-    <div id="wrapper" class="container-fluid">
-        <div class="hero min-h-screen bg-gradient-to-r from-sky-500 to-emerald-500">
-            <div class="bg-opacity-60 hero-overlay"></div>
-            <div class="hero-content text-center w-full text-neutral-content">
-                <div class="flex-shrink-0 max-w-4xl w-full shadow-2xl bg-base-100 p-8">
-                    <article class="">
-                        <header class="mb-4">
-                            <h1 class="fw-bolder mb-1">{{ post.title }}</h1><!-- Post meta content-->
-                            <div class="mb-2">Posted on
-                                {{ post.createdAt }}</div>
-                            <div class="mb-2">Updated on
-                                {{ post.updatedAt }}</div>
-                            <div class="mb-8">Posted by {{ post.author }}</div>
-                        </header>
-                        <!-- <figure class="mb-4"><img class="img-fluid rounded"
+    <div class="hero min-h-screen bg-gradient-to-r from-sky-500 to-emerald-500">
+        <div class="bg-opacity-60 hero-overlay"></div>
+        <div class="hero-content text-start w-full text-neutral-content">
+            <div class="flex-shrink-0 max-w-4xl w-full shadow-2xl bg-base-100 p-8">
+                <article>
+                    <div class="grid grid-col-12 mb-12">
+                        <div class="col-start-1 col-span-1">
+                            <img class="" :src="require('../../assets/profile.png')" alt="avatar" width="50" height="50" />
+                        </div>
+                        <div class="col-start-2 col-span-11 text-start">
+                            <p>{{ post.author }}</p>
+                            <p>{{ post.createdAt }} / {{ post.updatedAt }}</p>
+                        </div>
+                    </div>
+
+                    <header class="mb-12">
+                        <h1 class="fw-bolder mb-1 text-3xl">{{ post.title }}</h1>
+                    </header>
+                    <!-- <figure class="mb-4"><img class="img-fluid rounded"
                                             src="https://dummyimage.com/900x400/ced4da/6c757d.jpg" alt="..."></figure> -->
                         <section class="mb-5">
                             <p class="fs-5 mb-4">{{ post.content }}</p>
