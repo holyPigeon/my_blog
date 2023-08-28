@@ -1,12 +1,12 @@
 <template>
-    <div id="wrapper" class="container-fluid">
-        <div class="container px-4s my-5">
-            <div class="row gx-4 justify-content-center m-auto">
-                <div class="col-md-10 position-static d-block p-3 text-black"
-                    style="--bs-bg-opacity: .4; --bs-text-opacity: 0.6;">
+    <div class="hero h-screen bg-gradient-to-r from-sky-500 to-emerald-500">
+        <div class="bg-opacity-60 hero-overlay"></div>
+        <div class="hero-content text-center flex w-3/4 text-neutral-content">
+            <div class="flex-shrink-0 max-w-4xl w-full shadow-2xl bg-base-100 mb-64 p-8">
+                <div class="overflow-x-auto">
                     <div class="p-4">
                         <!-- style="--bs-text-opacity: 0.6;" -->
-                        <h4 class="mb-3 text-center text-black fs-3 fw-bold">회원 목록</h4>
+                        <h4 class="mb-3 text-center fs-3 fw-bold">회원 목록</h4>
                     </div>
 
                     <table class="text-center fs-4" style="width: 100%; border: 1px solid #CCCDCE;">
@@ -21,10 +21,6 @@
                             <td>{{ user.nickname }}</td>
                         </tr>
                     </table>
-
-                    <!-- <div class="row">
-                            <hr class="my-4 col-md-12 offset-md-0 border border-1 border-dark" style="opacity: 0.1;">
-                        </div> -->
                 </div>
             </div>
         </div>
