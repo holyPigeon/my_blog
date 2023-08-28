@@ -1,4 +1,4 @@
-package com.example.my_blog;
+package com.example.my_blog.exception;
 
 
 import com.example.my_blog.controller.CommentController;
