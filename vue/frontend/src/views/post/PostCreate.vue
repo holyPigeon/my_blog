@@ -1,44 +1,34 @@
 <template>
-    <div id="wrapper" class="container-fluid">
-        <div class="container px-4s my-5">
-            <div class="row gx-4 justify-content-center m-auto">
-                <div class="col-md-10 position-static d-block p-3 text-black"
-                    style="--bs-bg-opacity: .4; --bs-text-opacity: 0.6;">
+    <div class="hero min-h-screen bg-gradient-to-r from-sky-500 to-emerald-500">
+        <div class="bg-opacity-60 hero-overlay"></div>
+        <div class="hero-content text-center flex w-3/4 text-neutral-content">
+            <div class="card flex-shrink-0 max-w-4xl w-full shadow-2xl bg-base-100 mb-64 p-8">
+                
                     <div class="p-4">
                         <!-- style="--bs-text-opacity: 0.6;" -->
-                        <h4 class="mb-3 text-center text-black fs-3 fw-bold">게시글 등록</h4>
-                    </div>
-                    <div class="row g-3 mt-1">
-                        <div class="col-md-4 offset-md-4">
-                            <select v-model="post.author" class="form-control form-control-lg p-2" style="" name="author" id="author" @change="test">
-                                <option value="">회원 선택</option>
-                                <option v-for="(user, index) in userList.data" :key="index" :value="user.name">{{ user.name
-                                }}</option>
-                            </select>
-                        </div>
+                        <h4 class="mb-3 text-center text-neutral-content fs-3 fw-bold">게시글 등록</h4>
                     </div>
 
-                    <div class="row g-3 mt-1">
-                        <div class="col-md-4 offset-md-4">
-                            <input type="text" v-model="post.title" class="form-control form-control-lg p-2" id="title"
-                                   name="title" placeholder="제목" required>
-                        </div>
-                    </div>
-                    <div class="row g-3 mt-1">
-                        <div class="col-md-4 offset-md-4">
-                            <input type="text" v-model="post.content" class="form-control form-control-lg p-2" style="height: 100px;"
-                                   id="content" name="content" placeholder="내용" required>
-                        </div>
+                <div class="card-body overflow-x-auto">
+
+                    <div class="form-control">
+                        <label class="label">
+                            <span class="label-text">제목</span>
+                        </label>
+                        <input v-model="post.title" type="text" placeholder="제목"
+                            class="input input-bordered text-neutral-content" />
                     </div>
 
-                    <!-- <div class="row">
-                            <hr class="my-4 col-md-12 offset-md-0 border border-1 border-dark" style="opacity: 0.1;">
-                        </div> -->
+                    <div class="form-control">
+                        <label class="label">
+                            <span class="label-text">내용</span>
+                        </label>
+                        <textarea v-model="post.content" class="textarea textarea-bordered text-lg" rows="3"
+                            style="text-indent: 0.5%; padding-top: 1%; resize: none;" placeholder="내용을 입력하세요."></textarea>
+                    </div>
 
-                    <div class="row g-3 mt-3">
-                        <button type="button" @click="submitForm($router)"
-                            class="btn btn-outline-dark btn-lg col-md-4 offset-md-4 p-2" id="signup"
-                            style="opacity: 0.7;">완료</button>
+                    <div class="form-control mt-6 flex items-center">
+                            <button @click="submitForm()" class="btn btn-primary w-1/6">완료</button>
                     </div>
                 </div>
             </div>
@@ -54,7 +44,7 @@ export default {
     data() {
         return {
             post: {
-                author: '',
+                author: JSON.parse(sessionStorage.getItem("sessionData")).nickname,
                 title: '',
                 content: '',
             },
@@ -62,9 +52,9 @@ export default {
                 count: -1,
                 data: [
                     {
-                    //     id: '',
-                    //     name: '',
-                    //     nickname: '',
+                        //     id: '',
+                        //     name: '',
+                        //     nickname: '',
                     }
                 ]
             }
@@ -120,7 +110,7 @@ export default {
 </script>
  
 <style>
-input::placeholder {
-    font-size: 14px;
+::placeholder {
+    font-size: 18px;
 }
 </style>
