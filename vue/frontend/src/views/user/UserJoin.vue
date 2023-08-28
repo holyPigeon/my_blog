@@ -63,7 +63,7 @@ export default {
                 loginId: '',
                 password: '',
                 name: '',
-                age: '',
+                nickname: '',
             },
         }
     },
