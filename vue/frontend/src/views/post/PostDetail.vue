@@ -284,6 +284,8 @@ export default {
             axios.get(`/api/posts/${this.postId}/comments`)
                 .then((res) => {
                     this.comments = { ...res.data };
+                    // 부모 댓글들의 id를 미리 추출하여 replyCommentActive 객체에 저장함으로써
+                    // 답글 버튼 클릭 시 해당 부모 댓글 id와 일치하는 작성란을 활성화줄 수 있도록 함.
                     let obj = new Object();
                     for (let i = 0; i < this.comments.commentList.length; i++) {
                         let string = this.comments.commentList[i].id;
