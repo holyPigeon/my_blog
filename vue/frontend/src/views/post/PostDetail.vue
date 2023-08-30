@@ -39,7 +39,7 @@
                 <!-- 댓글 작성란 -->
                 <div id="write_comment" class="mb-5">
                     <h5 class="text-left p-3">{{ comments.count }}개의 댓글</h5>
-                    <div class="card border rounded-3 border-neutral-content">
+                    <div class="card border-4 rounded-3 border-dark" style="border-color: #2D2A2A;">
                         <div class="card-body grid grid-col-12 p-5">
                             <div class="col-start-1 col-span-1">
                                 <img class="mx-auto my-2" :src="require('../../assets/profile.png')" alt="avatar" width="50"
@@ -47,13 +47,13 @@
                             </div>
                             <div class="col-end-12 col-span-10 p-1">
                                 <form class="mb-2"><textarea v-model="comment.content"
-                                        class="textarea border border-neutral-content w-full" rows="3"
-                                        style="text-indent: 0.5%; padding-top: 1%; resize: none;"
+                                        class="textarea border-2 w-full text-lg" rows="3"
+                                        style="text-indent: 0.5%; padding-top: 1%; resize: none; border-color: #2D2A2A;"
                                         placeholder="Leave a comment here"></textarea>
                                 </form>
                             </div>
                             <div class="col-start-10 col-span-2 p-1 text-end d-grid gap-2">
-                                <button @click="createComment" class="btn btn-outline btn-info">댓글 쓰기</button>
+                                <button @click="createComment" class="btn btn-outline btn-primary">댓글 쓰기</button>
                             </div>
                         </div>
                     </div>
@@ -75,8 +75,8 @@
                             </div>
                             <div class="col-start-11 col-span-2 text-end">
                                 <button @click="createReplyCommentInput(comment.id)"
-                                    class="btn btn-outline btn-neutral-content mr-4">답글</button>
-                                <button @click="deleteComment(comment.id)" class="btn btn-outline btn-error">삭제</button>
+                                    class="text-neutral-content mr-4">답글</button>
+                                <button @click="deleteComment(comment.id)" class="text-error">삭제</button>
                             </div>
                             <div class="col-start-1 col-span-11 text-start px-2">
                                 <p class="mt-3">
@@ -88,7 +88,7 @@
                         <!-- 대댓글 리스트 -->
                         <div id="replyComment" v-for="(comment2, index) in comment.children" :key="index">
                             <div class="grid grid-col-12 p-5" style="">
-                                <div class="col-start-1 col-span-1 py-6">
+                                <div class="col-start-1 col-span-1 py-6 text-center">
                                     ㄴ
                                 </div>
                                 <div class="col-start-2 col-span-11 text-start">
@@ -105,9 +105,9 @@
                                         </div>
                                         <div class="col-start-11 col-span-2 text-end">
                                             <button @click="createReplyCommentInput(comment.id)"
-                                                class="btn btn-outline btn-neutral-content mr-4">답글</button>
+                                                class="text-neutral-content mr-4">답글</button>
                                             <button @click="deleteComment(comment2.id)"
-                                                class="btn btn-outline btn-error">삭제</button>
+                                                class="text-error">삭제</button>
                                         </div>
                                         <div class="col-start-1 col-span-11 text-start px-2">
                                             <p class="mt-3">
@@ -120,13 +120,16 @@
                         </div>
 
                         <!-- 대댓글 작성란 -->
-                        <div class="grid grid-col-12">
-                            <div v-if="replyCommentActive[comment.id] === true" class="col-start-2 col-span-10 py-4">
-                                <input @input="onReplyCommentInputChange" type="text" placeholder="Type here"
-                                    class="input input-bordered border border-neutral-content w-full max" />
+                        <div class="grid grid-col-12 p-5">
+                            <div class="col-start-1 col-span-1">
+
                             </div>
-                            <div v-if="replyCommentActive[comment.id] === true" class="col-start-12 col-span-1 py-4">
-                                <button @click="createReplyComment(comment.id)" class="btn btn-outline btn-info mr-4">댓글
+                            <div v-if="replyCommentActive[comment.id] === true" class="col-start-2 col-span-10">
+                                <input @input="onReplyCommentInputChange" type="text" placeholder="Type here"
+                                    class="input input-bordered border border-dark w-full max" />
+                            </div>
+                            <div v-if="replyCommentActive[comment.id] === true" class="col-start-12 col-span-1 text-end">
+                                <button @click="createReplyComment(comment.id)" class="btn btn-outline btn-primary">댓글
                                     쓰기</button>
                             </div>
                         </div>
