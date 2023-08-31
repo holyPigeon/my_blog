@@ -53,7 +53,7 @@
                                 </form>
                             </div>
                             <div class="col-start-10 col-span-2 p-1 text-end d-grid gap-2">
-                                <button @click="createComment" class="btn btn-outline btn-primary">댓글 쓰기</button>
+                                <button @click="createComment" class="btn btn-primary">댓글 쓰기</button>
                             </div>
                         </div>
                     </div>
