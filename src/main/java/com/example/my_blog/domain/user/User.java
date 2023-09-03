@@ -3,7 +3,9 @@ package com.example.my_blog.domain.user;
 import com.example.my_blog.domain.comment.Comment;
 import com.example.my_blog.domain.post.Post;
 import jakarta.persistence.*;
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.ArrayList;
@@ -12,6 +14,7 @@ import java.util.List;
 @Entity
 @Table(name = "users")
 @Getter @Setter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class User {
 
   @Id @GeneratedValue(strategy = GenerationType.IDENTITY)

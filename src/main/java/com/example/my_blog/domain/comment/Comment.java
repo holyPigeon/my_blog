@@ -16,8 +16,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "comments")
-@Getter
-@Setter
+@Getter @Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Comment {
 
