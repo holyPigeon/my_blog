@@ -1,21 +1,22 @@
 package com.example.my_blog.domain.comment.repository;
 
 import com.example.my_blog.domain.comment.Comment;
+import org.springframework.data.jpa.repository.EntityGraph;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import java.util.List;
-import java.util.Optional;
 
-public interface CommentRepository {
+public interface CommentRepository extends JpaRepository<Comment, Long> {
 
-  void save(Comment comment);
+  @EntityGraph(attributePaths = {"user"})
+  List<Comment> findByUser_Name(String name);
 
-  Optional<Comment> findById(Long id);
+  @Query("select distinct c from Comment c" +
+      " join fetch c.post p where c.parent is null and p.id = :postId")
+  @EntityGraph(attributePaths = {"post"})
+  List<Comment> findAllParentCommentByPost(@Param("postId") Long postId);
 
-  List<Comment> findByAuthor(String name);
-
-  List<Comment> findAll();
-
-  List<Comment> findAllParentCommentByPost(Long postId);
-
-  void deleteComment(Long id);
+  void deleteById(Long id);
 }
