@@ -39,7 +39,7 @@
                 <!-- 댓글 작성란 -->
                 <div id="write_comment" class="mb-5">
                     <h5 class="text-left p-3">{{ comments.count }}개의 댓글</h5>
-                    <div class="card border-4 rounded-3 border-dark" style="border-color: #2D2A2A;">
+                    <div class="card border-2 rounded-3 border-dark" style="border-color: #2D2A2A;">
                         <div class="card-body grid grid-col-12 p-5">
                             <div class="col-start-1 col-span-1">
                                 <img class="mx-auto my-2" :src="require('../../assets/profile.png')" alt="avatar" width="50"
