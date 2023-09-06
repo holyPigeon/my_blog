@@ -22,7 +22,7 @@ public class RequestInterceptor implements HandlerInterceptor{
     ObjectMapper objectMapper = new ObjectMapper();
 
     String requestURI = request.getRequestURI();
-    log.info("요청 URI : {}", requestURI);
+    log.info("요청 URI : [{}] {}", request.getMethod(), requestURI);
 
     HttpSession session = request.getSession(false);
     if (Objects.isNull(session) || Objects.isNull(session.getAttribute(SESSION_KEY))) {
