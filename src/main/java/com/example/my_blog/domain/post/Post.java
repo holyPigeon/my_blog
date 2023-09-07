@@ -31,6 +31,7 @@ public class Post {
   private User user;
 
   @CreatedDate
+  @Column(updatable = false)
   private LocalDateTime createdAt;
 
   @LastModifiedDate
