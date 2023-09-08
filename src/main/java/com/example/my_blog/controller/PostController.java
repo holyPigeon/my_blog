@@ -49,7 +49,7 @@ public class PostController {
 
     List<DetailPostResponse> collect = posts.stream().map(p ->
         new DetailPostResponse(p.getId(), p.getUser().getNickname(), p.getTitle(), p.getContent(),
-            p.getCreatedAt(), p.getUpdatedAt())).toList();
+            p.getCreatedDate(), p.getLastModifiedDate())).toList();
 
     List<DetailPostResponse> sorted = collect.stream()
         .sorted(Comparator.comparing(DetailPostResponse::getId).reversed())
@@ -68,7 +68,7 @@ public class PostController {
     Post findPost = postService.findById(postId);
 
     return new DetailPostResponse(findPost.getId(), findPost.getUser().getNickname(), findPost.getTitle(),
-        findPost.getContent(), findPost.getCreatedAt(), findPost.getUpdatedAt());
+        findPost.getContent(), findPost.getCreatedDate(), findPost.getLastModifiedDate());
   }
 
   /**
