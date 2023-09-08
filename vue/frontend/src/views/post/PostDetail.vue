@@ -69,7 +69,7 @@
                             </div>
                             <div class="col-start-2 col-span-3 text-start">
                                 <p>{{ comment.author }}</p>
-                                <p>{{ comment.createdAt }}</p>
+                                <p>{{ comment.createdDate }}</p>
                             </div>
                             <div class="col-start-5 col-end-11 text-start">
                             </div>
@@ -99,7 +99,7 @@
                                         </div>
                                         <div class="col-start-2 col-span-3 text-start">
                                             <p>{{ comment2.author }}</p>
-                                            <p>{{ comment2.createdAt }}</p>
+                                            <p>{{ comment2.createdDate }}</p>
                                         </div>
                                         <div class="col-start-5 col-end-11 text-start">
                                         </div>
@@ -169,7 +169,7 @@ export default {
                         // postId: 1,
                         // author: '',
                         // content: '',
-                        // createdAt: '',
+                        // createdDate: '',
                         // updatedAt: '',
                         // children: [
                         //     {
@@ -187,7 +187,7 @@ export default {
                         // postId: 1,
                         // author: '',
                         // content: '',
-                        // createdAt: '',
+                        // createdDate: '',
                         // updatedAt: '',
                     }
                 ],
