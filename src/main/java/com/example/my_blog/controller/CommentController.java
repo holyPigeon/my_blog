@@ -77,12 +77,12 @@ public class CommentController {
         .map(comment -> {
           List<ListReplyCommentDetailResponse> replyCommentList = comment.getChildren().stream()
               .map(replyComment -> new ListReplyCommentDetailResponse(replyComment.getId(), post.getId(), replyComment.getUser().getNickname(),
-                  replyComment.getContent(), replyComment.getCreatedAt(), replyComment.getUpdatedAt())).toList();
+                  replyComment.getContent(), replyComment.getCreatedDate(), replyComment.getLastModifiedDate())).toList();
 
           commentCount.addAndGet(replyCommentList.size());
 
           return new ListCommentDetailResponse(comment.getId(), post.getId(), comment.getUser().getNickname(),
-              comment.getContent(), comment.getCreatedAt(), comment.getUpdatedAt(), replyCommentList);
+              comment.getContent(), comment.getCreatedDate(), comment.getLastModifiedDate(), replyCommentList);
         }).toList();
 
     commentCount.addAndGet(adaptedCommentList.size());
