@@ -1,5 +1,6 @@
 package com.example.my_blog.domain.post;
 
+import com.example.my_blog.common.BaseEntity;
 import com.example.my_blog.domain.comment.Comment;
 import com.example.my_blog.domain.like.post.PostLike;
 import com.example.my_blog.domain.user.User;
@@ -8,10 +9,7 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,7 +17,7 @@ import java.util.List;
 @Table(name = "posts")
 @Getter @Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Post {
+public class Post extends BaseEntity {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,13 +27,6 @@ public class Post {
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "user_id")
   private User user;
-
-  @CreatedDate
-  @Column(updatable = false)
-  private LocalDateTime createdAt;
-
-  @LastModifiedDate
-  private LocalDateTime updatedAt;
 
   @Lob
   private String title;
@@ -65,8 +56,6 @@ public class Post {
     post.setUser(user);
     post.setTitle(title);
     post.setContent(content);
-    post.setCreatedAt(LocalDateTime.now());
-    post.setUpdatedAt(LocalDateTime.now());
 
     return post;
   }
