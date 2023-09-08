@@ -23,7 +23,7 @@
                                     </a>
                                 </td>
                                 <td style="width: 15%;">{{ post.author }}</td>
-                                <td>{{ post.createdAt }}</td>
+                                <td>{{ post.createdDate }}</td>
                             </tr>
                         </tbody>
                     </table>
@@ -48,7 +48,7 @@ export default {
                         // author: '',
                         // title: '',
                         // content: '',
-                        // createdAt: '',
+                        // createdDate: '',
                         // updatedAt: '',
                     }
                 ],
