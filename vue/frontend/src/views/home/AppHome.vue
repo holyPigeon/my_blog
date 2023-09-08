@@ -1,7 +1,7 @@
 <template>
   <div>
 
-    <div class="hero h-screen h-[60vh] bg-gradient-to-r from-sky-500 to-emerald-500">
+    <div class="hero h-[60vh] bg-gradient-to-r from-sky-500 to-emerald-500">
       <div class="hero-overlay bg-opacity-60"></div>
       <div class="hero-content text-center text-neutral-content">
         <div class="max-w-md">
@@ -26,7 +26,7 @@
       </div>
     </div>
 
-    <div class="hero h-screen h-[60vh] bg-base-100">
+    <div class="hero h-[60vh] bg-base-100">
       <div class="hero-content flex-col lg:flex-row">
         <img :src="require('../../assets/office1.jpg')" class="max-w-sm rounded-lg shadow-2xl" />
         <div class="text-neutral-content">
@@ -37,7 +37,7 @@
       </div>
     </div>
 
-    <div class="hero h-screen h-[60vh] bg-base-100">
+    <div class="hero h-[60vh] bg-base-100">
   <div class="hero-content flex-col lg:flex-row-reverse">
     <img :src="require('../../assets/office2.jpg')" class="max-w-sm rounded-lg shadow-2xl" />
     <div class="text-neutral-content">
