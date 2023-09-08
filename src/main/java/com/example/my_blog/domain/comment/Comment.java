@@ -60,8 +60,6 @@ public class Comment extends BaseEntity {
     comment.setUser(user);
     comment.setPost(post);
     comment.setContent(content);
-    comment.setCreatedAt(LocalDateTime.now());
-    comment.setUpdatedAt(LocalDateTime.now());
 
     return comment;
   }
