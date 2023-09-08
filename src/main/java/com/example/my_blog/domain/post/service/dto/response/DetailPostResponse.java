@@ -18,8 +18,8 @@ public class DetailPostResponse {
   private String content;
 
   @JsonFormat(pattern = "yyyy.MM.dd HH:mm:ss")
-  private LocalDateTime createdAt;
+  private LocalDateTime createdDate;
 
   @JsonFormat(pattern = "yyyy.MM.dd HH:mm:ss")
-  private LocalDateTime updatedAt;
+  private LocalDateTime lastModifiedDate;
 }
