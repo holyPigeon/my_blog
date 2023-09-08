@@ -10,8 +10,8 @@
                         </div>
                         <div class="col-start-2 col-span-11 text-start">
                             <p>{{ post.author }}</p>
-                            <p>{{ post.createdAt }} 
-                                <!-- / {{ post.updatedAt }} -->
+                            <p>{{ post.createdDate }} 
+                                <!-- / {{ post.lastModifiedDate }} -->
                             </p>
                         </div>
                     </div>
