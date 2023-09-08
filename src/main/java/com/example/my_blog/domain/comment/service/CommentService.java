@@ -7,7 +7,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 import static com.example.my_blog.exception.MyBlogErrorCode.COMMENT_NOT_FOUND;
@@ -66,7 +65,6 @@ public class CommentService {
     Comment comment = findById(id);
 
     comment.setContent(content);
-    comment.setUpdatedAt(LocalDateTime.now());
   }
 
   @Transactional
