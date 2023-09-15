@@ -89,19 +89,19 @@ public class PostService {
     if (!isAlreadyLiked(postId, userId)) { // 좋아요하지 않은 게시글이라면 에러 반환
       throw MyBlogException.type(ILLEGAL_LIKE_MARKING_CANCEL);
     }
-    postLikeRepository.delete(postId, userId);
+    postLikeRepository.deleteByPostIdAndUserId(postId, userId);
   }
 
   // 이미 좋아요한 게시글인지 판별
   public boolean isAlreadyLiked(Long postId, Long userId) {
 
     // 해당 postId와 userId의 좋아요가 존재하는지, 아니면 존재하지 않는지(null인지) 반환
-    return postLikeRepository.getPostLike(postId, userId).isPresent();
+    return postLikeRepository.findByPostIdAndUserId(postId, userId).isPresent();
   }
 
   public int getPostLikeCount(Long postId) {
 
     // Long 타입의 count 변수를 int 타입으로 변환
-    return Math.toIntExact(postLikeRepository.getPostLikeCountByPostId(postId));
+    return Math.toIntExact(postLikeRepository.countPostLikesByPostId(postId));
   }
 }
