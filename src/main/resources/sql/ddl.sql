@@ -1,7 +1,7 @@
-drop table if exists users;
-drop table if exists posts;
-drop table if exists comments;
 drop table if exists post_likes;
+drop table if exists comments;
+drop table if exists posts;
+drop table if exists users;
 
 create table users
 (
