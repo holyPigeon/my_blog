@@ -1,19 +1,22 @@
 package com.example.my_blog.domain.like.post.repository;
 
 import com.example.my_blog.domain.like.post.PostLike;
+import org.springframework.data.jpa.repository.EntityGraph;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 import java.util.Optional;
 
-public interface PostLikeRepository {
+public interface PostLikeRepository extends JpaRepository<PostLike, Long> {
 
-  void save(PostLike postLike);
+  @EntityGraph(attributePaths = {"post", "user"})
+  Optional<PostLike> findByPostIdAndUserId(Long postId, Long userId);
 
-  Optional<PostLike> getPostLike(Long postId, Long userId);
+  @EntityGraph(attributePaths = {"post"})
+  List<PostLike> findByPostId(Long postId);
 
-  List<PostLike> getPostLikeListByPostId(Long postId);
+  @EntityGraph(attributePaths = {"post"})
+  Long countPostLikesByPostId(Long postId);
 
-  Long getPostLikeCountByPostId(Long postId);
-
-  void delete(Long postId, Long userId);
+  void deleteByPostIdAndUserId(Long postId, Long userId);
 }
