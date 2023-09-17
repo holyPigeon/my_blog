@@ -5,10 +5,10 @@ import com.example.my_blog.domain.user.repository.UserRepository;
 import com.example.my_blog.domain.user.service.dto.request.UpdateUserRequest;
 import com.example.my_blog.exception.MyBlogException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
 
 import static com.example.my_blog.exception.MyBlogErrorCode.USER_NOT_FOUND;
 
@@ -48,7 +48,7 @@ public class UserService {
 
   public Page<User> findAll(Pageable pageable) {
 
-    return userRepository.findAll();
+    return userRepository.findAll(pageable);
   }
 
   @Transactional
