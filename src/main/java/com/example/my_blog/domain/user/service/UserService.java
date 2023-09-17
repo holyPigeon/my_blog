@@ -46,7 +46,7 @@ public class UserService {
         .orElseThrow(() -> MyBlogException.type(USER_NOT_FOUND));
   }
 
-  public List<User> findAll() {
+  public Page<User> findAll(Pageable pageable) {
 
     return userRepository.findAll();
   }
