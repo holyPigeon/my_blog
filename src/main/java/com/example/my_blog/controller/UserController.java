@@ -6,11 +6,13 @@ import com.example.my_blog.domain.user.service.dto.request.JoinUserRequest;
 import com.example.my_blog.domain.user.service.dto.request.UpdateUserRequest;
 import com.example.my_blog.domain.user.service.dto.response.*;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
-import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -38,17 +40,14 @@ public class UserController {
    * 회원 조회
    */
   @GetMapping("/users")
-  public ListUserResponse<List<DetailUserResponse>> listUser() {
+  public Page<DetailUserResponse> listUser() {
 
-    List<User> userList = userService.findAll();
-    List<DetailUserResponse> listUserData = userList
-        .stream()
-        .map(u -> new DetailUserResponse(
-            u.getId(), u.getName(), u.getNickname()
-        ))
-        .toList();
+    PageRequest pageRequest = PageRequest.of(0, 10, Sort.by(Sort.Direction.ASC, "id"));
 
-    return new ListUserResponse<>(listUserData.size(), listUserData);
+    Page<User> userList = userService.findAll(pageRequest);
+    Page<DetailUserResponse> listUserData = userList.map(u -> new DetailUserResponse(u.getId(), u.getName(), u.getNickname()));
+
+    return listUserData;
   }
 
   /**
