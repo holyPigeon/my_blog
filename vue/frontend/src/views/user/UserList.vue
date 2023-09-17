@@ -15,7 +15,7 @@
                             <td>User Name</td>
                             <td>User Nickname</td>
                         </tr>
-                        <tr v-for="(user, index) in userList.data" :key="index">
+                        <tr v-for="(user, index) in userList.content" :key="index">
                             <td>{{ user.id }}</td>
                             <td>{{ user.name }}</td>
                             <td>{{ user.nickname }}</td>
@@ -35,14 +35,38 @@ export default {
     data() {
         return {
             userList: {
-                count: -1,
-                data: [
+                "content": [
                     {
                         // id: '',
                         // name: '',
                         // age: '',
                     }
                 ],
+                "pageable": {
+                    "sort": {
+                        "empty": false,
+                        "unsorted": false,
+                        "sorted": true
+                    },
+                    "offset": 50,
+                    "pageNumber": 5, // 5+1 해서 6페이지
+                    "pageSize": 10,
+                    "paged": true,
+                    "unpaged": false
+                },
+                "totalPages": 6,
+                "totalElements": 51, // 총 유저 수
+                "last": true,
+                "size": 10, // 한 페이지당 유저 수
+                "number": 5, // 현재 페이지
+                "sort": {
+                    "empty": false,
+                    "unsorted": false,
+                    "sorted": true
+                },
+                "numberOfElements": 1, // 현재 페이지의 유저 수
+                "first": false,
+                "empty": false
             }
         }
     },
@@ -51,8 +75,8 @@ export default {
             .then((res) => {
                 console.log(res);
                 // JSON.stringify("res => " + res);
-                this.userList.count = res.data.count;
-                this.userList.data = [...res.data.data];
+                this.userList.totalElements = res.data.count;
+                this.userList.content = [...res.data.content];
             }).catch((err) => {
                 JSON.stringify("err => " + err);
             });
