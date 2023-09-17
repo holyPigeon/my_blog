@@ -10,7 +10,7 @@
                     </div>
 
                     <table class="text-center fs-4" style="width: 100%; border: 1px solid #CCCDCE;">
-                        <tr>
+                        <tr style="border: 1px solid #CCCDCE;">
                             <td>User Id</td>
                             <td>User Name</td>
                             <td>User Nickname</td>
