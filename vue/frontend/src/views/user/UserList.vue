@@ -35,38 +35,79 @@ export default {
     data() {
         return {
             userList: {
-                "content": [
-                    {
-                        // id: '',
-                        // name: '',
-                        // age: '',
-                    }
-                ],
-                "pageable": {
-                    "sort": {
-                        "empty": false,
-                        "unsorted": false,
-                        "sorted": true
-                    },
-                    "offset": 50,
-                    "pageNumber": 5, // 5+1 해서 6페이지
-                    "pageSize": 10,
-                    "paged": true,
-                    "unpaged": false
-                },
-                "totalPages": 6,
-                "totalElements": 51, // 총 유저 수
-                "last": true,
-                "size": 10, // 한 페이지당 유저 수
-                "number": 5, // 현재 페이지
-                "sort": {
-                    "empty": false,
-                    "unsorted": false,
-                    "sorted": true
-                },
-                "numberOfElements": 1, // 현재 페이지의 유저 수
-                "first": false,
-                "empty": false
+                // "content": [
+                //     {
+                //         // id: '',
+                //         // name: '',
+                //         // age: '',
+                //     }
+                // ],
+                // "pageable": {
+                //     "sort": {
+                //         "empty": false,
+                //         "unsorted": false,
+                //         "sorted": true
+                //     },
+                //     "offset": 50,
+                //     "pageNumber": 5, // 5+1 해서 6페이지
+                //     "pageSize": 10,
+                //     "paged": true,
+                //     "unpaged": false
+                // },
+                // "totalPages": 6,
+                // "totalElements": 51, // 총 유저 수
+                // "last": true,
+                // "size": 10, // 한 페이지당 유저 수
+                // "number": 5, // 현재 페이지 (number = 5일 경우 6페이지)
+                // "sort": {
+                //     "empty": false,
+                //     "unsorted": false,
+                //     "sorted": true
+                // },
+                // "numberOfElements": 1, // 현재 페이지의 유저 수
+                // "first": false,
+                // "empty": false
+            }
+        }
+    },
+    methods: {
+        checkButtonActive(currentPage, index) {
+            if (currentPage === index) {
+                return 'btn-primary';
+            } else {
+                return '';
+            }
+        },
+        goToPage(index) {
+            axios.get('/api/users?page=' + index)
+                .then((res) => {
+                    this.userList = { ...res.data };
+                }).catch((err) => {
+                    JSON.stringify("err => " + err);
+                });
+        },
+        goToPreviousPage(index) {
+            if (this.userList.first) {
+                alert("첫 페이지입니다.");
+            } else {
+                axios.get('/api/users?page=' + index)
+                    .then((res) => {
+                        this.userList = { ...res.data };
+                    }).catch((err) => {
+                        JSON.stringify("err => " + err);
+                    });
+            }
+        },
+        goToNextPage(index) {
+            if (this.userList.last) {
+                alert("마지막 페이지입니다.");
+            } else {
+                axios.get('/api/users?page=' + index)
+                    .then((res) => {
+                        this.userList = { ...res.data };
+                    }).catch((err) => {
+                        JSON.stringify("err => " + err);
+                    });
             }
         }
     },
