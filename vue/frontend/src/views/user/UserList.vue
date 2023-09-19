@@ -110,14 +110,12 @@ export default {
                     });
             }
         }
+
     },
     beforeMount() {
-        axios.get('/api/users')
+        axios.get('/api/users?page=1')
             .then((res) => {
-                console.log(res);
-                // JSON.stringify("res => " + res);
-                this.userList.totalElements = res.data.count;
-                this.userList.content = [...res.data.content];
+                this.userList = { ...res.data };
             }).catch((err) => {
                 JSON.stringify("err => " + err);
             });
