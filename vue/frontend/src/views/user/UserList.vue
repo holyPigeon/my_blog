@@ -9,8 +9,8 @@
                         <h4 class="mb-3 text-center fs-3 fw-bold">회원 목록</h4>
                     </div>
 
-                    <table class="text-center fs-4" style="width: 100%; border: 1px solid #CCCDCE;">
-                        <tr style="border: 1px solid #CCCDCE;">
+                    <table class="text-center fs-4 border border-base-content w-full">
+                        <tr class="border border-base-content">
                             <td>User Id</td>
                             <td>User Name</td>
                             <td>User Nickname</td>
