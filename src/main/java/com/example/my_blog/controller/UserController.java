@@ -41,9 +41,9 @@ public class UserController {
    * 회원 조회
    */
   @GetMapping("/users")
-  public Page<DetailUserResponse> listUser() {
+  public Page<DetailUserResponse> listUser(@RequestParam("page") int page) {
 
-    PageRequest pageRequest = PageRequest.of(0, 10, Sort.by(Sort.Direction.ASC, "id"));
+    PageRequest pageRequest = PageRequest.of(page - 1, 10, Sort.by(Sort.Direction.ASC, "id"));
 
     Page<User> userList = userService.findAll(pageRequest);
     Page<DetailUserResponse> listUserData = userList.map(u -> new DetailUserResponse(u.getId(), u.getName(), u.getNickname()));
