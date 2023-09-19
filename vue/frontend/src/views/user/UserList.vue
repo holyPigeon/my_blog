@@ -21,6 +21,15 @@
                             <td>{{ user.nickname }}</td>
                         </tr>
                     </table>
+
+                    <div class="join mt-4 border border-dark">
+                        <button @click="goToPreviousPage((userList.number + 1) - 1)" class="join-item btn"><a>이전</a></button>
+                        <button @click="goToPage(index)" v-for="(index) in userList.totalPages" :key="index"
+                            :class="checkButtonActive(userList.number + 1, index)" class="join-item btn hover:primary">{{ index }}
+                        </button>
+                        <button @click="goToNextPage((userList.number + 1) + 1)" class="join-item btn">다음</button>
+                    </div>
+
                 </div>
             </div>
         </div>
