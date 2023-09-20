@@ -17,8 +17,8 @@ create table posts
 (
     post_id            bigint auto_increment comment '게시글 ID'
         primary key,
-    created_by         varchar(30) not null comment '게시글 작성자',
-    last_modified_by   varchar(30) not null comment '게시글 수정자',
+    created_by         varchar(100) not null comment '게시글 작성자',
+    last_modified_by   varchar(100) not null comment '게시글 수정자',
     created_date       datetime(6)  not null comment '게시글 생성일',
     last_modified_date datetime(6)  not null comment '게시글 수정일',
     content            tinytext     not null comment '게시글 내용',
@@ -33,8 +33,8 @@ create table comments
 (
     comment_id         bigint auto_increment comment '댓글 ID'
         primary key,
-    created_by         varchar(30) not null comment '댓글 작성자',
-    last_modified_by   varchar(30) not null comment '댓글 수정자',
+    created_by         varchar(100) not null comment '댓글 작성자',
+    last_modified_by   varchar(100) not null comment '댓글 수정자',
     created_date       datetime(6)  not null comment '댓글 생성일',
     last_modified_date datetime(6)  not null comment '댓글 수정일',
     content            tinytext     not null comment '댓글 내용',
