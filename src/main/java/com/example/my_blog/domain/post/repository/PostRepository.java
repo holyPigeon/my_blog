@@ -10,7 +10,7 @@ import java.util.Optional;
 public interface PostRepository extends JpaRepository<Post, Long> {
 
   @EntityGraph(attributePaths = {"user"})
-  List<Post> findByUserId(Long memberId);
+  Page<Post> findByUserId(Long memberId, Pageable pageable);
 
   void deleteById(Long id);
 }
