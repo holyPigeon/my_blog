@@ -9,16 +9,16 @@
                         <h4 class="mb-3 text-center fs-3 fw-bold">회원 목록</h4>
                     </div>
 
-                    <table class="text-center fs-4 border border-base-content w-full">
+                    <table class="text-center fs-4 border border-base-content w-full" style="height: 500px;">
                         <tr class="border border-base-content">
                             <td>User Id</td>
                             <td>User Name</td>
                             <td>User Nickname</td>
                         </tr>
-                        <tr v-for="(user, index) in userList.content" :key="index">
-                            <td>{{ user.id }}</td>
-                            <td>{{ user.name }}</td>
-                            <td>{{ user.nickname }}</td>
+                        <tr v-for="(user, index) in userList.content" :key="index" class="hover text-neutral-content">
+                            <td style="width: 10%;">{{ user.id }}</td>
+                            <td style="width: 50%;">{{ user.name }}</td>
+                            <td style="width: 40%;">{{ user.nickname }}</td>
                         </tr>
                     </table>
 
