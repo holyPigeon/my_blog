@@ -7,6 +7,9 @@ import com.example.my_blog.domain.post.Post;
 import com.example.my_blog.domain.post.service.PostService;
 import com.example.my_blog.domain.post.service.dto.response.*;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -43,19 +46,13 @@ public class PostController {
    * 게시글 조회
    */
   @GetMapping("/posts")
-  public ListPostResponse<List<DetailPostResponse>> listPost() {
+  public Page<DetailPostResponse> listPost(@RequestParam("page") int page) {
 
-    List<Post> posts = postService.findAll();
+    PageRequest pageRequest = PageRequest.of(page - 1, 10, Sort.by(Sort.Direction.DESC, "id"));
+    Page<Post> postPage = postService.findAll(pageRequest);
+    Page<DetailPostResponse> postDtoPage = postPage.map(p -> new DetailPostResponse(p.getId(), p.getUser().getNickname(), p.getTitle(), p.getContent(), p.getCreatedDate(), p.getLastModifiedDate()));
 
-    List<DetailPostResponse> collect = posts.stream().map(p ->
-        new DetailPostResponse(p.getId(), p.getUser().getNickname(), p.getTitle(), p.getContent(),
-            p.getCreatedDate(), p.getLastModifiedDate())).toList();
-
-    List<DetailPostResponse> sorted = collect.stream()
-        .sorted(Comparator.comparing(DetailPostResponse::getId).reversed())
-        .toList();
-
-    return new ListPostResponse<>(sorted.size(), sorted);
+    return postDtoPage;
 
   }
 
