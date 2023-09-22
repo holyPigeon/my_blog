@@ -10,6 +10,8 @@ import com.example.my_blog.domain.user.repository.UserRepository;
 import com.example.my_blog.exception.MyBlogException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -39,14 +41,14 @@ public class PostService {
         .orElseThrow(() -> MyBlogException.type(POST_NOT_FOUND));
   }
 
-  public List<Post> findByUserId(Long userId) {
+  public Page<Post> findByUserId(Long userId, Pageable pageable) {
 
-    return postRepository.findByUserId(userId);
+    return postRepository.findByUserId(userId, pageable);
   }
 
-  public List<Post> findAll() {
+  public Page<Post> findAll(Pageable pageable) {
 
-    return postRepository.findAll();
+    return postRepository.findAll(pageable);
   }
 
   @Transactional
