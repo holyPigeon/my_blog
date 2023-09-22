@@ -149,6 +149,10 @@ export default {
 </script>
  
 <style>
+.table tr:last-child {
+    border-bottom: 1px solid #CAD2CF;
+}
+
 input::placeholder {
     font-size: 14px;
 }
