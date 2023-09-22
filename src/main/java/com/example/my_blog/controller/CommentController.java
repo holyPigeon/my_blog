@@ -25,8 +25,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 @RequiredArgsConstructor
 @RequestMapping("/api")
 @Slf4j
-//@CrossOrigin(origins = {"http://localhost:8080"})
-//@Api(tags = "댓글 관련 API")
+@CrossOrigin(origins = {"http://localhost:8081"})
 public class CommentController {
 
   private final UserService userService;
@@ -49,7 +48,6 @@ public class CommentController {
   }
 
   @PostMapping("/posts/{postId}/comments/reply")
-//  @ApiOperation(value = "대댓글 등록 API", notes = "해당 게시물에 대댓글 등록")
   public ResponseEntity<Long> createReplyComment(@PathVariable Long postId, @RequestBody CreateReplyCommentRequest request) {
 
     Post post = postService.findById(postId);
@@ -64,7 +62,6 @@ public class CommentController {
   }
 
   @GetMapping("/posts/{postId}/comments")
-//  @ApiOperation(value = "전체 댓글 조회 API", notes = "해당 게시글의 전체 댓글 조회")
   public ListCommentResponse<List<ListCommentDetailResponse>> listComment(@PathVariable Long postId) {
 
     Post post = postService.findById(postId);
@@ -91,7 +88,6 @@ public class CommentController {
   }
 
   @PatchMapping("/posts/{postId}/comments/{commentId}")
-//  @ApiOperation(value = "댓글 수정 API", notes = "댓글 본문을 수정")
   public ResponseEntity<Long> updateComment(@PathVariable("postId") Long postId, @PathVariable("commentId") Long commentId, @RequestBody UpdateCommentRequest request) {
 
     commentService.updateComment(commentId, request.getContent());
@@ -100,7 +96,6 @@ public class CommentController {
   }
   
   @DeleteMapping("/posts/{postId}/comments/{commentId}")
-//  @ApiOperation(value = "댓글 삭제 API", notes = "댓글 삭제")
   public ResponseEntity<Object> deleteComment(@PathVariable("postId") Long postId, @PathVariable("commentId") Long commentId) {
 
     commentService.delete(commentId);
