@@ -13,13 +13,13 @@
 
           <div class="col-md-8 offset-md-2">
             <button @click="$router.push('/user/list')" class="btn btn-outline btn-primary py-3">
-              <h6>회원 조회</h6>
+              <h6>회원 목록</h6>
             </button>
             <button @click="$router.push('/post/create')" class="btn btn-outline btn-primary mx-3 py-3">
               <h6>게시글 등록</h6>
             </button>
             <button @click="$router.push('/post/list')" class="btn btn-outline btn-primary py-3">
-              <h6>게시글 조회</h6>
+              <h6>게시글 목록</h6>
             </button>
           </div>
         </div>
