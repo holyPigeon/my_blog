@@ -43,7 +43,7 @@ public class PostController {
   }
 
   /**
-   * 게시글 조회
+   * 게시글 목록 조회
    */
   @GetMapping("/posts")
   public Page<DetailPostResponse> listPost(@RequestParam("page") int page) {
@@ -57,7 +57,7 @@ public class PostController {
   }
 
   /**
-   * 게시글 상세 조회
+   * 게시글 단일 조회
    */
   @GetMapping("/posts/{postId}")
   public DetailPostResponse listPostDetail(@PathVariable Long postId) {
