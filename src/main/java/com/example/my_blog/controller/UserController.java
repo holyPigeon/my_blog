@@ -44,11 +44,10 @@ public class UserController {
   public Page<DetailUserResponse> listUser(@RequestParam("page") int page) {
 
     PageRequest pageRequest = PageRequest.of(page - 1, 10, Sort.by(Sort.Direction.ASC, "id"));
+    Page<User> userPage = userService.findAll(pageRequest);
+    Page<DetailUserResponse> userDtoPage = userPage.map(u -> new DetailUserResponse(u.getId(), u.getName(), u.getNickname()));
 
-    Page<User> userList = userService.findAll(pageRequest);
-    Page<DetailUserResponse> listUserData = userList.map(u -> new DetailUserResponse(u.getId(), u.getName(), u.getNickname()));
-
-    return listUserData;
+    return userDtoPage;
   }
 
   /**
