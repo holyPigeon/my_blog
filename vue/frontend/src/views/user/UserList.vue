@@ -82,7 +82,7 @@ export default {
     methods: {
         checkButtonActive(currentPage, index) {
             if (currentPage === index) {
-                return 'btn-primary';
+                return 'btn text-primary';
             } else {
                 return '';
             }
