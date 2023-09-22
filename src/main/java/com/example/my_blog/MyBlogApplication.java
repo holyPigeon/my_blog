@@ -5,9 +5,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.domain.AuditorAware;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
 import java.util.Optional;
-import java.util.UUID;
 
 @EnableJpaAuditing
 @SpringBootApplication
@@ -19,7 +20,17 @@ public class MyBlogApplication {
 
   @Bean
   public AuditorAware<String> auditorProvider() {
-    return () -> Optional.of(UUID.randomUUID().toString());
+    return () -> {
+      ServletRequestAttributes attr
+          = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
+
+      String currentUser = attr.getRequest().getSession().getAttribute(SessionConst.SESSION_KEY).toString();
+
+      if(currentUser != null)
+        return Optional.of(currentUser);
+      else
+        return Optional.of("Anonymous");
+    };
   }
 
 }
