@@ -15,7 +15,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr v-for="(post, index) in posts.postList" :key="index" class="hover text-neutral-content ">
+                            <tr v-for="(post, index) in postList.content" :key="index" class="hover text-neutral-content">
                                 <th style="width: 10%;">{{ post.id }}</th>
                                 <td style="width: 50%;">
                                     <a @click="$router.push(`/post/list/${post.id}`)">
@@ -27,6 +27,18 @@
                             </tr>
                         </tbody>
                     </table>
+
+                    <div class="join mb-4 border border-dark" style="position: absolute; bottom: 0; left: 30%;">
+                        <button @click="goToPreviousPage((postList.number + 1) - 1)"
+                            class="join-item btn"><a>이전</a></button>
+                        <button @click="goToPage(index)" v-for="(index) in postList.totalPages" :key="index"
+                            :class="checkButtonActive(postList.number + 1, index)"
+                            class="join-item btn hover:neutral-content">{{
+                                index }}
+                        </button>
+                        <button @click="goToNextPage((postList.number + 1) + 1)" class="join-item btn">다음</button>
+                    </div>
+
                 </div>
             </div>
         </div>
