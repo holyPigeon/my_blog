@@ -40,29 +40,94 @@ export default {
     name: 'postList',
     data() {
         return {
-            posts: {
-                count: -1,
-                postList: [
-                    {
-                        // id: 1,
-                        // author: '',
-                        // title: '',
-                        // content: '',
-                        // createdDate: '',
-                        // updatedAt: '',
-                    }
-                ],
-            }
+            postList: null
+            // {
+            //     "content": [
+            //         {
+            //             id: 1,
+            //             author: '',
+            //             title: '',
+            //             content: '',
+            //             createdDate: '',
+            //             updatedAt: '',
+            //         }
+            //     ],
+            //     "pageable": {
+            //         "sort": {
+            //             "empty": false,
+            //             "unsorted": false,
+            //             "sorted": true
+            //         },
+            //         "offset": 50,
+            //         "pageNumber": 5, // 5+1 해서 6페이지
+            //         "pageSize": 10,
+            //         "paged": true,
+            //         "unpaged": false
+            //     },
+            //     "totalPages": 6,
+            //     "totalElements": 51, // 총 유저 수
+            //     "last": true,
+            //     "size": 10, // 한 페이지당 유저 수
+            //     "number": 5, // 현재 페이지 (number = 5일 경우 6페이지)
+            //     "sort": {
+            //         "empty": false,
+            //         "unsorted": false,
+            //         "sorted": true
+            //     },
+            //     "numberOfElements": 1, // 현재 페이지의 유저 수
+            //     "first": false,
+            //     "empty": false
+            // }
         }
     },
     methods: {
+        checkButtonActive(currentPage, index) {
+            if (currentPage === index) {
+                return 'btn text-primary';
+            } else {
+                return '';
+            }
+        },
+        goToPage(index) {
+            axios.get('/api/posts?page=' + index)
+                .then((res) => {
+                    this.postList = { ...res.data };
+                }).catch((err) => {
+                    JSON.stringify("err => " + err);
+                });
+        },
+        goToPreviousPage(index) {
+            if (this.postList.first) {
+                alert("첫 페이지입니다.");
+            } else {
+                axios.get('/api/posts?page=' + index)
+                    .then((res) => {
+                        this.postList = { ...res.data };
+                    }).catch((err) => {
+                        JSON.stringify("err => " + err);
+                    });
+            }
+        },
+        goToNextPage(index) {
+            if (this.postList.last) {
+                alert("마지막 페이지입니다.");
+            } else {
+                axios.get('/api/posts?page=' + index)
+                    .then((res) => {
+                        this.postList = { ...res.data };
+                    }).catch((err) => {
+                        JSON.stringify("err => " + err);
+                    });
+            }
+        }
+
     },
     beforeMount() {
-        axios.get('/api/posts')
+        axios.get('/api/posts?page=1')
             .then((res) => {
                 console.log(res);
-                // JSON.stringify("res => " + res);
-                this.posts = { ...res.data };
+                this.postList = { ...res.data };
+                console.log("postList after -> " + JSON.stringify(this.postList));
             }).catch((err) => {
                 JSON.stringify("err => " + err);
             });
