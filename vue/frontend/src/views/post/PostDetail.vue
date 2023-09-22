@@ -129,7 +129,7 @@
                                     class="input input-bordered border border-dark w-full max" />
                             </div>
                             <div v-if="replyCommentActive[comment.id] === true" class="col-start-12 col-span-1 text-end">
-                                <button @click="createReplyComment(comment.id)" class="btn btn-outline btn-primary">댓글
+                                <button @click="createReplyComment(comment.id)" class="btn btn-primary">댓글
                                     쓰기</button>
                             </div>
                         </div>
