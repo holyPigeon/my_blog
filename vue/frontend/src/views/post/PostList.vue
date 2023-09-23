@@ -1,8 +1,10 @@
 <template>
     <div class="hero min-h-screen bg-gradient-to-r from-sky-500 to-emerald-500">
         <div class="bg-opacity-60 hero-overlay"></div>
-        <div class="hero-content text-center flex w-3/4">
-            <div class="flex-shrink-0 max-w-4xl w-full shadow-2xl bg-base-100 mb-64 p-8">
+        <div class="hero-content text-center flex w-3/4 text-neutral-content">
+
+            <div class="flex-shrink-0 max-w-4xl w-full shadow-2xl bg-base-100 mb-64 p-8"
+                style="height: 780px; position: relative;">
                 <div class="overflow-x-auto">
                     <table class="table border border-base-content">
                         <!-- head -->
