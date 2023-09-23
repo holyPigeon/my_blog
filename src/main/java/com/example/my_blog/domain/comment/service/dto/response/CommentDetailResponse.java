@@ -1,5 +1,6 @@
 package com.example.my_blog.domain.comment.service.dto.response;
 
+import com.example.my_blog.domain.comment.Comment;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -11,7 +12,7 @@ import java.util.List;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class ListCommentDetailResponse {
+public class CommentDetailResponse {
 
   private Long id;
 
@@ -27,5 +28,16 @@ public class ListCommentDetailResponse {
   @JsonFormat(pattern = "yyyy.MM.dd HH:mm:ss")
   private LocalDateTime lastModifiedDate;
 
-  private List<ListReplyCommentDetailResponse> children;
+  private List<ReplyCommentDetailResponse> children;
+
+  public CommentDetailResponse (Comment comment, List<ReplyCommentDetailResponse> children) {
+
+    this.id = comment.getId();
+    this.postId = comment.getPost().getId();
+    this.author = comment.getUser().getNickname();
+    this.content = comment.getContent();
+    this.createdDate = comment.getCreatedDate();
+    this.lastModifiedDate = comment.getLastModifiedDate();
+    this.children = children;
+  }
 }
