@@ -5,11 +5,10 @@
             <div class="flex-shrink-0 max-w-4xl w-full shadow-2xl bg-base-100 mb-64 p-8">
                 <div class="overflow-x-auto">
                     <div class="p-4">
-                        <!-- style="--bs-text-opacity: 0.6;" -->
-                        <h4 class="mb-3 text-center fs-3 fw-bold">회원 목록</h4>
+                        <p class="mb-3 text-center text-lg fw-bold">회원 목록</p>
                     </div>
 
-                    <table class="text-center fs-4 border border-base-content w-full" style="height: 500px;">
+                    <table class="text-center fs-4 border border-base-content w-full">
                         <tr class="border border-base-content">
                             <td>User Id</td>
                             <td>User Name</td>
@@ -22,12 +21,16 @@
                         </tr>
                     </table>
 
-                    <div class="join mt-4 border border-dark">
-                        <button @click="goToPreviousPage((userList.number + 1) - 1)" class="join-item btn"><a>이전</a></button>
-                        <button @click="goToPage(index)" v-for="(index) in userList.totalPages" :key="index"
-                            :class="checkButtonActive(userList.number + 1, index)" class="join-item btn hover:primary">{{ index }}
-                        </button>
-                        <button @click="goToNextPage((userList.number + 1) + 1)" class="join-item btn">다음</button>
+                    <div class="text-center">
+                        <div class="join mt-8 border border-dark">
+                            <button @click="goToPreviousPage((userList.number + 1) - 1)"
+                                class="join-item btn"><a>이전</a></button>
+                            <button @click="goToPage(index)" v-for="(index) in userList.totalPages" :key="index"
+                                :class="checkButtonActive(userList.number + 1, index)"
+                                class="join-item btn hover:primary">{{ index }}
+                            </button>
+                            <button @click="goToNextPage((userList.number + 1) + 1)" class="join-item btn">다음</button>
+                        </div>
                     </div>
 
                 </div>
