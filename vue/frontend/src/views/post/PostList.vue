@@ -6,7 +6,12 @@
             <div class="flex-shrink-0 max-w-4xl w-full shadow-2xl bg-base-100 mb-64 p-8"
                 style="height: 780px; position: relative;">
                 <div class="overflow-x-auto">
-                    <table class="table border border-base-content">
+
+                    <div class="p-4">
+                        <h4 class="mb-3 text-center fs-3 fw-bold">게시글 목록</h4>
+                    </div>
+
+                    <table class="table border border-base-content" style="height: 500px;">
                         <!-- head -->
                         <thead>
                             <tr class="border border-base-content">
