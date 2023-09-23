@@ -70,16 +70,16 @@ public class CommentController {
     AtomicInteger commentCount = new AtomicInteger(); // 일반적인 int 타입의 변수는 람다 표현식 안에서 값을 변경할 수 없으므로 AtomicInteger를 사용한다.
 
     // 기존의 댓글 리스트에서 부모 댓글 하나하나의 children 자리에 대댓글 리스트를 삽입하여 새로운 response DTO를 생성한다.
-    List<ListCommentDetailResponse> adaptedCommentList = parentCommentList.stream()
+    List<CommentDetailResponse> adaptedCommentList = parentCommentList
+        .stream()
         .map(comment -> {
-          List<ListReplyCommentDetailResponse> replyCommentList = comment.getChildren().stream()
-              .map(replyComment -> new ListReplyCommentDetailResponse(replyComment.getId(), post.getId(), replyComment.getUser().getNickname(),
-                  replyComment.getContent(), replyComment.getCreatedDate(), replyComment.getLastModifiedDate())).toList();
+          List<ReplyCommentDetailResponse> replyCommentList = comment.getChildren()
+              .stream()
+              .map(ReplyCommentDetailResponse::new).toList();
 
           commentCount.addAndGet(replyCommentList.size());
 
-          return new ListCommentDetailResponse(comment.getId(), post.getId(), comment.getUser().getNickname(),
-              comment.getContent(), comment.getCreatedDate(), comment.getLastModifiedDate(), replyCommentList);
+          return new CommentDetailResponse(comment, replyCommentList);
         }).toList();
 
     commentCount.addAndGet(adaptedCommentList.size());
