@@ -44,9 +44,13 @@ public class PostController {
    * 게시글 목록 조회
    */
   @GetMapping("/posts")
-  public Page<DetailPostResponse> listPost(@RequestParam("page") int page) {
+  public Page<DetailPostResponse> listPost(
+      @RequestParam("page") int page,
+      @RequestParam("size") int size,
+      @RequestParam("sort") String sort
+  ) {
 
-    PageRequest pageRequest = PageRequest.of(page - 1, 10, Sort.by(Sort.Direction.DESC, "id"));
+    PageRequest pageRequest = PageRequest.of(page - 1, size, Sort.by(Sort.Direction.DESC, "id"));
     Page<Post> postPage = postService.findAll(pageRequest);
     Page<DetailPostResponse> postDtoPage = postPage.map(DetailPostResponse::new);
 
