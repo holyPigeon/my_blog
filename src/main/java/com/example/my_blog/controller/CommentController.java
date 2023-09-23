@@ -5,9 +5,9 @@ import com.example.my_blog.domain.comment.service.CommentService;
 import com.example.my_blog.domain.comment.service.dto.request.CreateCommentRequest;
 import com.example.my_blog.domain.comment.service.dto.request.CreateReplyCommentRequest;
 import com.example.my_blog.domain.comment.service.dto.request.UpdateCommentRequest;
-import com.example.my_blog.domain.comment.service.dto.response.ListCommentDetailResponse;
+import com.example.my_blog.domain.comment.service.dto.response.CommentDetailResponse;
 import com.example.my_blog.domain.comment.service.dto.response.ListCommentResponse;
-import com.example.my_blog.domain.comment.service.dto.response.ListReplyCommentDetailResponse;
+import com.example.my_blog.domain.comment.service.dto.response.ReplyCommentDetailResponse;
 import com.example.my_blog.domain.post.Post;
 import com.example.my_blog.domain.post.service.PostService;
 import com.example.my_blog.domain.user.User;
@@ -62,7 +62,7 @@ public class CommentController {
   }
 
   @GetMapping("/posts/{postId}/comments")
-  public ListCommentResponse<List<ListCommentDetailResponse>> listComment(@PathVariable Long postId) {
+  public ListCommentResponse<List<CommentDetailResponse>> listComment(@PathVariable Long postId) {
 
     Post post = postService.findById(postId);
 
