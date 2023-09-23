@@ -48,7 +48,7 @@ public class PostController {
 
     PageRequest pageRequest = PageRequest.of(page - 1, 10, Sort.by(Sort.Direction.DESC, "id"));
     Page<Post> postPage = postService.findAll(pageRequest);
-    Page<DetailPostResponse> postDtoPage = postPage.map(p -> new DetailPostResponse(p.getId(), p.getUser().getNickname(), p.getTitle(), p.getContent(), p.getCreatedDate(), p.getLastModifiedDate()));
+    Page<DetailPostResponse> postDtoPage = postPage.map(DetailPostResponse::new);
 
     return postDtoPage;
 
@@ -62,8 +62,7 @@ public class PostController {
 
     Post findPost = postService.findById(postId);
 
-    return new DetailPostResponse(findPost.getId(), findPost.getUser().getNickname(), findPost.getTitle(),
-        findPost.getContent(), findPost.getCreatedDate(), findPost.getLastModifiedDate());
+    return new DetailPostResponse(findPost);
   }
 
   /**
