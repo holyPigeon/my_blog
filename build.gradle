@@ -30,6 +30,13 @@ dependencies {
     annotationProcessor 'org.projectlombok:lombok'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
+    // QueryDSL 설정
+    implementation "com.querydsl:querydsl-jpa:5.0.0:jakarta"
+    annotationProcessor "com.querydsl:querydsl-apt:5.0.0:jakarta"
+    annotationProcessor "jakarta.annotation:jakarta.annotation-api"
+    annotationProcessor "jakarta.persistence:jakarta.persistence-api"
+    // -- QueryDSL ---
+
     // swagger
     // 접속 url: http://localhost:8080/swagger-ui/
     // implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.0.2'
