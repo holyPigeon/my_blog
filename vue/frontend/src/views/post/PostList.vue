@@ -3,8 +3,7 @@
         <div class="bg-opacity-60 hero-overlay"></div>
         <div class="hero-content text-center flex w-3/4 text-neutral-content">
 
-            <div class="flex-shrink-0 max-w-4xl w-full shadow-2xl bg-base-100 mb-64 p-8"
-                style="height: 780px; position: relative;">
+            <div class="flex-shrink-0 max-w-4xl w-full shadow-2xl bg-base-100 mb-64 p-8">
                 <div class="overflow-x-auto">
 
                     <div class="p-4">
@@ -35,15 +34,17 @@
                         </tbody>
                     </table>
 
-                    <div class="join mb-4 border border-dark" style="position: absolute; bottom: 0; left: 30%;">
-                        <button @click="goToPreviousPage((postList.number + 1) - 1)"
-                            class="join-item btn"><a>이전</a></button>
-                        <button @click="goToPage(index)" v-for="(index) in postList.totalPages" :key="index"
-                            :class="checkButtonActive(postList.number + 1, index)"
-                            class="join-item btn hover:neutral-content">{{
-                                index }}
-                        </button>
-                        <button @click="goToNextPage((postList.number + 1) + 1)" class="join-item btn">다음</button>
+                    <div class="text-center">
+                        <div class="join border border-dark mt-8">
+                            <button @click="goToPreviousPage((postList.number + 1) - 1)"
+                                class="join-item btn"><a>이전</a></button>
+                            <button @click="goToPage(index)" v-for="(index) in postList.totalPages" :key="index"
+                                :class="checkButtonActive(postList.number + 1, index)"
+                                class="join-item btn hover:neutral-content">{{
+                                    index }}
+                            </button>
+                            <button @click="goToNextPage((postList.number + 1) + 1)" class="join-item btn">다음</button>
+                        </div>
                     </div>
 
                 </div>
