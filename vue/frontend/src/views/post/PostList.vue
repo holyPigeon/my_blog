@@ -6,11 +6,28 @@
             <div class="flex-shrink-0 max-w-4xl w-full shadow-2xl bg-base-100 mb-64 p-8">
                 <div class="overflow-x-auto">
 
-                    <div class="p-4">
-                        <h4 class="mb-3 text-center fs-3 fw-bold">게시글 목록</h4>
+                    <div class="p-4 text-center">
+                        <p class="text-lg fw-bold">게시글 목록</p>
+                    </div>
+                    <div class="text-end">
+                        <div class="dropdown dropdown-hover">
+                            <label tabindex="0" class="btn btn-sm btn-primary m-1">{{ pageSize }}개</label>
+                            <ul tabindex="0" class="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
+                                <li><a @click="changePageSize(10)">10개</a></li>
+                                <li><a @click="changePageSize(30)">30개</a></li>
+                                <li><a @click="changePageSize(50)">50개</a></li>
+                            </ul>
+                        </div>
+                        <div class="dropdown dropdown-end dropdown-hover">
+                            <label tabindex="0" class="btn btn-sm btn-primary m-1">필터</label>
+                            <ul tabindex="0" class="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
+                                <li><a @click="changePageSort('like')">추천 많은 순</a></li>
+                                <li><a @click="changePageSort('rlike')">추천 적은 순</a></li>
+                            </ul>
+                        </div>
                     </div>
 
-                    <table class="table border border-base-content" style="height: 500px;">
+                    <table class="table border border-base-content mt-4">
                         <!-- head -->
                         <thead>
                             <tr class="border border-base-content">
@@ -60,6 +77,8 @@ export default {
     name: 'postList',
     data() {
         return {
+            pageSize: 10,
+            pageSort: 'date',
             postList: null
             // {
             //     "content": [
@@ -101,6 +120,24 @@ export default {
         }
     },
     methods: {
+        changePageSize(size) {
+            axios.get('/api/posts?sort=' + this.pageSort + '&size=' + size + '&page=' + (this.postList.number + 1))
+                .then((res) => {
+                    this.postList = { ...res.data };
+                    this.pageSize = size;
+                }).catch((err) => {
+                    JSON.stringify("err => " + err);
+                });
+        },
+        changePageSort(sort) {
+            axios.get('/api/posts?sort=' + sort + '&size=' + this.pageSize + '&page=' + (this.postList.number + 1))
+                .then((res) => {
+                    this.postList = { ...res.data };
+                    this.pageSort = 'date';
+                }).catch((err) => {
+                    JSON.stringify("err => " + err);
+                });
+        },
         checkButtonActive(currentPage, index) {
             if (currentPage === index) {
                 return 'btn text-primary';
@@ -109,7 +146,7 @@ export default {
             }
         },
         goToPage(index) {
-            axios.get('/api/posts?page=' + index)
+            axios.get('/api/posts?sort=' + this.pageSort + '&size=' + this.pageSize + '&page=' + index)
                 .then((res) => {
                     this.postList = { ...res.data };
                 }).catch((err) => {
@@ -120,7 +157,7 @@ export default {
             if (this.postList.first) {
                 alert("첫 페이지입니다.");
             } else {
-                axios.get('/api/posts?page=' + index)
+                axios.get('/api/posts?sort=' + this.pageSort + '&size=' + this.pageSize + '&page=' + index)
                     .then((res) => {
                         this.postList = { ...res.data };
                     }).catch((err) => {
@@ -132,7 +169,7 @@ export default {
             if (this.postList.last) {
                 alert("마지막 페이지입니다.");
             } else {
-                axios.get('/api/posts?page=' + index)
+                axios.get('/api/posts?sort=' + this.pageSort + '&size=' + this.pageSize + '&page=' + index)
                     .then((res) => {
                         this.postList = { ...res.data };
                     }).catch((err) => {
@@ -143,11 +180,11 @@ export default {
 
     },
     beforeMount() {
-        axios.get('/api/posts?page=1')
+        axios.get('/api/posts?sort=date&size=10&page=1')
             .then((res) => {
-                console.log(res);
                 this.postList = { ...res.data };
-                console.log("postList after -> " + JSON.stringify(this.postList));
+                this.pageSort = 'date';
+                this.pageSize = 10;
             }).catch((err) => {
                 JSON.stringify("err => " + err);
             });
