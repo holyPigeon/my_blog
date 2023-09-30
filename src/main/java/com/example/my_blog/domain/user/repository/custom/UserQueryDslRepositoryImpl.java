@@ -4,8 +4,8 @@ import com.example.my_blog.domain.user.service.dto.request.UserSearchCondition;
 import com.example.my_blog.domain.user.service.dto.response.DetailUserResponse;
 import com.example.my_blog.domain.user.service.dto.response.QDetailUserResponse;
 import com.querydsl.core.types.dsl.BooleanExpression;
+import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
-import jakarta.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -23,12 +23,8 @@ public class UserQueryDslRepositoryImpl implements  UserQueryDslRepository {
 
   private final JPAQueryFactory queryFactory;
 
-  public UserQueryDslRepositoryImpl (EntityManager em) {
-    this.queryFactory = new JPAQueryFactory(em);
-  }
-
   @Override
-  public List<DetailUserResponse> search(UserSearchCondition condition) {
+  public Page<DetailUserResponse> search(UserSearchCondition condition, Pageable pageable) {
 
     // 조건에 따른 회원 검색에 대한 List 결과값
     List<DetailUserResponse> content = queryFactory.select(new QDetailUserResponse(user))
