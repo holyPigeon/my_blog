@@ -7,6 +7,9 @@ import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import jakarta.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.support.PageableExecutionUtils;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
@@ -27,10 +30,22 @@ public class UserQueryDslRepositoryImpl implements  UserQueryDslRepository {
   @Override
   public List<DetailUserResponse> search(UserSearchCondition condition) {
 
-    return queryFactory.select(new QDetailUserResponse(user))
+    // 조건에 따른 회원 검색에 대한 List 결과값
+    List<DetailUserResponse> content = queryFactory.select(new QDetailUserResponse(user))
         .from(user)
         .where(nameContains(condition.getName()), nicknameContains(condition.getNickname()))
+        .offset(pageable.getOffset())
+        .limit(pageable.getPageSize())
         .fetch();
+
+    // 성능 최적화를 위해 pageSize를 구하는 쿼리를 따로 빼놓았음.
+    JPAQuery<DetailUserResponse> countQuery = queryFactory.select(new QDetailUserResponse(user))
+        .from(user)
+        .where(nameContains(condition.getName()), nicknameContains(condition.getNickname()))
+        .offset(pageable.getOffset())
+        .limit(pageable.getPageSize());
+
+    return PageableExecutionUtils.getPage(content, pageable, countQuery::fetchCount);
   }
 
   private BooleanExpression nameContains(String name) {
