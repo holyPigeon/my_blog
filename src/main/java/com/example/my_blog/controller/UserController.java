@@ -37,18 +37,6 @@ public class UserController {
   }
 
   /**
-   * 회원 조회
-   */
-  @GetMapping("/users")
-  public Page<DetailUserResponse> listUser(@RequestParam("page") int page) {
-
-    PageRequest pageRequest = PageRequest.of(page - 1, 10, Sort.by(Sort.Direction.ASC, "id"));
-    Page<DetailUserResponse> userDtoPage = userService.findAll(pageRequest).map(DetailUserResponse::new);
-
-    return userDtoPage;
-  }
-
-  /**
    * 회원 상세 조회
    */
   @GetMapping("/users/{userId}")
@@ -57,6 +45,25 @@ public class UserController {
     User findUser = userService.findById(userId);
 
     return new DetailUserResponse(findUser);
+  }
+
+  /**
+   * 회원 전체 조회
+   */
+  @GetMapping("/users")
+  public Page<DetailUserResponse> listUser(
+      @RequestParam("page") int page,
+      @RequestParam("size") int size,
+      @RequestParam("sort") String sort,
+      @RequestParam("name") String name,
+      @RequestParam("nickname") String nickname
+  ) {
+
+    PageRequest pageRequest = PageRequest.of(page - 1, size, Sort.by(Sort.Direction.ASC, "id"));
+    UserSearchCondition userSearchCondition = new UserSearchCondition(name, nickname);
+    Page<DetailUserResponse> userDtoPage = userService.search(userSearchCondition, pageRequest);
+
+    return userDtoPage;
   }
 
   /**
