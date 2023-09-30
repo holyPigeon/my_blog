@@ -3,6 +3,8 @@ package com.example.my_blog.domain.user.service;
 import com.example.my_blog.domain.user.User;
 import com.example.my_blog.domain.user.repository.UserRepository;
 import com.example.my_blog.domain.user.service.dto.request.UpdateUserRequest;
+import com.example.my_blog.domain.user.service.dto.request.UserSearchCondition;
+import com.example.my_blog.domain.user.service.dto.response.DetailUserResponse;
 import com.example.my_blog.exception.MyBlogException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -49,6 +51,11 @@ public class UserService {
   public Page<User> findAll(Pageable pageable) {
 
     return userRepository.findAll(pageable);
+  }
+
+  public Page<DetailUserResponse> search(UserSearchCondition condition, Pageable pageable) {
+
+    return userRepository.search(condition, pageable);
   }
 
   @Transactional
