@@ -4,6 +4,7 @@ import com.example.my_blog.domain.user.User;
 import com.example.my_blog.domain.user.service.UserService;
 import com.example.my_blog.domain.user.service.dto.request.JoinUserRequest;
 import com.example.my_blog.domain.user.service.dto.request.UpdateUserRequest;
+import com.example.my_blog.domain.user.service.dto.request.UserSearchCondition;
 import com.example.my_blog.domain.user.service.dto.response.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
