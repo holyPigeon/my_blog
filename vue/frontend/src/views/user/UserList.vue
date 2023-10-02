@@ -7,6 +7,42 @@
                     <div class="p-4">
                         <p class="mb-3 text-center text-lg fw-bold">회원 목록</p>
                     </div>
+                    <div class="flex items-center">
+                        <div class="dropdown dropdown-hover text-start">
+                            <label tabindex="0" class="btn btn-sm btn-primary m-1">{{ pageSize }}개</label>
+                            <ul tabindex="0" class="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
+                                <li><a @click="changePageSize(10)">10개</a></li>
+                                <li><a @click="changePageSize(30)">30개</a></li>
+                                <li><a @click="changePageSize(50)">50개</a></li>
+                            </ul>
+                        </div>
+                        <div class="dropdown dropdown-hover text-start">
+                            <label tabindex="0" class="btn btn-sm btn-primary m-1">필터</label>
+                            <ul tabindex="0" class="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
+                                <li><a @click="changePageSort('like')">추천 많은 순</a></li>
+                                <li><a @click="changePageSort('rlike')">추천 적은 순</a></li>
+                            </ul>
+                        </div>
+                        <div class="flex-grow text-end">
+                            <div class="dropdown">
+                                <label tabindex="0" class="btn btn-sm btn-primary m-1">{{ searchCondition }}</label>
+                                <ul tabindex="0"
+                                    class="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
+                                    <li><a @click="changeSearchCondition('이름')">이름</a></li>
+                                    <li><a @click="changeSearchCondition('닉네임')">닉네임</a></li>
+                                </ul>
+                            </div>
+                            <input v-model="searchKeyword" type="text"
+                                class="input input-bordered input-sm border-neutral-content w-1/4 max-w-xs" />
+                            <button @click="search(searchKeyword)" class="btn btn-sm inline p-1">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                    stroke="currentColor" class="w-6 h-6 inline">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
 
                     <table class="text-center fs-4 border border-base-content w-full">
                         <tr class="border border-base-content">
@@ -46,6 +82,10 @@ export default {
     name: 'userList',
     data() {
         return {
+            pageSize: 10,
+            pageSort: 'date',
+            searchCondition: '이름',
+            searchKeyword: '',
             userList: {
                 // "content": [
                 //     {
@@ -83,8 +123,52 @@ export default {
         }
     },
     methods: {
-        checkButtonActive(currentPage, index) {
-            if (currentPage === index) {
+        changePageSize(size) {
+            axios.get(`/api/users?sort=${this.pageSort}&page=${this.userList.number + 1}&size=${size}&name=&nickname=`)
+                .then((res) => {
+                    this.userList = { ...res.data };
+                    this.pageSize = size;
+                }).catch((err) => {
+                    JSON.stringify("err => " + err);
+                });
+        },
+        changePageSort(sort) {
+            axios.get(`/api/users?sort=${sort}&page=${this.userList.number + 1}&size=${this.pageSize}&name=&nickname=`)
+                .then((res) => {
+                    this.userList = { ...res.data };
+                    this.pageSort = 'date';
+                }).catch((err) => {
+                    JSON.stringify("err => " + err);
+                });
+        },
+        changeSearchCondition(searchCondition) {
+            this.searchCondition = searchCondition;
+        },
+        search(keyword) {
+            if (this.searchCondition == '이름') {
+                axios.get(`/api/users?sort=${this.pageSort}&page=${this.userList.number + 1}&size=${this.pageSize}&name=${keyword}&nickname=`)
+                    .then((res) => {
+                        this.userList = { ...res.data };
+                        if (this.userList.content.length == 0) {
+                            alert('검색 결과가 없습니다.');
+                        }
+                    }).catch((err) => {
+                        JSON.stringify("err => " + err);
+                    });
+            } else if (this.searchCondition == '닉네임') {
+                axios.get(`/api/users?sort=${this.pageSort}&page=${this.userList.number + 1}&size=${this.pageSize}&name=&nickname=${keyword}`)
+                    .then((res) => {
+                        this.userList = { ...res.data };
+                        if (this.userList.content.length == 0) {
+                            alert('검색 결과가 없습니다.');
+                        }
+                    }).catch((err) => {
+                        JSON.stringify("err => " + err);
+                    });
+            }
+        },
+        checkButtonActive(currentPage, page) {
+            if (currentPage === page) {
                 return 'btn text-primary';
             } else {
                 return '';
