@@ -25,6 +25,25 @@
                                 <li><a @click="changePageSort('rlike')">추천 적은 순</a></li>
                             </ul>
                         </div>
+                        <div class="flex-grow text-end">
+                            <div class="dropdown">
+                                <label tabindex="0" class="btn btn-sm btn-primary m-1">{{ searchCondition }}</label>
+                                <ul tabindex="0"
+                                    class="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
+                                    <li><a @click="changeSearchCondition('제목')">제목</a></li>
+                                    <li><a @click="changeSearchCondition('작성자')">작성자</a></li>
+                                </ul>
+                            </div>
+                            <input v-model="searchKeyword" type="text"
+                                class="input input-bordered input-sm border-neutral-content w-1/4 max-w-xs" />
+                            <button @click="search(searchKeyword)" class="btn btn-sm inline p-1">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                    stroke="currentColor" class="w-6 h-6 inline">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+                                </svg>
+                            </button>
+                        </div>
                     </div>
 
                     <table class="table border border-base-content mt-4">
@@ -137,6 +156,32 @@ export default {
                 }).catch((err) => {
                     JSON.stringify("err => " + err);
                 });
+        },
+        changeSearchCondition(searchCondition) {
+            this.searchCondition = searchCondition;
+        },
+        search(keyword) {
+            if (this.searchCondition == '제목') {
+                axios.get(`/api/posts?sort=${this.pageSort}&page=${this.postList.number + 1}&size=${this.pageSize}&name=${keyword}&nickname=`)
+                    .then((res) => {
+                        this.userList = { ...res.data };
+                        if (this.postList.content.length == 0) {
+                            alert('검색 결과가 없습니다.');
+                        }
+                    }).catch((err) => {
+                        JSON.stringify("err => " + err);
+                    });
+            } else if (this.searchCondition == '작성자') {
+                axios.get(`/api/posts?sort=${this.pageSort}&page=${this.postList.number + 1}&size=${this.pageSize}&name=&nickname=${keyword}`)
+                    .then((res) => {
+                        this.userList = { ...res.data };
+                        if (this.postList.content.length == 0) {
+                            alert('검색 결과가 없습니다.');
+                        }
+                    }).catch((err) => {
+                        JSON.stringify("err => " + err);
+                    });
+            }
         },
         checkButtonActive(currentPage, index) {
             if (currentPage === index) {
