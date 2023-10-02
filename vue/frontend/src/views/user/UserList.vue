@@ -1,10 +1,11 @@
 <template>
-    <div class="hero h-screen bg-gradient-to-r from-sky-500 to-emerald-500">
+    <div class="hero min-h-screen bg-gradient-to-r from-sky-500 to-emerald-500">
         <div class="bg-opacity-60 hero-overlay"></div>
         <div class="hero-content text-center flex w-3/4 text-neutral-content">
             <div class="flex-shrink-0 max-w-4xl w-full shadow-2xl bg-base-100 mb-64 p-8">
                 <div class="overflow-x-auto">
-                    <div class="p-4">
+
+                    <div class="p-4 text-center">
                         <p class="mb-3 text-center text-lg fw-bold">회원 목록</p>
                     </div>
                     <div class="flex items-center">
@@ -44,7 +45,7 @@
                         </div>
                     </div>
 
-                    <table class="text-center fs-4 border border-base-content w-full">
+                    <table class="text-center fs-4 border border-base-content w-full mt-4">
                         <tr class="border border-base-content">
                             <td>User Id</td>
                             <td>User Name</td>
@@ -61,9 +62,9 @@
                         <div class="join mt-8 border border-dark">
                             <button @click="goToPreviousPage((userList.number + 1) - 1)"
                                 class="join-item btn"><a>이전</a></button>
-                            <button @click="goToPage(index)" v-for="(index) in userList.totalPages" :key="index"
-                                :class="checkButtonActive(userList.number + 1, index)"
-                                class="join-item btn hover:primary">{{ index }}
+                            <button @click="goToPage(page)" v-for="(page) in userList.totalPages" :key="page"
+                                :class="checkButtonActive(userList.number + 1, page)" class="join-item btn hover:primary">{{
+                                    page }}
                             </button>
                             <button @click="goToNextPage((userList.number + 1) + 1)" class="join-item btn">다음</button>
                         </div>
