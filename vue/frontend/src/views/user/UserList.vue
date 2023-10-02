@@ -186,24 +186,14 @@ export default {
             if (this.userList.first) {
                 alert("첫 페이지입니다.");
             } else {
-                axios.get('/api/users?page=' + index)
-                    .then((res) => {
-                        this.userList = { ...res.data };
-                    }).catch((err) => {
-                        JSON.stringify("err => " + err);
-                    });
+                goToPage(index);
             }
         },
         goToNextPage(index) {
             if (this.userList.last) {
                 alert("마지막 페이지입니다.");
             } else {
-                axios.get('/api/users?page=' + index)
-                    .then((res) => {
-                        this.userList = { ...res.data };
-                    }).catch((err) => {
-                        JSON.stringify("err => " + err);
-                    });
+                goToPage(index);
             }
         }
     },
