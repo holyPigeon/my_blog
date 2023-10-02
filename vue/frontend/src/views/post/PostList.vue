@@ -7,10 +7,10 @@
                 <div class="overflow-x-auto">
 
                     <div class="p-4 text-center">
-                        <p class="text-lg fw-bold">게시글 목록</p>
+       능                 <p class="text-lg fw-bold">게시글 목록</p>
                     </div>
-                    <div class="text-end">
-                        <div class="dropdown dropdown-hover">
+                    <div class="flex items-center">
+                        <div class="dropdown dropdown-hover text-start">
                             <label tabindex="0" class="btn btn-sm btn-primary m-1">{{ pageSize }}개</label>
                             <ul tabindex="0" class="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
                                 <li><a @click="changePageSize(10)">10개</a></li>
@@ -18,7 +18,7 @@
                                 <li><a @click="changePageSize(50)">50개</a></li>
                             </ul>
                         </div>
-                        <div class="dropdown dropdown-end dropdown-hover">
+                        <div class="dropdown dropdown-hover text-start">
                             <label tabindex="0" class="btn btn-sm btn-primary m-1">필터</label>
                             <ul tabindex="0" class="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
                                 <li><a @click="changePageSort('like')">추천 많은 순</a></li>
