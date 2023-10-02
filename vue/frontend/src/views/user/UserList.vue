@@ -174,8 +174,8 @@ export default {
                 return '';
             }
         },
-        goToPage(index) {
-            axios.get('/api/users?page=' + index)
+        goToPage(page) {
+            axios.post(`/api/users?sort=${this.pageSort}&page=${page}&size=${this.pageSize}&name=&nickname=`)
                 .then((res) => {
                     this.userList = { ...res.data };
                 }).catch((err) => {
@@ -206,10 +206,9 @@ export default {
                     });
             }
         }
-
     },
     beforeMount() {
-        axios.get('/api/users?page=1')
+        axios.get(`/api/users?page=1&size=${this.pageSize}&sort=${this.pageSort}&name=&nickname=`)
             .then((res) => {
                 this.userList = { ...res.data };
             }).catch((err) => {
