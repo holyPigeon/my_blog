@@ -21,7 +21,7 @@ create table posts
     last_modified_by   varchar(100) not null comment '게시글 수정자',
     created_date       datetime(6)  not null comment '게시글 생성일',
     last_modified_date datetime(6)  not null comment '게시글 수정일',
-    content            tinytext     not null comment '게시글 내용',
+    content            longtext     not null comment '게시글 내용',
     title              tinytext     not null comment '게시글 생성일',
     user_id            bigint       not null comment '유저 ID',
 
@@ -37,7 +37,7 @@ create table comments
     last_modified_by   varchar(100) not null comment '댓글 수정자',
     created_date       datetime(6)  not null comment '댓글 생성일',
     last_modified_date datetime(6)  not null comment '댓글 수정일',
-    content            tinytext     not null comment '댓글 내용',
+    content            longtext     not null comment '댓글 내용',
     parent_id          bigint                comment '부모 댓글 ID',
     post_id            bigint       not null comment '게시글 ID',
     user_id            bigint       not null comment '유저 ID',
