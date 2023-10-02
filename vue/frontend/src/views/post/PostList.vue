@@ -98,6 +98,8 @@ export default {
         return {
             pageSize: 10,
             pageSort: 'date',
+            searchCondition: '제목',
+            searchKeyword: '',
             postList: null
             // {
             //     "content": [
