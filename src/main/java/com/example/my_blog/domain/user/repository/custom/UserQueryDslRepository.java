@@ -7,5 +7,7 @@ import org.springframework.data.domain.Pageable;
 
 public interface UserQueryDslRepository {
 
-  Page<DetailUserResponse> search(UserSearchCondition condition, Pageable pageable);
+  Page<DetailUserResponse> listSearchResult(UserSearchCondition condition, Pageable pageable);
+
+  Page<DetailUserResponse> listSortedSearchResult(UserSearchCondition condition, String sortType, Pageable pageable);
 }
