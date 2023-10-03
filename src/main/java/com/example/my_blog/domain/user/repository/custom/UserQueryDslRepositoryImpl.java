@@ -51,4 +51,39 @@ public class UserQueryDslRepositoryImpl implements  UserQueryDslRepository {
   private BooleanExpression nicknameContains(String nickname) {
     return hasText(nickname) ? user.nickname.contains(nickname) : null;
   }
+
+  private List<DetailUserResponse> addSortingQuery(JPAQuery<DetailUserResponse> basicQuery, String sortType) {
+    List<DetailUserResponse> content;
+    switch (sortType) {
+
+      case "name":
+        content = basicQuery
+            .orderBy(user.name.desc())
+            .fetch();
+        break;
+
+      case "rname":
+        content = basicQuery
+            .orderBy(user.name.asc())
+            .fetch();
+        break;
+
+      case "nickname":
+        content = basicQuery
+            .orderBy(user.nickname.desc())
+            .fetch();
+        break;
+
+      case "rnickname":
+        content = basicQuery
+            .orderBy(user.nickname.asc())
+            .fetch();
+        break;
+
+      default:
+        content = new ArrayList<>(); // return empty list
+    }
+
+    return content;
+  }
 }
