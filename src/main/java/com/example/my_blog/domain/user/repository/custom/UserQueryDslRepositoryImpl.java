@@ -12,6 +12,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.support.PageableExecutionUtils;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static com.example.my_blog.domain.user.QUser.*;
@@ -26,8 +27,8 @@ public class UserQueryDslRepositoryImpl implements  UserQueryDslRepository {
   @Override
   public Page<DetailUserResponse> listSearchResult(UserSearchCondition condition, Pageable pageable) {
 
-    // 조건에 따른 회원 검색에 대한 List 결과값
-    List<DetailUserResponse> content = queryFactory.select(new QDetailUserResponse(user))
+    List<DetailUserResponse> content = queryFactory
+        .select(new QDetailUserResponse(user))
         .from(user)
         .where(nameContains(condition.getName()), nicknameContains(condition.getNickname()))
         .offset(pageable.getOffset())
