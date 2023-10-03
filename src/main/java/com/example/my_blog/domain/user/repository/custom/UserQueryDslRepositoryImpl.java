@@ -45,6 +45,29 @@ public class UserQueryDslRepositoryImpl implements  UserQueryDslRepository {
     return PageableExecutionUtils.getPage(content, pageable, countQuery::fetchCount);
   }
 
+  /*
+  정렬된 전체 회원 조회 + 일반 검색 및 정렬된 검색 결과 조회
+   */
+  @Override
+  public Page<DetailUserResponse> listSortedSearchResult(UserSearchCondition condition, String sortType, Pageable pageable) {
+    JPAQuery<DetailUserResponse> basicQuery = queryFactory
+        .select(new QDetailUserResponse(user))
+        .from(user)
+        .where(nameContains(condition.getName()), nicknameContains(condition.getNickname()))
+        .offset(pageable.getOffset())
+        .limit(pageable.getPageSize());
+
+    List<DetailUserResponse> content = addSortingQuery(basicQuery, sortType);
+
+    JPAQuery<DetailUserResponse> countQuery = queryFactory.select(new QDetailUserResponse(user))
+        .from(user)
+        .where(nameContains(condition.getName()), nicknameContains(condition.getNickname()))
+        .offset(pageable.getOffset())
+        .limit(pageable.getPageSize());
+
+    return PageableExecutionUtils.getPage(content, pageable, countQuery::fetchCount);
+  }
+
   private BooleanExpression nameContains(String name) {
     return hasText(name) ? user.name.contains(name) : null;
   }
