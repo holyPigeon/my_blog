@@ -24,6 +24,9 @@ public class UserQueryDslRepositoryImpl implements  UserQueryDslRepository {
 
   private final JPAQueryFactory queryFactory;
 
+  /*
+  일반 검색
+   */
   @Override
   public Page<DetailUserResponse> listSearchResult(UserSearchCondition condition, Pageable pageable) {
 
