@@ -24,6 +24,7 @@ public class Comment extends BaseEntity {
   private Long id;
 
   @Lob
+  @Column(columnDefinition = "LONGTEXT")
   private String content;
 
   @ManyToOne(fetch = FetchType.LAZY)
