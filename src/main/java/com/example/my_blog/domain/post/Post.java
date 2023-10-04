@@ -29,9 +29,11 @@ public class Post extends BaseEntity {
   private User user;
 
   @Lob
+  @Column(columnDefinition = "LONGTEXT")
   private String title;
 
   @Lob
+  @Column(columnDefinition = "LONGTEXT")
   private String content;
 
   @OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
