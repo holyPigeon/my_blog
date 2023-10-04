@@ -22,7 +22,7 @@ create table posts
     created_date       datetime(6)  not null comment '게시글 생성일',
     last_modified_date datetime(6)  not null comment '게시글 수정일',
     content            longtext     not null comment '게시글 내용',
-    title              tinytext     not null comment '게시글 생성일',
+    title              longtext     not null comment '게시글 제목',
     user_id            bigint       not null comment '유저 ID',
 
     constraint FK5lidm6cqbc7u4xhqpxm898qme
