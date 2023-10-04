@@ -58,8 +58,9 @@ public class UserController {
   ) {
 
     PageRequest pageRequest = PageRequest.of(page - 1, size, Sort.by(Sort.Direction.ASC, "id"));
-    UserSearchCondition userSearchCondition = new UserSearchCondition(name, nickname);
-    Page<DetailUserResponse> userDtoPage = userService.search(userSearchCondition, pageRequest);
+    Page<DetailUserResponse> userDtoPage = userService
+        .findAll(pageRequest)
+        .map(DetailUserResponse::new);
 
     return userDtoPage;
   }
