@@ -54,10 +54,7 @@ public class UserController {
   @GetMapping("/users")
   public Page<DetailUserResponse> listUser(
       @RequestParam("page") int page,
-      @RequestParam("size") int size,
-      @RequestParam("sort") String sort,
-      @RequestParam("name") String name,
-      @RequestParam("nickname") String nickname
+      @RequestParam("size") int size
   ) {
 
     PageRequest pageRequest = PageRequest.of(page - 1, size, Sort.by(Sort.Direction.ASC, "id"));
