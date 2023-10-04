@@ -55,8 +55,33 @@ VALUES (1, "erat.eget@outlook.ca", "Carissa Chan", "Indira Wagner", "VDS42ZMG5IO
 
 -- 2. Posts
 insert into posts (post_id, user_id, title, content, created_date, last_modified_date, created_by, last_modified_by)
-values (1, 1,
-        'Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Duis faucibus accumsan odio. Curabitur convallis.', 'In hac habitasse platea dictumst. Morbi vestibulum, velit id pretium iaculis, diam erat fermentum justo, nec condimentum neque sapien placerat ante. Nulla justo.
+values (1, 1, 'Duis aliquam convallis nunc. Proin at turpis a pede posuere nonummy.', 'Nam ultrices, libero non mattis pulvinar, nulla pede ullamcorper augue, a suscipit nulla elit ac nulla. Sed vel enim sit amet nunc viverra dapibus. Nulla suscipit ligula in lacus.
+
+Curabitur at ipsum ac tellus semper interdum. Mauris ullamcorper purus sit amet nulla. Quisque arcu libero, rutrum ac, lobortis vel, dapibus at, diam.',
+        '2023.01.01 00:00:00', '2023.01.01 00:00:00', 'cchipchase0', 'rborzoni0'),
+       (2, 2,
+        'Morbi vel lectus in quam fringilla rhoncus. Mauris enim leo, rhoncus sed, vestibulum sit amet, cursus id, turpis.', 'Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Vivamus vestibulum sagittis sapien. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
+
+Etiam vel augue. Vestibulum rutrum rutrum neque. Aenean auctor gravida sem.', '2023.01.02 00:00:00',
+        '2023.01.02 00:00:00', 'cminchinton1', 'rdand1'),
+       (3, 3,
+        'Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Mauris viverra diam vitae quam. Suspendisse potenti.', 'Fusce posuere felis sed lacus. Morbi sem mauris, laoreet ut, rhoncus aliquet, pulvinar sed, nisl. Nunc rhoncus dui vel sem.
+
+Sed sagittis. Nam congue, risus semper porta volutpat, quam pede lobortis ligula, sit amet eleifend pede libero quis orci. Nullam molestie nibh in lectus.
+
+Pellentesque at nulla. Suspendisse potenti. Cras in purus eu magna vulputate luctus.', '2023.01.03 00:00:00',
+        '2023.01.03 00:00:00', 'thavik2', 'mfidelli2'),
+       (4, 4, 'Vestibulum rutrum rutrum neque. Aenean auctor gravida sem.', 'In hac habitasse platea dictumst. Morbi vestibulum, velit id pretium iaculis, diam erat fermentum justo, nec condimentum neque sapien placerat ante. Nulla justo.
+
+Aliquam quis turpis eget elit sodales scelerisque. Mauris sit amet eros. Suspendisse accumsan tortor quis turpis.',
+        '2023.01.04 00:00:00', '2023.01.04 00:00:00', 'cwitherington3', 'crichel3'),
+       (5, 5, 'Ut tellus. Nulla ut erat id mauris vulputate elementum.', 'Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Vivamus vestibulum sagittis sapien. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
+
+Etiam vel augue. Vestibulum rutrum rutrum neque. Aenean auctor gravida sem.
+
+Praesent id massa id nisl venenatis lacinia. Aenean sit amet justo. Morbi ut odio.', '2023.01.05 00:00:00',
+        '2023.01.05 00:00:00', 'medington4', 'pdeevey4'),
+       (6, 6, 'Nam nulla. Integer pede justo, lacinia eget, tincidunt eget, tempus vel, pede.', 'In hac habitasse platea dictumst. Morbi vestibulum, velit id pretium iaculis, diam erat fermentum justo, nec condimentum neque sapien placerat ante. Nulla justo.
 
 Aliquam quis turpis eget elit sodales scelerisque. Mauris sit amet eros. Suspendisse accumsan tortor quis turpis.
 
