@@ -66,6 +66,43 @@ public class UserController {
   }
 
   /**
+   * 회원 검색
+   */
+  @GetMapping("/users/search")
+  public Page<DetailUserResponse> searchUser(
+      @RequestParam("page") int page,
+      @RequestParam("size") int size,
+      @RequestParam("name") String name,
+      @RequestParam("nickname") String nickname
+  ) {
+
+    PageRequest pageRequest = PageRequest.of(page - 1, size, Sort.by(Sort.Direction.ASC, "id"));
+    UserSearchCondition userSearchCondition = new UserSearchCondition(name, nickname);
+    Page<DetailUserResponse> userDtoPage = userService.listSearchResult(userSearchCondition, pageRequest);
+
+    return userDtoPage;
+  }
+
+  /**
+   * 정렬된 전체 회원 조회 + 일반 검색 및 정렬된 검색 결과 조회
+   */
+  @GetMapping("/users/sort")
+  public Page<DetailUserResponse> searchSortedUser(
+      @RequestParam("page") int page,
+      @RequestParam("size") int size,
+      @RequestParam("sort") String sortType,
+      @RequestParam("name") String name,
+      @RequestParam("nickname") String nickname
+  ) {
+
+    PageRequest pageRequest = PageRequest.of(page - 1, size);
+    UserSearchCondition userSearchCondition = new UserSearchCondition(name, nickname);
+    Page<DetailUserResponse> userDtoPage = userService.listSortedSearchResult(userSearchCondition, sortType, pageRequest);
+
+    return userDtoPage;
+  }
+
+  /**
    * 회원 수정
    */
   @PatchMapping("/users/{userId}")
