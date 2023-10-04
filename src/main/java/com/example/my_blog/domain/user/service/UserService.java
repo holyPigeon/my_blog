@@ -58,7 +58,9 @@ public class UserService {
     return userRepository.listSearchResult(condition, pageable);
   }
 
-    return userRepository.search(condition, pageable);
+  public Page<DetailUserResponse> listSortedSearchResult(UserSearchCondition condition, String sortType, Pageable pageable) {
+
+    return userRepository.listSortedSearchResult(condition, sortType, pageable);
   }
 
   @Transactional
