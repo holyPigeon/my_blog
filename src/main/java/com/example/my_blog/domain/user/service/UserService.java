@@ -53,7 +53,10 @@ public class UserService {
     return userRepository.findAll(pageable);
   }
 
-  public Page<DetailUserResponse> search(UserSearchCondition condition, Pageable pageable) {
+  public Page<DetailUserResponse> listSearchResult(UserSearchCondition condition, Pageable pageable) {
+
+    return userRepository.listSearchResult(condition, pageable);
+  }
 
     return userRepository.search(condition, pageable);
   }
