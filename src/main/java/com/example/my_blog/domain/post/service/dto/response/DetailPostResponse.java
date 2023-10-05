@@ -24,6 +24,7 @@ public class DetailPostResponse {
   @JsonFormat(pattern = "yyyy.MM.dd HH:mm:ss")
   private LocalDateTime lastModifiedDate;
 
+  @QueryProjection
   public DetailPostResponse (Post post) {
 
     this.id = post.getId();
