@@ -2,6 +2,7 @@ package com.example.my_blog.domain.post.service.dto.response;
 
 import com.example.my_blog.domain.post.Post;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.querydsl.core.annotations.QueryProjection;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
