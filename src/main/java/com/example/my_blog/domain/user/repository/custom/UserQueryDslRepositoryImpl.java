@@ -25,7 +25,7 @@ public class UserQueryDslRepositoryImpl implements  UserQueryDslRepository {
   private final JPAQueryFactory queryFactory;
 
   /*
-  일반 검색
+  일반 회원 검색
    */
   @Override
   public Page<DetailUserResponse> listSearchResult(UserSearchCondition condition, Pageable pageable) {
@@ -71,6 +71,9 @@ public class UserQueryDslRepositoryImpl implements  UserQueryDslRepository {
     return PageableExecutionUtils.getPage(content, pageable, countQuery::fetchCount);
   }
 
+  /**
+   * 이름 및 닉네임 포함 여부 조사 메소드
+   */
   private BooleanExpression nameContains(String name) {
     return hasText(name) ? user.name.contains(name) : null;
   }
@@ -79,6 +82,9 @@ public class UserQueryDslRepositoryImpl implements  UserQueryDslRepository {
     return hasText(nickname) ? user.nickname.contains(nickname) : null;
   }
 
+  /**
+   * 정렬 쿼리 추가 메소드
+   */
   private List<DetailUserResponse> addSortingQuery(JPAQuery<DetailUserResponse> basicQuery, String sortType) {
     List<DetailUserResponse> content;
     switch (sortType) {

@@ -5,10 +5,7 @@ import com.example.my_blog.domain.comment.Comment;
 import com.example.my_blog.domain.like.post.PostLike;
 import com.example.my_blog.domain.user.User;
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,6 +32,9 @@ public class Post extends BaseEntity {
   @Lob
   @Column(columnDefinition = "LONGTEXT")
   private String content;
+
+  @Column(columnDefinition = "integer default 0")
+  private int viewCount;
 
   @OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
   private List<PostLike> likes = new ArrayList<>();
