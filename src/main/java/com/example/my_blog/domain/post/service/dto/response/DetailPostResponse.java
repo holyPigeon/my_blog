@@ -34,6 +34,8 @@ public class DetailPostResponse {
     this.author = post.getUser().getNickname();
     this.title = post.getTitle();
     this.content = post.getContent();
+    this.viewCount = post.getViewCount();
+    this.likeCount = post.getLikes().size();
     this.createdDate = post.getCreatedDate();
     this.lastModifiedDate = post.getLastModifiedDate();
   }
