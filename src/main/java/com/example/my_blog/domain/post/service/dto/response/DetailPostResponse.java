@@ -18,6 +18,8 @@ public class DetailPostResponse {
   private String author;
   private String title;
   private String content;
+  private int viewCount;
+  private int likeCount;
 
   @JsonFormat(pattern = "yyyy.MM.dd HH:mm:ss")
   private LocalDateTime createdDate;
