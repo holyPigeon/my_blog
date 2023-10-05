@@ -4,7 +4,9 @@ import com.example.my_blog.domain.like.post.PostLike;
 import com.example.my_blog.domain.like.post.repository.PostLikeRepository;
 import com.example.my_blog.domain.post.Post;
 import com.example.my_blog.domain.post.repository.PostRepository;
+import com.example.my_blog.domain.post.service.dto.request.PostSearchCondition;
 import com.example.my_blog.domain.post.service.dto.request.UpdatePostRequest;
+import com.example.my_blog.domain.post.service.dto.response.DetailPostResponse;
 import com.example.my_blog.domain.user.User;
 import com.example.my_blog.domain.user.repository.UserRepository;
 import com.example.my_blog.exception.MyBlogException;
@@ -49,6 +51,16 @@ public class PostService {
   public Page<Post> findAll(Pageable pageable) {
 
     return postRepository.findAll(pageable);
+  }
+
+  public Page<DetailPostResponse> listSearchResult(PostSearchCondition condition, Pageable pageable) {
+
+    return postRepository.listSearchResult(condition, pageable);
+  }
+
+  public Page<DetailPostResponse> listSortedSearchResult(PostSearchCondition condition, String sortType, Pageable pageable) {
+
+    return postRepository.listSortedSearchResult(condition, sortType, pageable);
   }
 
   @Transactional
