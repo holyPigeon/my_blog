@@ -46,7 +46,7 @@ public class PostQueryDslRepositoryImpl implements PostQueryDslRepository{
         .fetch();
 
     // 성능 최적화를 위해 pageSize를 구하는 쿼리를 따로 빼놓았음.
-    JPAQuery<DetailPostResponse> countQuery = getSearchResultCountQuery(condition, pageable);
+    JPAQuery<Long> countQuery = getSearchResultCountQuery(condition, pageable);
 
     return PageableExecutionUtils.getPage(content, pageable, countQuery::fetchCount);
   }
@@ -71,7 +71,7 @@ public class PostQueryDslRepositoryImpl implements PostQueryDslRepository{
     List<DetailPostResponse> content = addSortingQuery(basicQuery, sortType);
 
     // 성능 최적화를 위해 pageSize를 구하는 쿼리를 따로 빼놓았음.
-    JPAQuery<DetailPostResponse> countQuery = getSearchResultCountQuery(condition, pageable);
+    JPAQuery<Long> countQuery = getSearchResultCountQuery(condition, pageable);
 
     return PageableExecutionUtils.getPage(content, pageable, countQuery::fetchCount);
   }
@@ -79,19 +79,17 @@ public class PostQueryDslRepositoryImpl implements PostQueryDslRepository{
   /*
     pageSize를 구하는 Count 쿼리를 성능 최적화를 위해 따로 구현 + 가독성을 위해 메소드 추출
    */
-  private JPAQuery<DetailPostResponse> getSearchResultCountQuery(PostSearchCondition condition, Pageable pageable) {
-    JPAQuery<DetailPostResponse> countQuery = queryFactory
-        .select(new QDetailPostResponse(post))
+  private JPAQuery<Long> getSearchResultCountQuery(PostSearchCondition condition, Pageable pageable) {
+
+    return queryFactory
+        .select(post.count())
         .from(post)
-        .innerJoin(post.user, user).fetchJoin()
+        .leftJoin(post.user, user).fetchJoin()
         .where(
             titleContains(condition.getTitle()),
             contentContains(condition.getContent()),
             authorContains(condition.getAuthor())
-        )
-        .offset(pageable.getOffset())
-        .limit(pageable.getPageSize());
-    return countQuery;
+        );
   }
 
   /**
