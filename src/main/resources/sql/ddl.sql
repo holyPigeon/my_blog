@@ -23,6 +23,7 @@ create table posts
     last_modified_date datetime(6)  not null comment '게시글 수정일',
     content            longtext     not null comment '게시글 내용',
     title              longtext     not null comment '게시글 제목',
+    view_count         bigint       default 0 not null comment '게시글 조회수',
     user_id            bigint       not null comment '유저 ID',
 
     constraint FK5lidm6cqbc7u4xhqpxm898qme
