@@ -54,7 +54,7 @@ public class PostController {
   }
 
   /**
-   * 게시글 목록 조회
+   * 게시글 전체 조회
    */
   @GetMapping("/posts")
   public Page<DetailPostResponse> listPost(
@@ -71,7 +71,7 @@ public class PostController {
   }
 
   /**
-   * 게시글 단일 조회
+   * 게시글 검색
    */
   @GetMapping("/posts/search")
   public Page<DetailPostResponse> searchPost(
