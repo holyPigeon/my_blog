@@ -15,10 +15,8 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.example.my_blog.domain.like.post.QPostLike.*;
 import static com.example.my_blog.domain.post.QPost.post;
 import static com.example.my_blog.domain.user.QUser.user;
-import static com.querydsl.jpa.JPAExpressions.*;
 import static org.springframework.util.StringUtils.hasText;
 
 @RequiredArgsConstructor
@@ -36,7 +34,12 @@ public class PostQueryDslRepositoryImpl implements PostQueryDslRepository{
     List<DetailPostResponse> content = queryFactory
         .select(new QDetailPostResponse(post))
         .from(post)
-        .where()
+        .innerJoin(post.user, user).fetchJoin()
+        .where(
+            titleContains(condition.getTitle()),
+            contentContains(condition.getContent()),
+            authorContains(condition.getAuthor())
+        )
         .offset(pageable.getOffset())
         .limit(pageable.getPageSize())
         .fetch();
@@ -60,7 +63,12 @@ public class PostQueryDslRepositoryImpl implements PostQueryDslRepository{
     JPAQuery<DetailPostResponse> basicQuery = queryFactory
         .select(new QDetailPostResponse(post))
         .from(post)
-        .where(keywordContains(condition.getTitle(), condition.getTitle(), condition.getTitle()))
+        .innerJoin(post.user, user).fetchJoin()
+        .where(
+            titleContains(condition.getTitle()),
+            contentContains(condition.getContent()),
+            authorContains(condition.getAuthor())
+        )
         .offset(pageable.getOffset())
         .limit(pageable.getPageSize());
 
@@ -69,7 +77,12 @@ public class PostQueryDslRepositoryImpl implements PostQueryDslRepository{
     JPAQuery<DetailPostResponse> countQuery = queryFactory
         .select(new QDetailPostResponse(post))
         .from(post)
-        .where(keywordContains(condition.getTitle(), condition.getTitle(), condition.getTitle()))
+        .innerJoin(post.user, user).fetchJoin()
+        .where(
+            titleContains(condition.getTitle()),
+            contentContains(condition.getContent()),
+            authorContains(condition.getAuthor())
+        )
         .offset(pageable.getOffset())
         .limit(pageable.getPageSize());
 
