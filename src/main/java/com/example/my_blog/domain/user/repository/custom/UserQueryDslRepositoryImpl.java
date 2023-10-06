@@ -59,13 +59,20 @@ public class UserQueryDslRepositoryImpl implements  UserQueryDslRepository {
 
     List<DetailUserResponse> content = addSortingQuery(basicQuery, sortType);
 
-    JPAQuery<DetailUserResponse> countQuery = queryFactory.select(new QDetailUserResponse(user))
-        .from(user)
-        .where(nameContains(condition.getName()), nicknameContains(condition.getNickname()))
-        .offset(pageable.getOffset())
-        .limit(pageable.getPageSize());
+    JPAQuery<Long> countQuery = getSearchResultCountQuery(condition, pageable);
 
     return PageableExecutionUtils.getPage(content, pageable, countQuery::fetchCount);
+  }
+
+  private JPAQuery<Long> getSearchResultCountQuery(UserSearchCondition condition, Pageable pageable) {
+
+    return queryFactory
+        .select(user.count())
+        .from(user)
+        .where(
+            nameContains(condition.getName()),
+            nicknameContains(condition.getNickname())
+        );
   }
 
   /**
