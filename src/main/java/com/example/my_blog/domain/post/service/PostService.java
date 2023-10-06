@@ -78,6 +78,13 @@ public class PostService {
     postRepository.deleteById(id);
   }
 
+  //== 게시글 조회수 증가 메소드 ==//
+  @Transactional
+  public void incrementViewCount(Long postId) {
+
+    postRepository.incrementViewCount(postId);
+  }
+
   //== 게시글 좋아요 관련 메소드 ==//
 
   @Transactional
