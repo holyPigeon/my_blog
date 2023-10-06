@@ -34,7 +34,7 @@ public class PostQueryDslRepositoryImpl implements PostQueryDslRepository{
     List<DetailPostResponse> content = queryFactory
         .select(new QDetailPostResponse(post))
         .from(post)
-        .innerJoin(post.user, user).fetchJoin()
+        .leftJoin(post.user, user).fetchJoin()
         .where(
             titleContains(condition.getTitle()),
             contentContains(condition.getContent()),
@@ -59,7 +59,7 @@ public class PostQueryDslRepositoryImpl implements PostQueryDslRepository{
     JPAQuery<DetailPostResponse> basicQuery = queryFactory
         .select(new QDetailPostResponse(post))
         .from(post)
-        .innerJoin(post.user, user).fetchJoin()
+        .leftJoin(post.user, user).fetchJoin()
         .where(
             titleContains(condition.getTitle()),
             contentContains(condition.getContent()),
