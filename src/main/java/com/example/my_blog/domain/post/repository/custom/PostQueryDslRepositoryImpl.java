@@ -97,10 +97,6 @@ public class PostQueryDslRepositoryImpl implements PostQueryDslRepository{
   /**
    * 제목, 내용, 글쓴이 포함 여부 조사 메소드
    */
-  private BooleanExpression keywordContains(String title, String content, String author) {
-    return titleContains(title).and(contentContains(content)).and(authorContains(author));
-  }
-
   private BooleanExpression titleContains(String title) {
     return hasText(title) ? post.title.contains(title) : null;
   }
