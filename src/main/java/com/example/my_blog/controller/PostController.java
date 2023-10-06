@@ -90,6 +90,26 @@ public class PostController {
   }
 
   /**
+   * 정렬된 전체 회원 조회 + 일반 검색 및 정렬된 검색 결과 조회
+   */
+  @GetMapping("/posts/sort")
+  public Page<DetailPostResponse> searchSortedPost(
+      @RequestParam("page") int page,
+      @RequestParam("size") int size,
+      @RequestParam("sort") String sortType,
+      @RequestParam("title") String title,
+      @RequestParam("content") String content,
+      @RequestParam("author") String author
+  ) {
+
+    PageRequest pageRequest = PageRequest.of(page - 1, size);
+    PostSearchCondition postSearchCondition = new PostSearchCondition(title, content, author);
+    Page<DetailPostResponse> postDtoPage = postService.listSortedSearchResult(postSearchCondition, sortType, pageRequest);
+
+    return postDtoPage;
+  }
+
+  /**
    * 게시글 수정
    */
   @PatchMapping("/posts/{postId}")
