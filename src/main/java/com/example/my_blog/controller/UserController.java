@@ -57,7 +57,7 @@ public class UserController {
       @RequestParam("size") int size
   ) {
 
-    PageRequest pageRequest = PageRequest.of(page - 1, size, Sort.by(Sort.Direction.ASC, "id"));
+    PageRequest pageRequest = PageRequest.of(page - 1, size, Sort.by(Sort.Direction.DESC, "id"));
     Page<DetailUserResponse> userDtoPage = userService
         .findAll(pageRequest)
         .map(DetailUserResponse::new);
