@@ -36,6 +36,7 @@ public class UserQueryDslRepositoryImpl implements  UserQueryDslRepository {
         .where(nameContains(condition.getName()), nicknameContains(condition.getNickname()))
         .offset(pageable.getOffset())
         .limit(pageable.getPageSize())
+        .orderBy(user.id.desc())
         .fetch();
 
     // 성능 최적화를 위해 pageSize를 구하는 쿼리를 따로 빼놓았음.

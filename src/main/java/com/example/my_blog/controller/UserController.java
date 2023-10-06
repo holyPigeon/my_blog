@@ -76,7 +76,7 @@ public class UserController {
       @RequestParam("nickname") String nickname
   ) {
 
-    PageRequest pageRequest = PageRequest.of(page - 1, size, Sort.by(Sort.Direction.ASC, "id"));
+    PageRequest pageRequest = PageRequest.of(page - 1, size);
     UserSearchCondition userSearchCondition = new UserSearchCondition(name, nickname);
     Page<DetailUserResponse> userDtoPage = userService.listSearchResult(userSearchCondition, pageRequest);
 
