@@ -73,12 +73,20 @@ public class PostController {
   /**
    * 게시글 단일 조회
    */
-  @GetMapping("/posts/{postId}")
-  public DetailPostResponse listPostDetail(@PathVariable Long postId) {
+  @GetMapping("/posts/search")
+  public Page<DetailPostResponse> searchPost(
+      @RequestParam("page") int page,
+      @RequestParam("size") int size,
+      @RequestParam("title") String title,
+      @RequestParam("content") String content,
+      @RequestParam("author") String author
+  ) {
 
-    Post findPost = postService.findById(postId);
+    PageRequest pageRequest = PageRequest.of(page - 1, size);
+    PostSearchCondition postSearchCondition = new PostSearchCondition(title, content, author);
+    Page<DetailPostResponse> postDtoPage = postService.listSearchResult(postSearchCondition, pageRequest);
 
-    return new DetailPostResponse(findPost);
+    return postDtoPage;
   }
 
   /**
