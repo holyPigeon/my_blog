@@ -24,6 +24,8 @@
                                 <li><a @click="changePageSort('name')">이름 내림차순</a></li>
                                 <li><a @click="changePageSort('rnickname')">닉네임 오름차순</a></li>
                                 <li><a @click="changePageSort('nickname')">닉네임 내림차순</a></li>
+                                <li><a @click="changePageSort('rdate')">날짜 빠른 순</a></li>
+                                <li><a @click="changePageSort('date')">날짜 느린 순</a></li>
 
                             </ul>
                         </div>
@@ -90,6 +92,7 @@ export default {
             pageSort: 'date',
             searchCondition: '이름',
             searchKeyword: '',
+            searchParameter: '',
             userList: {
                 // "content": [
                 //     {
@@ -128,7 +131,7 @@ export default {
     },
     methods: {
         changePageSize(size) {
-            axios.get(`/api/users?page=${this.userList.number + 1}&size=${size}`)
+            axios.get(`/api/users?sort=${this.pageSort}page=${this.userList.number + 1}&size=${size}`)
                 .then((res) => {
                     this.userList = { ...res.data };
                     this.pageSize = size;
@@ -137,15 +140,8 @@ export default {
                 });
         },
         changePageSort(sort) {
-            let searchQuery;
-
-            if (this.searchCondition == '이름') {
-                searchQuery = `&name=${this.searchKeyword}&nickname=`;
-            } else if (this.searchCondition == '닉네임') {
-                searchQuery = `&name=&nickname=${this.searchKeyword}`;
-            }
-
-            axios.get(`/api/users/sort?sort=${sort}&page=${this.userList.number + 1}&size=${this.pageSize}${searchQuery}`)
+            this.changeSearchParameter(this.searchKeyword);
+            axios.get(`/api/users/sort?sort=${sort}&page=${this.userList.number + 1}&size=${this.pageSize}${this.searchParameter}`)
                 .then((res) => {
                     this.userList = { ...res.data };
                     this.pageSort = sort;
@@ -157,26 +153,32 @@ export default {
             this.searchCondition = searchCondition;
         },
         search(keyword) {
-            if (this.searchCondition == '이름') {
-                axios.get(`/api/users/search?page=${this.userList.number + 1}&size=${this.pageSize}&name=${keyword}&nickname=`)
+            this.changeSearchParameter(keyword);
+                axios.get(`/api/users/search?page=1&size=${this.pageSize}${this.searchParameter}`)
                     .then((res) => {
                         this.userList = { ...res.data };
-                        if (this.userList.content.length == 0) {
+                        if (this.userList.totalElements == 0) {
                             alert('검색 결과가 없습니다.');
                         }
                     }).catch((err) => {
                         JSON.stringify("err => " + err);
                     });
-            } else if (this.searchCondition == '닉네임') {
-                axios.get(`/api/users/search?page=${this.userList.number + 1}&size=${this.pageSize}&name=&nickname=${keyword}`)
-                    .then((res) => {
-                        this.userList = { ...res.data };
-                        if (this.userList.content.length == 0) {
-                            alert('검색 결과가 없습니다.');
-                        }
-                    }).catch((err) => {
-                        JSON.stringify("err => " + err);
-                    });
+        },
+        changeSearchParameter(keyword) {
+            switch (this.searchCondition) {
+                case '이름':
+                    this.searchParameter
+                        = `&name=${keyword}&nickname=`;
+                    break;
+
+                case '닉네임':
+                    this.searchParameter
+                        = `&name=&nickname=${keyword}`;
+                    break;
+
+                default:
+                    this.searchParameter
+                        = ``;
             }
         },
         checkButtonActive(currentPage, page) {
@@ -187,7 +189,8 @@ export default {
             }
         },
         goToPage(page) {
-            axios.get(`/api/users?page=${page}&size=${this.pageSize}`)
+            this.changeSearchParameter(this.searchKeyword);
+            axios.get(`/api/users/sort?sort=${this.pageSort}&size=${this.pageSize}&page=${page}${this.searchParameter}`)
                 .then((res) => {
                     this.userList = { ...res.data };
                 }).catch((err) => {
@@ -209,7 +212,7 @@ export default {
             }
         }
     },
-    beforeMount() {
+    created() {
         axios.get(`/api/users?page=1&size=${this.pageSize}`)
             .then((res) => {
                 this.userList = { ...res.data };
