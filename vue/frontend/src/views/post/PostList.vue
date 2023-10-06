@@ -7,7 +7,7 @@
                 <div class="overflow-x-auto">
 
                     <div class="p-4 text-center">
-       능                 <p class="text-lg fw-bold">게시글 목록</p>
+                        <p class="text-lg fw-bold">게시글 목록</p>
                     </div>
                     <div class="flex items-center">
                         <div class="dropdown dropdown-hover text-start">
@@ -21,8 +21,12 @@
                         <div class="dropdown dropdown-hover text-start">
                             <label tabindex="0" class="btn btn-sm btn-primary m-1">필터</label>
                             <ul tabindex="0" class="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
+                                <li><a @click="changePageSort('view')">조회수 많은 순</a></li>
+                                <li><a @click="changePageSort('rview')">조회수 적은 순</a></li>
                                 <li><a @click="changePageSort('like')">추천 많은 순</a></li>
                                 <li><a @click="changePageSort('rlike')">추천 적은 순</a></li>
+                                <li><a @click="changePageSort('date')">날짜 최신 순</a></li>
+                                <li><a @click="changePageSort('rdate')">날짜 오래된 순</a></li>
                             </ul>
                         </div>
                         <div class="flex-grow text-end">
@@ -31,7 +35,9 @@
                                 <ul tabindex="0"
                                     class="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
                                     <li><a @click="changeSearchCondition('제목')">제목</a></li>
+                                    <li><a @click="changeSearchCondition('내용')">내용</a></li>
                                     <li><a @click="changeSearchCondition('작성자')">작성자</a></li>
+                                    <li><a @click="changeSearchCondition('전체')">전체</a></li>
                                 </ul>
                             </div>
                             <input v-model="searchKeyword" type="text"
@@ -54,10 +60,13 @@
                                 <th>제목</th>
                                 <th>글쓴이</th>
                                 <th>등록일</th>
+                                <th>좋아요</th>
+                                <th>조회</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr v-for="(post, index) in postList.content" :key="index" class="hover text-neutral-content">
+
+                            <tr v-for="post in postList.content" :key="post.id" class="hover text-neutral-content">
                                 <th style="width: 10%;">{{ post.id }}</th>
                                 <td style="width: 50%;">
                                     <a @click="$router.push(`/post/list/${post.id}`)">
@@ -66,6 +75,8 @@
                                 </td>
                                 <td style="width: 15%;">{{ post.author }}</td>
                                 <td>{{ post.createdDate }}</td>
+                                <td class="text-center">{{ post.likeCount }}</td>
+                                <td class="text-center">{{ post.viewCount }}</td>
                             </tr>
                         </tbody>
                     </table>
@@ -74,10 +85,10 @@
                         <div class="join border border-dark mt-8">
                             <button @click="goToPreviousPage((postList.number + 1) - 1)"
                                 class="join-item btn"><a>이전</a></button>
-                            <button @click="goToPage(index)" v-for="(index) in postList.totalPages" :key="index"
-                                :class="checkButtonActive(postList.number + 1, index)"
+                            <button @click="goToPage(page)" v-for="(page) in postList.totalPages" :key="page"
+                                :class="checkButtonActive(postList.number + 1, page)"
                                 class="join-item btn hover:neutral-content">{{
-                                    index }}
+                                    page }}
                             </button>
                             <button @click="goToNextPage((postList.number + 1) + 1)" class="join-item btn">다음</button>
                         </div>
@@ -100,7 +111,8 @@ export default {
             pageSort: 'date',
             searchCondition: '제목',
             searchKeyword: '',
-            postList: null
+            searchParameter: '',
+            postList: {}
             // {
             //     "content": [
             //         {
@@ -142,7 +154,7 @@ export default {
     },
     methods: {
         changePageSize(size) {
-            axios.get('/api/posts?sort=' + this.pageSort + '&size=' + size + '&page=' + (this.postList.number + 1))
+            axios.get(`/api/posts?sort=${this.pageSort}&size=${size}&page=${this.postList.number + 1}`)
                 .then((res) => {
                     this.postList = { ...res.data };
                     this.pageSize = size;
@@ -151,10 +163,11 @@ export default {
                 });
         },
         changePageSort(sort) {
-            axios.get('/api/posts?sort=' + sort + '&size=' + this.pageSize + '&page=' + (this.postList.number + 1))
+            this.changeSearchParameter(this.searchKeyword);
+            axios.get(`/api/posts/sort?sort=${sort}&size=${this.pageSize}&page=${this.postList.number + 1}${this.searchParameter}`)
                 .then((res) => {
                     this.postList = { ...res.data };
-                    this.pageSort = 'date';
+                    this.pageSort = sort;
                 }).catch((err) => {
                     JSON.stringify("err => " + err);
                 });
@@ -163,26 +176,42 @@ export default {
             this.searchCondition = searchCondition;
         },
         search(keyword) {
-            if (this.searchCondition == '제목') {
-                axios.get(`/api/posts?sort=${this.pageSort}&page=${this.postList.number + 1}&size=${this.pageSize}&name=${keyword}&nickname=`)
-                    .then((res) => {
-                        this.userList = { ...res.data };
-                        if (this.postList.content.length == 0) {
-                            alert('검색 결과가 없습니다.');
-                        }
-                    }).catch((err) => {
-                        JSON.stringify("err => " + err);
-                    });
-            } else if (this.searchCondition == '작성자') {
-                axios.get(`/api/posts?sort=${this.pageSort}&page=${this.postList.number + 1}&size=${this.pageSize}&name=&nickname=${keyword}`)
-                    .then((res) => {
-                        this.userList = { ...res.data };
-                        if (this.postList.content.length == 0) {
-                            alert('검색 결과가 없습니다.');
-                        }
-                    }).catch((err) => {
-                        JSON.stringify("err => " + err);
-                    });
+            this.changeSearchParameter(keyword);
+            axios.get(`/api/posts/search?page=1&size=${this.pageSize}${this.searchParameter}`)
+                .then((res) => {
+                    this.postList = { ...res.data };
+                    if (this.postList.totalElements == 0) {
+                        alert('검색 결과가 없습니다.');
+                    }
+                }).catch((err) => {
+                    JSON.stringify("err => " + err);
+                });
+        },
+        changeSearchParameter(keyword) {
+            switch (this.searchCondition) {
+                case '제목':
+                    this.searchParameter
+                        = `&title=${keyword}&content=&author=`;
+                    break;
+
+                case '내용':
+                    this.searchParameter
+                        = `&title=&content=${keyword}&author=`;
+                    break;
+
+                case '작성자':
+                    this.searchParameter
+                        = `&title=&content=&author=${keyword}`;
+                    break;
+
+                case '전체':
+                    this.searchParameter
+                        = `&title=${keyword}&content=${keyword}&author=${keyword}`;
+                    break;
+
+                default:
+                    this.searchParameter
+                        = ``;
             }
         },
         checkButtonActive(currentPage, index) {
@@ -192,46 +221,35 @@ export default {
                 return '';
             }
         },
-        goToPage(index) {
-            axios.get('/api/posts?sort=' + this.pageSort + '&size=' + this.pageSize + '&page=' + index)
+        goToPage(page) {
+            this.changeSearchParameter(this.searchKeyword);
+            axios.get(`/api/posts/sort?sort=${this.pageSort}&size=${this.pageSize}&page=${page}${this.searchParameter}`)
                 .then((res) => {
                     this.postList = { ...res.data };
                 }).catch((err) => {
                     JSON.stringify("err => " + err);
                 });
         },
-        goToPreviousPage(index) {
+        goToPreviousPage(page) {
             if (this.postList.first) {
                 alert("첫 페이지입니다.");
             } else {
-                axios.get('/api/posts?sort=' + this.pageSort + '&size=' + this.pageSize + '&page=' + index)
-                    .then((res) => {
-                        this.postList = { ...res.data };
-                    }).catch((err) => {
-                        JSON.stringify("err => " + err);
-                    });
+                this.goToPage(page);
             }
         },
-        goToNextPage(index) {
+        goToNextPage(page) {
             if (this.postList.last) {
                 alert("마지막 페이지입니다.");
             } else {
-                axios.get('/api/posts?sort=' + this.pageSort + '&size=' + this.pageSize + '&page=' + index)
-                    .then((res) => {
-                        this.postList = { ...res.data };
-                    }).catch((err) => {
-                        JSON.stringify("err => " + err);
-                    });
+                this.goToPage(page);
             }
         }
 
     },
-    beforeMount() {
-        axios.get('/api/posts?sort=date&size=10&page=1')
+    created() {
+        axios.get(`/api/posts?page=1&size=${this.pageSize}`)
             .then((res) => {
                 this.postList = { ...res.data };
-                this.pageSort = 'date';
-                this.pageSize = 10;
             }).catch((err) => {
                 JSON.stringify("err => " + err);
             });
