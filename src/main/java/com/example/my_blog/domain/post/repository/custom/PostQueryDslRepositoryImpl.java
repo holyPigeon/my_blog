@@ -109,6 +109,9 @@ public class PostQueryDslRepositoryImpl implements PostQueryDslRepository{
     return hasText(author) ? post.user.nickname.contains(author) : null;
   }
 
+  /*
+    정렬 관련 쿼리를 추가하기 위한 메소드
+   */
   private List<DetailPostResponse> addSortingQuery(JPAQuery<DetailPostResponse> basicQuery, String sortType) {
     List<DetailPostResponse> content;
     switch (sortType) {
@@ -150,7 +153,7 @@ public class PostQueryDslRepositoryImpl implements PostQueryDslRepository{
         break;
 
       default:
-        content = new ArrayList<>(); // return empty list
+        content = new ArrayList<>();
     }
 
     return content;
