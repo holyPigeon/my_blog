@@ -59,8 +59,7 @@ public class PostController {
   @GetMapping("/posts")
   public Page<DetailPostResponse> listPost(
       @RequestParam("page") int page,
-      @RequestParam("size") int size,
-      @RequestParam("sort") String sort
+      @RequestParam("size") int size
   ) {
 
     PageRequest pageRequest = PageRequest.of(page - 1, size, Sort.by(Sort.Direction.DESC, "id"));
