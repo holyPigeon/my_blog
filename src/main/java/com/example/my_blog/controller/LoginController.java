@@ -19,7 +19,6 @@ import java.util.Objects;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api")
-//@CrossOrigin(origins = {"http://localhost:8080"})
 @Slf4j
 public class LoginController {
 

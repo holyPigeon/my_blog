@@ -20,8 +20,11 @@
                         <div class="dropdown dropdown-hover text-start">
                             <label tabindex="0" class="btn btn-sm btn-primary m-1">필터</label>
                             <ul tabindex="0" class="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
-                                <li><a @click="changePageSort('like')">추천 많은 순</a></li>
-                                <li><a @click="changePageSort('rlike')">추천 적은 순</a></li>
+                                <li><a @click="changePageSort('rname')">이름 오름차순</a></li>
+                                <li><a @click="changePageSort('name')">이름 내림차순</a></li>
+                                <li><a @click="changePageSort('rnickname')">닉네임 오름차순</a></li>
+                                <li><a @click="changePageSort('nickname')">닉네임 내림차순</a></li>
+
                             </ul>
                         </div>
                         <div class="flex-grow text-end">
@@ -125,7 +128,7 @@ export default {
     },
     methods: {
         changePageSize(size) {
-            axios.get(`/api/users?sort=${this.pageSort}&page=${this.userList.number + 1}&size=${size}&name=&nickname=`)
+            axios.get(`/api/users?page=${this.userList.number + 1}&size=${size}`)
                 .then((res) => {
                     this.userList = { ...res.data };
                     this.pageSize = size;
@@ -134,10 +137,18 @@ export default {
                 });
         },
         changePageSort(sort) {
-            axios.get(`/api/users?sort=${sort}&page=${this.userList.number + 1}&size=${this.pageSize}&name=&nickname=`)
+            let searchQuery;
+
+            if (this.searchCondition == '이름') {
+                searchQuery = `&name=${this.searchKeyword}&nickname=`;
+            } else if (this.searchCondition == '닉네임') {
+                searchQuery = `&name=&nickname=${this.searchKeyword}`;
+            }
+
+            axios.get(`/api/users/sort?sort=${sort}&page=${this.userList.number + 1}&size=${this.pageSize}${searchQuery}`)
                 .then((res) => {
                     this.userList = { ...res.data };
-                    this.pageSort = 'date';
+                    this.pageSort = sort;
                 }).catch((err) => {
                     JSON.stringify("err => " + err);
                 });
@@ -147,7 +158,7 @@ export default {
         },
         search(keyword) {
             if (this.searchCondition == '이름') {
-                axios.get(`/api/users?sort=${this.pageSort}&page=${this.userList.number + 1}&size=${this.pageSize}&name=${keyword}&nickname=`)
+                axios.get(`/api/users/search?page=${this.userList.number + 1}&size=${this.pageSize}&name=${keyword}&nickname=`)
                     .then((res) => {
                         this.userList = { ...res.data };
                         if (this.userList.content.length == 0) {
@@ -157,7 +168,7 @@ export default {
                         JSON.stringify("err => " + err);
                     });
             } else if (this.searchCondition == '닉네임') {
-                axios.get(`/api/users?sort=${this.pageSort}&page=${this.userList.number + 1}&size=${this.pageSize}&name=&nickname=${keyword}`)
+                axios.get(`/api/users/search?page=${this.userList.number + 1}&size=${this.pageSize}&name=&nickname=${keyword}`)
                     .then((res) => {
                         this.userList = { ...res.data };
                         if (this.userList.content.length == 0) {
@@ -176,30 +187,30 @@ export default {
             }
         },
         goToPage(page) {
-            axios.post(`/api/users?sort=${this.pageSort}&page=${page}&size=${this.pageSize}&name=&nickname=`)
+            axios.get(`/api/users?page=${page}&size=${this.pageSize}`)
                 .then((res) => {
                     this.userList = { ...res.data };
                 }).catch((err) => {
                     JSON.stringify("err => " + err);
                 });
         },
-        goToPreviousPage(index) {
+        goToPreviousPage(page) {
             if (this.userList.first) {
                 alert("첫 페이지입니다.");
             } else {
-                goToPage(index);
+                this.goToPage(page);
             }
         },
-        goToNextPage(index) {
+        goToNextPage(page) {
             if (this.userList.last) {
                 alert("마지막 페이지입니다.");
             } else {
-                goToPage(index);
+                this.goToPage(page);
             }
         }
     },
     beforeMount() {
-        axios.get(`/api/users?page=1&size=${this.pageSize}&sort=${this.pageSort}&name=&nickname=`)
+        axios.get(`/api/users?page=1&size=${this.pageSize}`)
             .then((res) => {
                 this.userList = { ...res.data };
             }).catch((err) => {
