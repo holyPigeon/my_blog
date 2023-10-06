@@ -46,6 +46,7 @@ public class PostController {
   @GetMapping("/posts/{postId}")
   public DetailPostResponse listPostDetail(@PathVariable Long postId) {
 
+    postService.incrementViewCount(postId);
     Post findPost = postService.findById(postId);
     postService.incrementViewCount(postId);
 
