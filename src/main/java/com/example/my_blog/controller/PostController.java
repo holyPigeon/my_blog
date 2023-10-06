@@ -37,7 +37,6 @@ public class PostController {
     return ResponseEntity
         .created(URI.create("/posts/" + postId))
         .build();
-
   }
 
   /**
@@ -48,7 +47,6 @@ public class PostController {
 
     postService.incrementViewCount(postId);
     Post findPost = postService.findById(postId);
-    postService.incrementViewCount(postId);
 
     return new DetailPostResponse(findPost);
   }
@@ -63,11 +61,11 @@ public class PostController {
   ) {
 
     PageRequest pageRequest = PageRequest.of(page - 1, size, Sort.by(Sort.Direction.DESC, "id"));
-    Page<Post> postPage = postService.findAll(pageRequest);
-    Page<DetailPostResponse> postDtoPage = postPage.map(DetailPostResponse::new);
+    Page<DetailPostResponse> postDtoPage = postService
+        .findAll(pageRequest)
+        .map(DetailPostResponse::new);
 
     return postDtoPage;
-
   }
 
   /**
