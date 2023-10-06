@@ -42,6 +42,7 @@ public class PostQueryDslRepositoryImpl implements PostQueryDslRepository{
         )
         .offset(pageable.getOffset())
         .limit(pageable.getPageSize())
+        .orderBy(post.id.desc())
         .fetch();
 
     // 성능 최적화를 위해 pageSize를 구하는 쿼리를 따로 빼놓았음.
