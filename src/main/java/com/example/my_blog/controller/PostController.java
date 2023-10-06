@@ -41,6 +41,18 @@ public class PostController {
   }
 
   /**
+   * 게시글 단일 조회
+   */
+  @GetMapping("/posts/{postId}")
+  public DetailPostResponse listPostDetail(@PathVariable Long postId) {
+
+    Post findPost = postService.findById(postId);
+    postService.incrementViewCount(postId);
+
+    return new DetailPostResponse(findPost);
+  }
+
+  /**
    * 게시글 목록 조회
    */
   @GetMapping("/posts")
