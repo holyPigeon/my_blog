@@ -40,12 +40,7 @@ public class UserQueryDslRepositoryImpl implements  UserQueryDslRepository {
         .fetch();
 
     // 성능 최적화를 위해 pageSize를 구하는 쿼리를 따로 빼놓았음.
-    JPAQuery<DetailUserResponse> countQuery = queryFactory
-        .select(new QDetailUserResponse(user))
-        .from(user)
-        .where(nameContains(condition.getName()), nicknameContains(condition.getNickname()))
-        .offset(pageable.getOffset())
-        .limit(pageable.getPageSize());
+    JPAQuery<Long> countQuery = getSearchResultCountQuery(condition, pageable);
 
     return PageableExecutionUtils.getPage(content, pageable, countQuery::fetchCount);
   }
