@@ -115,6 +115,18 @@ public class UserQueryDslRepositoryImpl implements  UserQueryDslRepository {
             .fetch();
         break;
 
+      case "date":
+        content = basicQuery
+            .orderBy(user.id.desc())
+            .fetch();
+        break;
+
+      case "rdate":
+        content = basicQuery
+            .orderBy(user.id.asc())
+            .fetch();
+        break;
+
       default:
         content = new ArrayList<>(); // return empty list
     }
