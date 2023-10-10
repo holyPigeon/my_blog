@@ -16,7 +16,7 @@
                             <label class="label">
                                 <span class="label-text">비밀번호</span>
                             </label>
-                            <input v-model="formData.password" type="text" placeholder="비밀번호"
+                            <input v-model="formData.password" @keyup.enter="submitForm()" type="text" placeholder="비밀번호"
                                 class="input input-bordered text-neutral-content" />
                             <!-- <label class="label">
                                 <a href="#" class="label-text-alt link link-hover">Forgot password?</a>
